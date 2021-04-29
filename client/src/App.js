@@ -4,7 +4,7 @@ import axios from "axios"
 
 function App() {
   const sendreq = async()=>{
-    const req = await axios.get("http://localhost:5000/")
+    const req = await axios.get("/test")
     console.log(req)
   }
   return (
