@@ -1,4 +1,10 @@
 {
+  "name": "monopoly",
+  "version": "1.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": "15.4.0"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "concurrently": "^6.0.2",
@@ -10,9 +16,6 @@
     "path": "^0.12.7",
     "validator": "^13.6.0"
   },
-  "name": "monopoly",
-  "version": "1.0.0",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
