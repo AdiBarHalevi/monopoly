@@ -6,7 +6,11 @@ import axios from "./axioscall"
 
 function App() {
   const sendreq = async()=>{
-    const req = await axios.get("http://localhost:8000/test")
+  let url =""
+    if(process.env.NODE_ENV === "production"){url= `https://adi-bootcamp-finalproject.herokuapp.com`}
+    else {url= `http://localhost:8000`}
+    console.log(url)
+    const req = await axios.get(`${url}/test`)
     console.log(req)
   }
   return (
