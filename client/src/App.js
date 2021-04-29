@@ -1,9 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios"
 
 function App() {
+  const sendreq = async()=>{
+    const req = await axios.get("http://localhost:5000/")
+    console.log(req)
+  }
   return (
     <div className="App">
+      <button onClick={sendreq}>Click me</button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
