@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import {useRecoilState} from "recoil"
+import cardWindowState from "../../../../atoms"
 
 const SpecialSquare = ({ image, assetHeight, assetWidth, headerDirection }) => {
+  const[card,setCardWindow] = useRecoilState(cardWindowState)
+
+  const handleHover =()=>{
+    setCardWindow([image])
+  }
+
+
   return (
     <Container
+      onMouseEnter={handleHover}
       assetHeight={assetHeight}
       assetWidth={assetWidth}
       headerDirection={headerDirection}

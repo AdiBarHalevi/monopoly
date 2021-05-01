@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import cardWindowState from "../../../../atoms"
+
+
 
 const AssetCard = ({
   assetHeight,
@@ -13,8 +17,19 @@ const AssetCard = ({
   headerColor,
   headerTitle,
 }) => {
+
+  const[card,setCardWindow] = useRecoilState(cardWindowState)
+
+  
+
+  const handleHover =()=>{
+    const title = headerTitle.split("$")
+    setCardWindow([title[0],title[1],headerColor])
+  }
+
   return (
     <Container
+      onMouseOver={handleHover}
       assetHeight={assetHeight}
       assetWidth={assetWidth}
       headerDirection={headerDirection}
@@ -43,6 +58,7 @@ const Container = styled.div`
   border: 1px solid black;
   justify-content: end;
   align-items: center;
+  overflow:hidden;
 `;
 
 const Header = styled.div`
@@ -63,6 +79,5 @@ const Header = styled.div`
       text-align: center;
     
     }
-
   }
 `;

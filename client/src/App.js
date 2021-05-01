@@ -3,6 +3,7 @@ import axios from "./axioscall";
 import Page1 from "./components/page-1/Page1";
 import Page2 from "./components/page-2/Page2";
 import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
+import {RecoilRoot} from "recoil"
 
 function App() {
   const sendreq = async () => {
@@ -18,6 +19,7 @@ function App() {
   };
 
   return (
+    <RecoilRoot>
     <div className="App">
       <Router>
         <header className="app-header">
@@ -51,6 +53,7 @@ function App() {
         </Switch>
       </Router>
     </div>
+    </RecoilRoot>
   );
 }
 

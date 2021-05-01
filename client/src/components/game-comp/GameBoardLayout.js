@@ -81,19 +81,19 @@ const GameBoardLayout = () => {
                 return (
                   <AssetCardLeftColumn key={0}
                     headerColor="orange"
-                    headerTitle="NEW- YORK AVENUE $200"
+                    headerTitle="NEW-YORK AVENUE $200"
                   />
                 )
               case card === 1: 
               return <AssetCardLeftColumn key={1}
               headerColor="orange"
-              headerTitle="TENN- ESSE AVENUE $180"
+              headerTitle="TENNESSE AVENUE $180"
               />
               case card === 3:           
                 return (
                     <AssetCardLeftColumn key={3}
                       headerColor="orange"
-                      headerTitle="ST.JAMES -PLACE $180"
+                      headerTitle="ST.JAMES PLACE $180"
                     />
                   );
               case card === 2:           
@@ -118,7 +118,7 @@ const GameBoardLayout = () => {
               case card ===8:
                 return <AssetCardLeftColumn
                 headerColor="#ED008C"
-                headerTitle="ST. CHARELS PLACE $140"
+                headerTitle="ST.CHARELS PLACE $140"
                 key={8}
               />
               default: return null
@@ -132,7 +132,7 @@ const GameBoardLayout = () => {
               case(card === 0): return (
                 <AssetCardRightColumn
                   headerColor="green"
-                  headerTitle="PACI- FIC AVENUE $300"
+                  headerTitle="PACIFIC AVENUE $300"
                   key={0}
                 />
               );
@@ -149,7 +149,7 @@ const GameBoardLayout = () => {
               return (
                 <AssetCardRightColumn
                   headerColor="green"
-                  headerTitle="PENN- SILVANIA AVENUE $320"
+                  headerTitle="PENNSILVANIA AVENUE $320"
                   key={3}
                 />
               );
@@ -165,7 +165,7 @@ const GameBoardLayout = () => {
                 return (
                   <AssetCardRightColumn
                     headerColor="blue"
-                    headerTitle="BOAR- DWALK $400"
+                    headerTitle="BROADWALK $400"
                     key={8}
                   />
                 );
@@ -220,7 +220,7 @@ const GameBoardLayout = () => {
             return (
               <AssetCardButtomRow
                 headerColor="#5C3817"
-                headerTitle="MEDITER- RANEAN AVENUE $60"
+                headerTitle="MEDITERRANEAN AVENUE $60"
                 key={9} 
 
               />
