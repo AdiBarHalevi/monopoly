@@ -9,7 +9,8 @@ const AssetCard = ({
     headerDirection,
     headerRotation,
     abosoluteTopPosition,
-    abosoluteLeftPosition}) => {
+    abosoluteLeftPosition,
+    headerColor}) => {
 
 
       return (
@@ -17,9 +18,12 @@ const AssetCard = ({
 
     <Container assetHeight={assetHeight} assetWidth={assetWidth} headerDirection={headerDirection}>
         <Header
-         headerheight={headerheight} headerWidth={headerWidth}
-        headerRotation={headerRotation} abosoluteTopPosition={abosoluteTopPosition}
-        abosoluteLeftPosition={abosoluteLeftPosition}>
+         headerheight={headerheight}
+         headerWidth={headerWidth}
+         headerRotation={headerRotation}
+         abosoluteTopPosition={abosoluteTopPosition}
+         abosoluteLeftPosition={abosoluteLeftPosition}
+         headerColor={headerColor}>
         </Header>
     </Container>
   );
@@ -39,14 +43,14 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  &{background: white;
+  &{background:${(props)=>props.headerColor};
   width: ${(props) => props.headerWidth};
   height:${(props) => props.headerheight};
   position:relative;
   
   }
   &:after{
-      content:"header";
+      content:"";
       transform:${(props)=>props.headerRotation};
       position: absolute;
       top:${(props)=>props.abosoluteTopPosition};

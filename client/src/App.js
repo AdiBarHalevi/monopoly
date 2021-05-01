@@ -1,6 +1,7 @@
 import "./App.css";
 import axios from "./axioscall";
 import Page1 from "./components/page-1/Page1";
+import Page2 from "./components/page-2/Page2"
 import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 
 function App() {
@@ -27,8 +28,8 @@ function App() {
           </div>
           <ul>
             <li>
-              <Link to="/" style={{ textDecoration: "none" }}>
-                Home
+              <Link to="/play" style={{ textDecoration: "none" }}>
+                Play
               </Link>
             </li>
             <li>
@@ -45,7 +46,7 @@ function App() {
         </header>
         <Switch>
           <Route path="/" exact component={Page1} />
-          <Route path="/page2" exact component={Page1} />
+          <Route path="/play" exact component={Page2} />
           <Route path="/page3" exact component={Page1} />
         </Switch>
       </Router>
