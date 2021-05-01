@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import communityChestImage from "../../img/communitychest.jpg"
+import communityChestImage from "../../img/communitychest.jpg";
 
 const CommunityChestCard = () => {
-  return <Container>    
-  </Container>;
+  return <Container></Container>;
 };
 
 export default CommunityChestCard;

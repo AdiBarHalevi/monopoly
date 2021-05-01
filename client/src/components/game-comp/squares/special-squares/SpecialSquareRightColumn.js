@@ -1,15 +1,15 @@
 import React from "react";
 import SpecialSquare from "./SpcialSquares";
 
-const SpecialSquareTopRow = ({ image }) => {
+const SpecialSquareRightColumn = ({ image }) => {
   return (
     <SpecialSquare
       assetHeight="1.77rem"
       assetWidth="3.5rem"
       headerheight="1.77rem"
       headerWidth="1.313rem"
-      headerDirection="row-reverse"
-      headerRotation="rotate(90deg)"
+      headerDirection="row-reverese"
+      headerRotation="rotate(270deg)"
       abosoluteTopPosition="1.1rem"
       abosoluteLeftPosition="-1rem"
       image={image}
@@ -17,4 +17,4 @@ const SpecialSquareTopRow = ({ image }) => {
   );
 };
 
-export default SpecialSquareTopRow;
+export default SpecialSquareRightColumn;

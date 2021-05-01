@@ -1,7 +1,7 @@
 import "./App.css";
 import axios from "./axioscall";
 import Page1 from "./components/page-1/Page1";
-import Page2 from "./components/page-2/Page2"
+import Page2 from "./components/page-2/Page2";
 import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 
 function App() {

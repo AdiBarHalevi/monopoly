@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import chanceCardImage from "../../img/chanceCard.png"
+import chanceCardImage from "../../img/chanceCard.png";
 
 const ChanceCard = () => {
   return <Container></Container>;

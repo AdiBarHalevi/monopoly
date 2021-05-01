@@ -12,10 +12,9 @@ const GamePage = () => {
 
 export default GamePage;
 
-
 const PageLayout = styled.div`
-height: 90vh;
-display: flex;
-justify-content: center;
-align-items: center
-`
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

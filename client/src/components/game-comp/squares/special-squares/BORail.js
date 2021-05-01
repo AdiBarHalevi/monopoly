@@ -1,12 +1,9 @@
 import React from "react";
-import BORailImg from "../../../../img/BORail.jpg"
-import SpecialSquareTopRow from "./SpecialSquareTopRow"
-
+import BORailImg from "../../../../img/BORail.jpg";
+import SpecialSquareTopRow from "./SpecialSquareTopRow";
 
 const BORail = () => {
-      return <SpecialSquareTopRow
-                image={BORailImg}>
-          </SpecialSquareTopRow>
+  return <SpecialSquareTopRow image={BORailImg}></SpecialSquareTopRow>;
 };
 
 export default BORail;
