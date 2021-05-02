@@ -17,11 +17,3 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
 });
-
-
-
-
-
-
-
-

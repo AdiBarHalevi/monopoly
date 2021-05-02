@@ -1,8 +1,8 @@
-import {atom} from "recoil"
+import { atom } from "recoil";
 
 const cardWindowState = atom({
-    key:"cardWindow",
-    default:[]
-  })
+  key: "cardWindow",
+  default: [],
+});
 
-export default cardWindowState
+export default cardWindowState;

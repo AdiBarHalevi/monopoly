@@ -1,7 +1,7 @@
 import React from "react";
 import AssetCard from "./AssetsCard";
 
-const AssetCardRightColumn = ({ headerColor, headerTitle }) => {
+const AssetCardRightColumn = (data) => {
   return (
     <AssetCard
       assetHeight="1.77rem"
@@ -12,8 +12,7 @@ const AssetCardRightColumn = ({ headerColor, headerTitle }) => {
       headerRotation="rotate(270deg)"
       abosoluteTopPosition="2px"
       abosoluteLeftPosition=" 1.4rem;"
-      headerColor={headerColor}
-      headerTitle={headerTitle}
+      data={data}
     ></AssetCard>
   );
 };

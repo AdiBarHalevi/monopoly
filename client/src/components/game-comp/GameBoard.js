@@ -3,14 +3,12 @@ import CardDisplay from "../page-2/CardDisplay";
 import PlayerTable from "../page-2/PlayerTable";
 import GameBoardLayout from "./GameBoardLayout";
 
-
 const GameBoard = () => {
-
   return (
     <>
-      <CardDisplay/>
+      <CardDisplay />
       <GameBoardLayout />
-      <PlayerTable/>
+      <PlayerTable />
     </>
   );
 };

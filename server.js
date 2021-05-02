@@ -8,9 +8,7 @@ const gamePlayRoute = require("./server/routes/gameplay.routes");
 app.use(bodyParser.json());
 app.use(cors());
 require("./server/db/mongoose");
-app.use('/gameAPI', gamePlayRoute);
-
-
+app.use("/gameAPI", gamePlayRoute);
 
 const port = 8000;
 

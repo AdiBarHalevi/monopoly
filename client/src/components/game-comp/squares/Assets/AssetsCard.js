@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import cardWindowState from "../../../../atoms"
-
-
+import cardWindowState from "../../../../atoms";
 
 const AssetCard = ({
   assetHeight,
@@ -14,22 +12,39 @@ const AssetCard = ({
   headerRotation,
   abosoluteTopPosition,
   abosoluteLeftPosition,
-  headerColor,
-  headerTitle,
+  data,
 }) => {
+  const [card, setCardWindow] = useRecoilState(cardWindowState);
 
-  const[card,setCardWindow] = useRecoilState(cardWindowState)
+  const {
+    cardDetails,
+    fieldNum,
+    headerColor,
+    name,
+    price,
+    displayImage,
+  } = data.rowItems;
 
-  
+  // const handleHover =()=>{
+  //   const title = headerTitle.split("$")
+  //   setCardWindow([title[0],title[1],headerColor])
+  // }
 
-  const handleHover =()=>{
-    const title = headerTitle.split("$")
-    setCardWindow([title[0],title[1],headerColor])
+  if (displayImage) {
+    return (
+      <Container2
+        // onMouseEnter={handleHover}
+        assetHeight={assetHeight}
+        assetWidth={assetWidth}
+        headerDirection={headerDirection}
+        image={displayImage}
+      ></Container2>
+    );
   }
-
   return (
     <Container
-      onMouseOver={handleHover}
+      // onMouseOver={handleHover}
+      // onMouseOver={console.log(data.rowItems)}
       assetHeight={assetHeight}
       assetWidth={assetWidth}
       headerDirection={headerDirection}
@@ -41,7 +56,7 @@ const AssetCard = ({
         abosoluteTopPosition={abosoluteTopPosition}
         abosoluteLeftPosition={abosoluteLeftPosition}
         headerColor={headerColor}
-        headerTitle={headerTitle}
+        name={name}
       ></Header>
     </Container>
   );
@@ -58,18 +73,19 @@ const Container = styled.div`
   border: 1px solid black;
   justify-content: end;
   align-items: center;
-  overflow:hidden;
+  overflow: hidden;
 `;
 
 const Header = styled.div`
-  &{background:${(props) => props.headerColor};
+  &{
+  background:${(props) => props.headerColor};
   width: ${(props) => props.headerWidth};
   height:${(props) => props.headerheight};
   position:relative;
   
   }
   &:after{
-      content:"${(props) => props.headerTitle}";
+      content:"${(props) => props.name}";
       transform:${(props) => props.headerRotation};
       position: absolute;
       top:${(props) => props.abosoluteTopPosition};
@@ -80,4 +96,14 @@ const Header = styled.div`
     
     }
   }
+`;
+
+const Container2 = styled.div`
+  height: ${(props) => props.assetHeight};
+  width: ${(props) => props.assetWidth};
+  background-image: url(${(props) => props.image});
+  background-position: center;
+  background-size: cover;
+  display: inline-block;
+  border: 1px solid black;
 `;

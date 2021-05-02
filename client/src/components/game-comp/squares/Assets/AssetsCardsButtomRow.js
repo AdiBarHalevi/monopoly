@@ -1,7 +1,7 @@
 import React from "react";
 import AssetCard from "./AssetsCard";
 
-const AssetCardButtomRow = ({ headerColor, headerTitle }) => {
+const AssetCardButtomRow = (data) => {
   return (
     <AssetCard
       assetHeight="3.5rem"
@@ -12,8 +12,7 @@ const AssetCardButtomRow = ({ headerColor, headerTitle }) => {
       headerRotation="0deg"
       abosoluteTopPosition="1.5rem"
       abosoluteLeftPosition="0rem"
-      headerColor={headerColor}
-      headerTitle={headerTitle}
+      data={data}
     ></AssetCard>
   );
 };
