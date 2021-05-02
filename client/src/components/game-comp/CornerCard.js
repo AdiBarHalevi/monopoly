@@ -7,12 +7,12 @@ const CornerCard = (props) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
 
   const handleHover = () => {
-    // setCardWindow([props.image])
+    setCardWindow([props.rowItems.originalImage])
+    console.log(card)
   };
 
   return (
     <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-      {console.log(props.rowItems.displayImage)}
     </Container>
   );
 };

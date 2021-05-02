@@ -60,9 +60,9 @@ const GameBoardLayout = () => {
         <FlexBox>
           {Object.keys(boardData[2]).map((blocknumber) => {
                 if (blocknumber === `20`||blocknumber === `30`){
-                  return <CornerCard rowItems={boardData[2][blocknumber]} />;
+                  return <CornerCard rowItems={boardData[2][blocknumber]} key={blocknumber}/>;
                 }
-                return <AssetCardTopRow rowItems={boardData[2][blocknumber]} />;
+                return <AssetCardTopRow rowItems={boardData[2][blocknumber]} key={blocknumber}/>;
               })
             }
         </FlexBox>
@@ -71,7 +71,7 @@ const GameBoardLayout = () => {
           <FlexBox flexDirection="column">
             { Object.keys(boardData[1]).map((blocknumber) => {
                   return (
-                    <AssetCardLeftColumn rowItems={boardData[1][blocknumber]} />
+                    <AssetCardLeftColumn rowItems={boardData[1][blocknumber]} key={blocknumber}/>
                   );
                 })
               }
@@ -79,7 +79,7 @@ const GameBoardLayout = () => {
           <ChanceAndCommunityChest assetHeight="6rem" assetWidth="8rem" />
           <FlexBox flexDirection="column">
             { Object.keys(boardData[3]).map((blocknumber) => (
-                  <AssetCardRightColumn rowItems={boardData[3][blocknumber]} />
+                  <AssetCardRightColumn rowItems={boardData[3][blocknumber]} key={blocknumber}/>
                 ))
               }
           </FlexBox>
@@ -87,9 +87,9 @@ const GameBoardLayout = () => {
         <FlexBox flexDirection="row-reverse">
           { Object.keys(boardData[0]).map((blocknumber) => {
                 if (blocknumber === `0` || blocknumber === `10`)
-                  return <CornerCard rowItems={boardData[0][blocknumber]} flexDirection="row-reverse" />;
+                  return <CornerCard rowItems={boardData[0][blocknumber]} flexDirection="row-reverse" key={blocknumber} />;
                 return (
-                  <AssetCardButtomRow rowItems={boardData[0][blocknumber]} />
+                  <AssetCardButtomRow rowItems={boardData[0][blocknumber]} key={blocknumber}/>
                 );
               })
            }

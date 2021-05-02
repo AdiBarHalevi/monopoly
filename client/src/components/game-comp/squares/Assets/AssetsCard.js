@@ -25,15 +25,15 @@ const AssetCard = ({
     displayImage,
   } = data.rowItems;
 
-  // const handleHover =()=>{
-  //   const title = headerTitle.split("$")
-  //   setCardWindow([title[0],title[1],headerColor])
-  // }
+  const handleHover =()=>{
+    if(displayImage) setCardWindow([displayImage])
+    setCardWindow([headerColor,name,price])
+  }
 
   if (displayImage) {
     return (
       <Container2
-        // onMouseEnter={handleHover}
+        onMouseEnter={handleHover}
         assetHeight={assetHeight}
         assetWidth={assetWidth}
         headerDirection={headerDirection}
@@ -43,8 +43,7 @@ const AssetCard = ({
   }
   return (
     <Container
-      // onMouseOver={handleHover}
-      // onMouseOver={console.log(data.rowItems)}
+      onMouseOver={handleHover}
       assetHeight={assetHeight}
       assetWidth={assetWidth}
       headerDirection={headerDirection}
