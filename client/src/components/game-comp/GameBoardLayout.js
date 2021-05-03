@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
 import axiosInstance from "../../axioscall";
 

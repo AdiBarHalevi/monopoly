@@ -1,24 +1,59 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import {GamePlayDataState} from "../../atoms"
 
 const WelcomPage = () => {
+  const [playersDataState, setPlayersDataState]= useRecoilState(GamePlayDataState)
+  const [registrated,setregistrated] = useState([])
   const textInput = useRef()
-  const users = []
+  
   const saveUser =()=>{
-    users.push(textInput.current.value)
-    console.log(users)
+    const add = registrated
+    add.push(textInput.current.value)
+    setregistrated(add)
+    console.log(registrated)
   }
-  const startGame =()=>{
-    localStorage.setItem('users', users)
-  }
+  
+  const shuffle=(array)=> array.sort(() => Math.random() - 0.5);
+  
+  const useIt=()=>{
+    const usersData =[]
+    shuffle(registrated).forEach((user,index) => {
+      user={
+        name:user,
+        balance:1000,
+        assets:[],
+        active:true,
+        turnNum:index+1,
+        playerLocation:0
+      }
+      usersData.push(user)
+    });
+
+    setPlayersDataState(usersData)
+  };
+
+  // const startGame =()=>{
+  //   localStorage.setItem('users', users)
+  // }
   return (
   <div className="welcome-page">
-    <tr>
-        <th>Player's name</th>
-        <td><input type="text" ref={textInput}></input></td>
-        <td><button onClick={saveUser}>Submit</button></td>
-        <td><button onClick={startGame}>startGame</button></td>
-      </tr>
-
+    <div>
+      registrated players:
+      {
+        registrated.map((player,i)=>{return <div key={i}>{player}</div>})
+      }
+    </div>
+    <table>
+      <tbody>
+      <tr>
+          <th>Player's name</th>
+          <td><input type="text" ref={textInput}></input></td>
+          <td><button onClick={saveUser}>Submit</button></td>
+          <td><button onClick={useIt}>startGame</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>);
 };
 

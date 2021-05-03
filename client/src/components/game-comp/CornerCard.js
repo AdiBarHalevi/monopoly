@@ -8,6 +8,7 @@ const CornerCard = (props) => {
 
   const handleHover = () => {
     setCardWindow([props.rowItems.originalImage])
+    console.log(card)
   };
 
   return (

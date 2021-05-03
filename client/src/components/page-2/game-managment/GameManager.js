@@ -14,7 +14,7 @@ const GameManager = () => {
 
   const saveToGlobalUserData=()=>{
     const update = []
-    playersDataState.map((player)=>{
+    playersDataState.forEach((player)=>{
       if(player.name === (activePlayerState.name)) {
         const newPlayerStatus={
           ...player
@@ -69,13 +69,15 @@ const GameManager = () => {
   useEffect(()=>{
     setActivePlayerState(playersDataState[diceState[2]])
     
-  },[])
+  },[playersDataState])
   
   
   if(activePlayerState){
   return (
+    <>
+    <PlayerManager/>
     <TurnTable>
-      <PlayerManager/>
+    <tbody>
       <tr>
         <th>Player's Turn</th>
         <td>{activePlayerState.name}</td>
@@ -85,16 +87,22 @@ const GameManager = () => {
         <td>{activePlayerState.playerLocation}</td>
       </tr>
       <tr>
-        <td><button onClick={endTurn}>End turn</button></td>
-        <td><button onClick={RollDice}>Roll Dice</button></td>
         {/* <td><span>dice result</span> <span>{activePlayerState.playerLocation}</span></td> */}
       </tr>
+    </tbody>
   </TurnTable>
+  <div><button onClick={endTurn}>End turn</button></div>
+  <div><button onClick={RollDice}>Roll Dice</button></div>
+  </>
   );
 } else return (
+  <>
+  <div><button onClick={endTurn}>End turn</button></div>
+  <div><button onClick={RollDice}>Roll Dice</button></div>
     <TurnTable>
       <PlayerManager/>
     </TurnTable>
+    </>
     )
 };
 

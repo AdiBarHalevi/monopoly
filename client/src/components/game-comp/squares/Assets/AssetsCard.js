@@ -27,6 +27,7 @@ const AssetCard = ({
   } = data.rowItems;
 
   const handleHover =()=>{
+    console.log(cardDetails,fieldNum,card)
     if(displayImage) return setCardWindow([originalImage])
     setCardWindow([headerColor,name,price])
   }
