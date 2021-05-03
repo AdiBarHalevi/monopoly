@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
-import axios from "axios";
+import axiosInstance from "../../axioscall";
 
 // assetes Column/Row Parent components
 import AssetCardLeftColumn from "./squares/Assets/AssetCardLeftColumn";
@@ -13,8 +13,10 @@ import ChanceAndCommunityChest from "./ChanceAndCommunityChest";
 import CornerCard from "./CornerCard";
 
 const GameBoardLayout = () => {
+  // boards layout's state
   const [boardData, setboardData] = useState([]);
 
+  // process the data from the API call
   const processData = (data) => {
     const lowerRow = {};
     const leftColumn = {};
@@ -32,14 +34,9 @@ const GameBoardLayout = () => {
     setboardData([lowerRow, leftColumn, topRow, rightColumn]);
   };
 
+  // Call the API for the game board
   const sendreq = async () => {
-    let url = "";
-    if (process.env.NODE_ENV === "production") {
-      url = `https://adi-bootcamp-finalproject.herokuapp.com`;
-    } else {
-      url = `http://localhost:8000`;
-    }
-    const req = await axios.get(`${url}/gameAPI/gameCards`);
+    const req = await axiosInstance.get(`/gameAPI/gameCards`);
     try {
       processData(req.data);
     } catch (e) {
@@ -47,13 +44,11 @@ const GameBoardLayout = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(boardData);
-  }, [boardData]);
-
   return (
     <div>
       <button onClick={sendreq}>Click here</button>
+
+      {/* if board data holds the data from the API we will iterate over it and pull the data for each component depending on the serial number of the square */}
       {
         boardData.length > 0 &&
       <FlexBox alignItems="center" flexDirection="column">

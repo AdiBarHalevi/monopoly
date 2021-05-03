@@ -30,3 +30,5 @@ const PlayerTable = () => {
 };
 
 export default PlayerTable;
+
+

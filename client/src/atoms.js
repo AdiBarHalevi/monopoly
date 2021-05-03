@@ -1,8 +1,12 @@
-import { atom } from "recoil";
+import { atom  ,useRecoilState } from "recoil";
 
-const cardWindowState = atom({
+export const cardWindowState = atom({
   key: "cardWindow",
   default: [],
 });
 
-export default cardWindowState;
+export const GamePlayDataState = atom({
+  key: "GamePlayObj",
+  default: [],
+});
+

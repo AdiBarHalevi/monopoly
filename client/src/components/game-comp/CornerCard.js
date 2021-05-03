@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import cardWindowState from "../../atoms";
+import {cardWindowState} from "../../atoms";
 
 const CornerCard = (props) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);

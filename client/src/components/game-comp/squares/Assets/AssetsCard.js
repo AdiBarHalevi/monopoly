@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import cardWindowState from "../../../../atoms";
+import {cardWindowState} from "../../../../atoms";
 
 const AssetCard = ({
   assetHeight,
@@ -23,10 +23,11 @@ const AssetCard = ({
     name,
     price,
     displayImage,
+    originalImage
   } = data.rowItems;
 
   const handleHover =()=>{
-    if(displayImage) setCardWindow([displayImage])
+    if(displayImage) return setCardWindow([originalImage])
     setCardWindow([headerColor,name,price])
   }
 
