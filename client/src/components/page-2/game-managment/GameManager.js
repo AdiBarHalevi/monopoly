@@ -81,6 +81,8 @@ const GameManager = () => {
           endTurn={endTurn}
           rollDice={rollDice}
           diceState={diceState}
+          activePlayerState={activePlayerState}
+          
         />
       </>
     );

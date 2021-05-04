@@ -35,9 +35,9 @@ const WelcomPage = () => {
     setPlayersDataState(usersData);
   };
 
-  useEffect(() => {
-    console.log(`render`);
-  }, [registrated]);
+  // useEffect(() => {
+  //   console.log(`render`);
+  // }, [registrated]);
 
   // const startGame =()=>{
   //   localStorage.setItem('users', users)
