@@ -9,4 +9,3 @@ export const GamePlayDataState = atom({
   key: "GamePlayObj",
   default: [],
 });
-

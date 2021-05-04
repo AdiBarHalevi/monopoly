@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import {cardWindowState} from "../../atoms";
+import { cardWindowState } from "../../atoms";
 
 const CornerCard = (props) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
 
   const handleHover = () => {
-    setCardWindow([props.rowItems.originalImage])
+    setCardWindow([props.rowItems.originalImage]);
   };
 
   return (
-    <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-    </Container>
+    <Container
+      image={props.rowItems.displayImage}
+      onMouseEnter={handleHover}
+    ></Container>
   );
 };
 

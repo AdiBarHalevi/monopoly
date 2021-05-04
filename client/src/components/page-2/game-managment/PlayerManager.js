@@ -2,15 +2,11 @@ import React from "react";
 // import { useRecoilState } from "recoil";
 // import {GamePlayDataState} from "../../../atoms"
 
-
-
-
 const PlayerManager = () => {
-
   // const [playersDataState, setPlayersDataState]= useRecoilState(GamePlayDataState)
 
   // const shuffle=(array)=> array.sort(() => Math.random() - 0.5);
-  
+
   // const useIt=()=>{
   //   let usersList = localStorage.getItem("users")
   //   usersList = usersList.split(",")
@@ -28,19 +24,14 @@ const PlayerManager = () => {
   //   });
 
   // };
-  
+
   // useEffect(()=>{
   //   setPlayersDataState(usersData)
   // },[playersDataState])
-  
-  return (
-    <>
-    </>
-  );
+
+  return <></>;
 };
 
 export default PlayerManager;
 
 // non used file at the moment all functionality was moved to the main page
-
-
