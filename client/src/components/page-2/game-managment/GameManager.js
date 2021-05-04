@@ -9,7 +9,7 @@ import {getRandomInt} from "../../../UtilityFunctions"
 const GameManager = () => {
 
   const [activePlayerState,setActivePlayerState] = useState({})
-  const [diceState,setdiceState] = useState([0,0,0])
+  const [diceState,setdiceState] = useState([0,0,0,true])
   const [playersDataState, setPlayersDataState]= useRecoilState(GamePlayDataState)
 
   const saveToGlobalUserData=()=>{
@@ -35,13 +35,13 @@ const GameManager = () => {
     whosturn++
     if(whosturn < playersDataState.length) {
       const activeUser = playersDataState[whosturn]
-      setdiceState([diceState[0],diceState[1], whosturn])
+      setdiceState([diceState[0],diceState[1], whosturn,true])
       setActivePlayerState(activeUser)
     }
     else{
       whosturn=0
       const activeUser = playersDataState[0]
-      setdiceState([diceState[0],diceState[1], whosturn])
+      setdiceState([diceState[0],diceState[1], whosturn,true])
       setActivePlayerState(activeUser)
     }
   }
@@ -49,12 +49,14 @@ const GameManager = () => {
   // genereate Dice roll (keeps the players turn)
   const RollDice =()=>{ 
 
-    setdiceState([getRandomInt(1,7),getRandomInt(1,7), diceState[2]])
+    setdiceState([getRandomInt(1,7),getRandomInt(1,7), diceState[2],false])
 
     // set changes on the Active User State
     const update = {...activePlayerState}
-    console.log(diceState[0]+diceState[1])
-    update[`playerLocation`]+=(diceState[0]+diceState[1])
+    if( update[`playerLocation`]+(diceState[0]+diceState[1])>=40) update[`playerLocation`]+=(diceState[0]+diceState[1]-40)
+      
+    else update[`playerLocation`]+=(diceState[0]+diceState[1])
+    
     setActivePlayerState(update)
 
   }
@@ -92,18 +94,12 @@ const GameManager = () => {
     </tbody>
   </TurnTable>
   <div><button onClick={endTurn}>End turn</button></div>
+  {diceState[3] &&
   <div><button onClick={RollDice}>Roll Dice</button></div>
+  }
   </>
   );
-} else return (
-  <>
-  <div><button onClick={endTurn}>End turn</button></div>
-  <div><button onClick={RollDice}>Roll Dice</button></div>
-    <TurnTable>
-      <PlayerManager/>
-    </TurnTable>
-    </>
-    )
+} 
 };
 
 export default GameManager;

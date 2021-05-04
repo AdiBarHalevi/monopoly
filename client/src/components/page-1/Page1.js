@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import {GamePlayDataState} from "../../atoms"
 
@@ -32,6 +32,10 @@ const WelcomPage = () => {
 
     setPlayersDataState(usersData)
   };
+
+  useEffect(()=>{
+    console.log(`render`)
+  },[registrated])
 
   // const startGame =()=>{
   //   localStorage.setItem('users', users)
