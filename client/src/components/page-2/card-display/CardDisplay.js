@@ -6,7 +6,6 @@ import GameUtilityDisplayCard from "./GameUtilityDisplayCard";
 
 const CardDisplay = () => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
-  console.log(card)
   if (card.length===0) return <></>
   if (card[0].length)
     return (

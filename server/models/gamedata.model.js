@@ -12,11 +12,9 @@ const CardSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    // required: true,
   },
   headerColor: {
     type: String,
-    // required: true,
   },
   displayImage: {
     type: String,

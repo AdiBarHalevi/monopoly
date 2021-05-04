@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../../../atoms";
+import { GamePlayDataState} from "../../../atoms";
 import styled from "styled-components";
 import PlayerManager from "./PlayerManager";
 import ActiveUserManager from "./ActiveUserManager";
@@ -9,9 +9,7 @@ import { getRandomInt } from "../../../UtilityFunctions";
 const GameManager = () => {
   const [activePlayerState, setActivePlayerState] = useState({});
   const [diceState, setdiceState] = useState([0, 0, 0, true]);
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
+  const [playersDataState, setPlayersDataState] = useRecoilState(GamePlayDataState);
 
   const saveToGlobalUserData = () => {
     const update = [];
@@ -60,6 +58,13 @@ const GameManager = () => {
   useEffect(() => {
     setActivePlayerState(playersDataState[diceState[2]]);
   }, [playersDataState]);
+
+  useEffect(()=>{
+    console.log(activePlayerState)
+    console.log(activePlayerState.playerLocation)
+
+  },[diceState])
+
 
   if (activePlayerState) {
     return (

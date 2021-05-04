@@ -18,7 +18,7 @@ const WelcomPage = () => {
 
   const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
-  const useIt = () => {
+  const startGame = () => {
     const usersData = [];
     shuffle(registrated).forEach((user, index) => {
       user = {
@@ -61,7 +61,7 @@ const WelcomPage = () => {
               <button onClick={saveUser}>Submit</button>
             </td>
             <td>
-              <button onClick={useIt}>startGame</button>
+              <button onClick={startGame}>startGame</button>
             </td>
           </tr>
         </tbody>

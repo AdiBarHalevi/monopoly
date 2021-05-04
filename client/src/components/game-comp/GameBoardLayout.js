@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlexBox } from "../common-components/FlexBox";
 import axiosInstance from "../../axioscall";
+import { gameboardData } from "../../atoms";
+import { useRecoilState } from "recoil";
 
 // assetes Column/Row Parent components
 import AssetCardLeftColumn from "./squares/Assets/AssetCardLeftColumn";
@@ -14,7 +16,7 @@ import CornerCard from "./CornerCard";
 
 const GameBoardLayout = () => {
   // boards layout's state
-  const [boardData, setboardData] = useState([]);
+  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
 
   // process the data from the API call
   const processData = (data) => {
@@ -23,22 +25,33 @@ const GameBoardLayout = () => {
     const topRow = {};
     const rightColumn = {};
     data.forEach((singleCard) => {
-      if (singleCard.fieldNum < 11) lowerRow[singleCard.fieldNum] = singleCard;
-      if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19)
+      if (singleCard.fieldNum < 11){ 
+        lowerRow[singleCard.fieldNum] = singleCard
+      
+      }
+      if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19){
         leftColumn[singleCard.fieldNum] = singleCard;
-      if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30)
+
+      }
+        
+      if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30){
         topRow[singleCard.fieldNum] = singleCard;
-      if (singleCard.fieldNum > 30)
-        rightColumn[singleCard.fieldNum] = singleCard;
+      }
+      if (singleCard.fieldNum > 30){
+        rightColumn[singleCard.fieldNum] = singleCard;  
+      }
     });
-    setboardData([lowerRow, leftColumn, topRow, rightColumn]);
+    setgameboardData([lowerRow, leftColumn, topRow, rightColumn]);
   };
+
 
   // Call the API for the game board
   const sendreq = async () => {
-    const req = await axiosInstance.get(`/gameAPI/gameCards`);
+    // i've blocked this option in order to have on game plate, later on this comment has to be removed
+    // const req = await axiosInstance.post(`/gameAPI/gameCards`);
+    const res = await axiosInstance.get(`/gameAPI/gamePlay`)
     try {
-      processData(req.data);
+      processData(res.data.gamedata);
     } catch (e) {
       console.log(e);
     }
@@ -47,23 +60,21 @@ const GameBoardLayout = () => {
   return (
     <div>
       <button onClick={sendreq}>Click here</button>
-
-      {/* if board data holds the data from the API we will iterate over it and pull the data for each component depending on the serial number of the square */}
-      {boardData.length > 0 && (
+      {gameboardDataState.length > 0 && (
         <FlexBox alignItems="center" flexDirection="column">
           <FlexBox>
-            {Object.keys(boardData[2]).map((blocknumber) => {
+            {Object.keys(gameboardDataState[2]).map((blocknumber) => {
               if (blocknumber === `20` || blocknumber === `30`) {
                 return (
                   <CornerCard
-                    rowItems={boardData[2][blocknumber]}
+                    rowItems={gameboardDataState[2][blocknumber]}
                     key={blocknumber}
                   />
                 );
               }
               return (
                 <AssetCardTopRow
-                  rowItems={boardData[2][blocknumber]}
+                  rowItems={gameboardDataState[2][blocknumber]}
                   key={blocknumber}
                 />
               );
@@ -71,11 +82,11 @@ const GameBoardLayout = () => {
           </FlexBox>
 
           <FlexBox>
-            <FlexBox flexDirection="column">
-              {Object.keys(boardData[1]).map((blocknumber) => {
+            <FlexBox flexDirection="column-reverse">
+              {Object.keys(gameboardDataState[1]).map((blocknumber) => {
                 return (
                   <AssetCardLeftColumn
-                    rowItems={boardData[1][blocknumber]}
+                    rowItems={gameboardDataState[1][blocknumber]}
                     key={blocknumber}
                   />
                 );
@@ -83,27 +94,27 @@ const GameBoardLayout = () => {
             </FlexBox>
             <ChanceAndCommunityChest assetHeight="6rem" assetWidth="8rem" />
             <FlexBox flexDirection="column">
-              {Object.keys(boardData[3]).map((blocknumber) => (
+              {Object.keys(gameboardDataState[3]).map((blocknumber) => (
                 <AssetCardRightColumn
-                  rowItems={boardData[3][blocknumber]}
+                  rowItems={gameboardDataState[3][blocknumber]}
                   key={blocknumber}
                 />
               ))}
             </FlexBox>
           </FlexBox>
           <FlexBox flexDirection="row-reverse">
-            {Object.keys(boardData[0]).map((blocknumber) => {
+            {Object.keys(gameboardDataState[0]).map((blocknumber) => {
               if (blocknumber === `0` || blocknumber === `10`)
                 return (
                   <CornerCard
-                    rowItems={boardData[0][blocknumber]}
+                    rowItems={gameboardDataState[0][blocknumber]}
                     flexDirection="row-reverse"
                     key={blocknumber}
                   />
                 );
               return (
                 <AssetCardButtomRow
-                  rowItems={boardData[0][blocknumber]}
+                  rowItems={gameboardDataState[0][blocknumber]}
                   key={blocknumber}
                 />
               );

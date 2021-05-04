@@ -24,6 +24,7 @@ const AssetCard = ({
     price,
     displayImage,
     originalImage,
+    forSale
   } = data.rowItems;
 
   const handleHover = () => {
