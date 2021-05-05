@@ -6,7 +6,7 @@ import GameUtilityDisplayCard from "./GameUtilityDisplayCard";
 
 const CardDisplay = () => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
-  if (card.length===0) return <></>
+  if (card.length === 0) return <></>;
   if (card[0].length)
     return (
       <>
@@ -42,46 +42,44 @@ const CardDisplay = () => {
           </Container>
           <Container>
             <CardDetailsBack>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>rent:</th>
-                    <td>{rent}</td>
-                  </tr>
-                  <tr>
-                    <th>with color set</th>
-                    <td>{rentWithColorSet}</td>
-                  </tr>
-                  <tr>
-                    <th>With 1 house</th>
-                    <td>{rentWith1house}</td>
-                  </tr>
-                  <tr>
-                    <th>With 2 houses</th>
-                    <td>{rentWith2house}</td>
-                  </tr>
-                  <tr>
-                    <th>With 3 houses</th>
-                    <td>{rentWith3house}</td>
-                  </tr>
-                  <tr>
-                    <th>With 4 houses</th>
-                    <td>{rentWith4house}</td>
-                  </tr>
-                  <tr>
-                    <th>rent With Hotel</th>
-                    <td>{rentWithHotel}</td>
-                  </tr>
-                  <tr>
-                    <th>house Cost</th>
-                    <td>{houseCost}</td>
-                  </tr>
-                  <tr>
-                    <th>hotel Cost</th>
-                    <td>{houseCost}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <tbody>
+                <tr>
+                  <th>rent:</th>
+                  <td>{rent}</td>
+                </tr>
+                <tr>
+                  <th>with color set</th>
+                  <td>{rentWithColorSet}</td>
+                </tr>
+                <tr>
+                  <th>With 1 house</th>
+                  <td>{rentWith1house}</td>
+                </tr>
+                <tr>
+                  <th>With 2 houses</th>
+                  <td>{rentWith2house}</td>
+                </tr>
+                <tr>
+                  <th>With 3 houses</th>
+                  <td>{rentWith3house}</td>
+                </tr>
+                <tr>
+                  <th>With 4 houses</th>
+                  <td>{rentWith4house}</td>
+                </tr>
+                <tr>
+                  <th>rent With Hotel</th>
+                  <td>{rentWithHotel}</td>
+                </tr>
+                <tr>
+                  <th>house Cost</th>
+                  <td>{houseCost}</td>
+                </tr>
+                <tr>
+                  <th>hotel Cost</th>
+                  <td>{houseCost}</td>
+                </tr>
+              </tbody>
             </CardDetailsBack>
           </Container>
         </CardsContainer>
@@ -99,12 +97,12 @@ const CardDisplay = () => {
         />
       );
     }
-  }
-  else return (
-    <>
-      <PicContainer picture={card[0].rowItems.originalImage} />{" "}
-    </>
-  );
+  } else
+    return (
+      <>
+        <PicContainer picture={card[0].rowItems.originalImage} />{" "}
+      </>
+    );
 };
 export default CardDisplay;
 

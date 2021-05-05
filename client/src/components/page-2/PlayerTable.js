@@ -2,28 +2,30 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../axioscall";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState} from "../../atoms";
+import { GamePlayDataState } from "../../atoms";
 
 const PlayerTable = () => {
-
   const [playersState, setplayersState] = useState([]);
-  const [playersDataState, setPlayersDataState] = useRecoilState(GamePlayDataState);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
 
   const getUsers = async (relatedGame) => {
     try {
-      const res = await axiosInstance.get(`/gameAPI/users/getAll/${relatedGame}`)
-      setplayersState(res.data)
-      setPlayersDataState(res.data)
-      return (res.data)
-      
+      const res = await axiosInstance.get(
+        `/gameAPI/users/getAll/${relatedGame}`
+      );
+      setplayersState(res.data);
+      setPlayersDataState(res.data);
+      return res.data;
     } catch (e) {
       console.log(e);
     }
   };
 
-  useEffect(async()=>{
-    await getUsers(1)
-  },[playersDataState])
+  useEffect(() => {
+    getUsers(1);
+  }, [playersDataState, getUsers]);
 
   if (playersState)
     return (
@@ -52,7 +54,7 @@ const PlayerTable = () => {
         </GameStatus>
       </>
     );
-    else return <></>
+  else return <></>;
 };
 
 export default PlayerTable;

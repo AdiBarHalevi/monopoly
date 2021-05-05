@@ -25,33 +25,31 @@ const GameBoardLayout = () => {
     const topRow = {};
     const rightColumn = {};
     data.forEach((singleCard) => {
-      if (singleCard.fieldNum < 11){ 
-        lowerRow[singleCard.fieldNum] = singleCard
-      
+      if (singleCard.fieldNum < 11) {
+        lowerRow[singleCard.fieldNum] = singleCard;
       }
-      if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19){
+      if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19) {
         leftColumn[singleCard.fieldNum] = singleCard;
-
       }
-        
-      if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30){
+
+      if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30) {
         topRow[singleCard.fieldNum] = singleCard;
       }
-      if (singleCard.fieldNum > 30){
-        rightColumn[singleCard.fieldNum] = singleCard;  
+      if (singleCard.fieldNum > 30) {
+        rightColumn[singleCard.fieldNum] = singleCard;
       }
     });
     setgameboardData([lowerRow, leftColumn, topRow, rightColumn]);
   };
 
-
   // Call the API for the game board
   const sendreq = async () => {
     // i've blocked this option in order to have on game plate, later on this comment has to be removed
     // const req = await axiosInstance.post(`/gameAPI/gameCards`);
-    const res = await axiosInstance.get(`/gameAPI/gamePlay`)
+    const res = await axiosInstance.get(`/gameAPI/gameplay`);
+    console.log(res);
     try {
-      processData(res.data.gamedata);
+      processData(res.data);
     } catch (e) {
       console.log(e);
     }

@@ -24,13 +24,26 @@ const AssetCard = ({
     price,
     displayImage,
     originalImage,
-    forSale
+    forSale,
   } = data.rowItems;
 
   const handleHover = () => {
     // console.log(cardDetails,fieldNum,card)
     if (displayImage) return setCardWindow([data]);
     setCardWindow([data]);
+  };
+  const unUsed = () => {
+    console.log(
+      cardDetails,
+      fieldNum,
+      headerColor,
+      name,
+      price,
+      displayImage,
+      originalImage,
+      forSale,
+      card
+    );
   };
 
   if (displayImage) {

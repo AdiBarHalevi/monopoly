@@ -11,6 +11,6 @@ export const GamePlayDataState = atom({
 });
 
 export const gameboardData = atom({
-  key:"gameboardData",
-  default:[]
-})
+  key: "gameboardData",
+  default: [],
+});

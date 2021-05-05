@@ -1,34 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-
 const GameUtilityDisplayCard = (props) => {
   return (
     <Container>
       <PicContainer picture={props.picture} />
       <CardDetailsBack>
-        <table>
-          <tbody>
-            <tr>
-              <th>{props.name}</th>
-            </tr>
-            <tr>
-              <th>Rent</th>
-              <td>{props.rent}</td>
-            </tr>
-            <tr>
-              <th>with 2 Rail Roads</th>
-              <td>{props.with2RR}</td>
-            </tr>
-            <tr>
-              <th>with 3 Rail Roads</th>
-              <td>{props.with3RR}</td>
-            </tr>
-            <tr>
-              <th>with 4 Rail Roads</th>
-              <td>{props.with4RR}</td>
-            </tr>
-          </tbody>
-        </table>
+        <tbody>
+          <tr>
+            <th>{props.name}</th>
+          </tr>
+          <tr>
+            <th>Rent</th>
+            <td>{props.rent}</td>
+          </tr>
+          <tr>
+            <th>with 2 Rail Roads</th>
+            <td>{props.with2RR}</td>
+          </tr>
+          <tr>
+            <th>with 3 Rail Roads</th>
+            <td>{props.with3RR}</td>
+          </tr>
+          <tr>
+            <th>with 4 Rail Roads</th>
+            <td>{props.with4RR}</td>
+          </tr>
+        </tbody>
       </CardDetailsBack>
     </Container>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import GameBoard from "../game-comp/GameBoard";
 
-
 const Page2 = () => {
   return (
     <PageLayout>
