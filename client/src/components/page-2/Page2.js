@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import GameBoard from "../game-comp/GameBoard";
 
-const GamePage = () => {
+
+const Page2 = () => {
   return (
     <PageLayout>
       <GameBoard />
@@ -10,7 +11,7 @@ const GamePage = () => {
   );
 };
 
-export default GamePage;
+export default Page2;
 
 const PageLayout = styled.div`
   height: 90vh;

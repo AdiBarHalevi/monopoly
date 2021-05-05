@@ -1,13 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";
+import axiosInstance from "../../axioscall";
 
 const WelcomPage = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
+  
   const [registrated, setregistrated] = useState([]);
   const textInput = useRef();
+
+
+  const postUser= async (user,turnNum) => {
+    try {
+      const res = await axiosInstance.post(`/gameAPI/genUser/${user}/${turnNum}`)
+      console.log(res)
+      
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const saveUser = () => {
     const add = registrated;
@@ -19,29 +32,15 @@ const WelcomPage = () => {
   const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
   const startGame = () => {
-    const usersData = [];
-    shuffle(registrated).forEach((user, index) => {
-      user = {
-        name: user,
-        balance: 1000,
-        assets: [],
-        active: true,
-        turnNum: index + 1,
-        playerLocation: 0,
-      };
-      usersData.push(user);
-    });
+    shuffle(registrated).forEach((user, index)=>{
+    postUser(user,index+1)
+    console.log(user,index)
 
-    setPlayersDataState(usersData);
+    })
+    
   };
 
-  // useEffect(() => {
-  //   console.log(`render`);
-  // }, [registrated]);
 
-  // const startGame =()=>{
-  //   localStorage.setItem('users', users)
-  // }
   return (
     <div className="welcome-page">
       <div>

@@ -1,14 +1,31 @@
-import React from "react";
-import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../../atoms";
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../../axioscall";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { GamePlayDataState} from "../../atoms";
 
 const PlayerTable = () => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
 
-  if (playersDataState)
+  const [playersState, setplayersState] = useState([]);
+  const [playersDataState, setPlayersDataState] = useRecoilState(GamePlayDataState);
+
+  const getUsers = async (relatedGame) => {
+    try {
+      const res = await axiosInstance.get(`/gameAPI/users/getAll/${relatedGame}`)
+      setplayersState(res.data)
+      setPlayersDataState(res.data)
+      return (res.data)
+      
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(async()=>{
+    await getUsers(1)
+  },[playersDataState])
+
+  if (playersState)
     return (
       <>
         <GameStatus>
@@ -21,13 +38,13 @@ const PlayerTable = () => {
             </tr>
           </thead>
           <tbody>
-            {playersDataState.map((player, i) => {
+            {playersState.map((player, i) => {
               return (
                 <tr key={i}>
-                  <Td>{player.turnNum}</Td>
+                  <Td>{player.playersTurnNumber}</Td>
                   <Td>{player.name}</Td>
                   <Td>{player.balance}</Td>
-                  <Td>{player.playerLocation}</Td>
+                  <Td>{player.currentLocation}</Td>
                 </tr>
               );
             })}
@@ -35,6 +52,7 @@ const PlayerTable = () => {
         </GameStatus>
       </>
     );
+    else return <></>
 };
 
 export default PlayerTable;

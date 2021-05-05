@@ -4,6 +4,10 @@ const gamePlateSchema = new mongoose.Schema({
   gamedata:{
     type:Object,
     required:true
+  },
+  gameNum:{
+    type:Number,
+    required:true
   }
 });
 
