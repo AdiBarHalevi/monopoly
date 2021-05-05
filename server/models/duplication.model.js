@@ -13,6 +13,12 @@ const gamePlateSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
+  type: {
+    type: String,
+  },
+  forSale: {
+    type: Boolean,
+  },
   headerColor: {
     type: String,
   },

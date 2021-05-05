@@ -10,22 +10,9 @@ const PlayerTable = () => {
     GamePlayDataState
   );
 
-  const getUsers = async (relatedGame) => {
-    try {
-      const res = await axiosInstance.get(
-        `/gameAPI/users/getAll/${relatedGame}`
-      );
-      setplayersState(res.data);
-      setPlayersDataState(res.data);
-      return res.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
-    getUsers(1);
-  }, [playersDataState, getUsers]);
+    setplayersState(playersDataState);
+  }, [playersDataState]);
 
   if (playersState)
     return (
