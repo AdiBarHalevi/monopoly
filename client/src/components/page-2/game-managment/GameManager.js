@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../../../atoms";
+import { GamePlayDataState,activeUserData } from "../../../atoms";
 import ActiveUserManager from "./ActiveUserManager";
 import axiosInstance from "../../../axioscall";
 import CardDisplay from "../card-display/CardDisplay";
+
 
 const GameManager = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
+
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(activeUserData);
+
   const [turnState, setTurnState] = useState(0);
-  const [activeUserState, setActiveUserState] = useState([]);
 
   // updates the last active user state and saves the changes
   const updateUserReq = async () => {
     try {
-      const body = JSON.stringify(activeUserState);
+      const body = JSON.stringify(activeUserDataState);
        await axiosInstance.put(`/gameAPI/users/update`, {
         body: body,
       });
@@ -25,7 +28,7 @@ const GameManager = () => {
   };
 
   // by the end of each turn the users list updates with the server
-  const updateUserList = async () => {
+  const getaUserListFromApi = async () => {
     const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
     setPlayersDataState(res.data);
   };
@@ -34,13 +37,16 @@ const GameManager = () => {
   const primaryPlayersLoad = async () => {
     const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
     setPlayersDataState(res.data);
-    setActiveUserState(playersDataState[turnState]);
+    // setActiveUserState(res.data[turnState]);
+    setActiveUserDataState(res.data[turnState])
+    
   };
 
   // saves data to the API - updates the users data on both sides
   const savetoAPI = () => {
     updateUserReq();
-    updateUserList();
+    // to be added when i will have online LAN game
+    getaUserListFromApi();
   };
 
   // validates the turn, once a turn is over it passes the turn to the next player
@@ -48,22 +54,25 @@ const GameManager = () => {
     let turn = turnState;
     if (turn === playersDataState.length - 1) setTurnState(0);
     else setTurnState((turn += 1));
-    setActiveUserState(playersDataState[turnState]);
+    setActiveUserDataState(playersDataState[turnState])
+    // setActiveUserState(playersDataState[turnState]);
   };
 
   // saves the changes in the local global state and in the server
-  const saveChanges = (variant) => {
-    setActiveUserState(variant);
+  const saveChanges = () => {
     savetoAPI();
   };
 
   // ends the turn, saves the changes
-  const endTurn = (activeUser) => {
+  const endTurn = () => {
     turnValidator();
-    saveChanges(activeUser);
+    saveChanges();
   };
 
-  // const buyAsset = (locationCard) => {};
+  useEffect(()=>{
+    console.log("changed to",activeUserDataState)
+  },[activeUserDataState])
+
 
   return (
     <>
@@ -71,7 +80,6 @@ const GameManager = () => {
       <CardDisplay />
       <ActiveUserManager
         endTurn={endTurn}
-        activeUser={playersDataState[turnState]}
         saveChanges={saveChanges}
       />
     </>

@@ -21,16 +21,12 @@ const LandedOnAsset = (props) => {
     tempLocationState[`property`]= [tempActiveUser.name,tempActiveUser.playersTurnNumber,tempActiveUser._id]
     props.setinTurnLocationState(tempLocationState)
     props.setActiveUserState(tempActiveUser)
-    setbuytheAssetState(false)
-    props.confirm()
+    setbuytheAssetState(true)
   
   }
 
+  if(!buyTheAssetState) {
 
-
-
-
-  if(props.boxState) {
       if(inTurnLocationState.forSale)
       return (
         <div>
@@ -50,7 +46,7 @@ const LandedOnAsset = (props) => {
       />
 
   } 
-  else if(buyTheAssetState&&props.boxState)
+  else if(buyTheAssetState)
     return <BuytheAsset
     activeUserState={activeUserState}
     confirm = {confirm}

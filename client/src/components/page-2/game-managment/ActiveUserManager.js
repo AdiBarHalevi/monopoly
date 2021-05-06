@@ -1,73 +1,104 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
 import { useRecoilState } from "recoil";
-import { gameboardData } from "../../../atoms";
+import { gameboardData,GamePlayDataState,activeUserData } from "../../../atoms";
 import ActionBox from "./actions-components/ActionBox";
+import LandedOnStart from "./actions-components/LandedOnStart"
+import {saveToPlayersState} from "../../../UtilityFunctions"
+
 
 const ActiveUserManager = (props) => {
   const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(activeUserData);
   const [inTurnLocationState, setinTurnLocationState] = useState({});
-  const [diceState, setdiceState] = useState([0, 0, 0, true]);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
+
+
+
+  const [diceState, setdiceState] = useState([0, 0, 0, false,false]);
   const [boxState, setBoxState] = useState(["none", false]);
+  const [startBlockState,setStartBoxState] = useState(false)
+  // const [activeUserState, setActiveUserState] = useState({});
 
-  const [activeUserState, setActiveUserState] = useState({});
 
-  const rollDice = () => {
-    setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), diceState[2], false]);
+  const rollDice = async() => {
+    setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), diceState[2], false ,true]);
     updateLocation();
-    turnEffect();
-    props.saveChanges(activeUserState);
+    saveToPlayersState(activeUserDataState,playersDataState,setPlayersDataState)
+    props.saveChanges(activeUserDataState);
+    setBoxState(["show", true]);
+
   };
 
   // updates the user's location and saves it on its state
   const updateLocation = () => {
-    const update = { ...activeUserState };
-    if (update[`currentLocation`] + diceState[1] + diceState[0] < 40)
-      update[`currentLocation`] += diceState[1] + diceState[0];
-    else
+    const update = { ...activeUserDataState };
+    let newLocation = update[`currentLocation`] + diceState[1] + diceState[0]
+    if (newLocation < 40){
+      update[`currentLocation`] = newLocation;
+    }
+    else{
       update[`currentLocation`] =
-        diceState[1] + diceState[0] + update[`currentLocation`] - 40;
-    setActiveUserState(update);
+      newLocation - 40;
+      setStartBoxState(true)
+
+    }
+    setActiveUserDataState(update);
+    saveToPlayersState(activeUserDataState,playersDataState,setPlayersDataState)
   };
 
   // finishes the turn with click of a button saves the next user as active, resets the dice state and saves changes
   const finishTurn = () => {
-    props.endTurn(activeUserState);
-    props.saveChanges(activeUserState);
-    setdiceState([diceState[0], diceState[1], diceState[2], true]);
-    setActiveUserState(props.activeUser);
+    saveToPlayersState(activeUserDataState,playersDataState,setPlayersDataState)
+    props.endTurn();
+    props.saveChanges();
+    setdiceState([diceState[0], diceState[1], diceState[2], false,false]);
     setBoxState(["show", false]);
   };
 
-  // holds the function of the turn decides if the user can buy or has to pay rent
-  const turnEffect = () => {
-    loadLocationCard();
-  };
 
+  const startTurn = ()=>{
+    setinTurnLocationState(gameboardDataState[activeUserDataState.currentLocation])
+    setdiceState([diceState[0], diceState[1], diceState[2], true,false]);
 
-  const boxStateChange = () => {
-    setBoxState(["flex", false]);
-  };
+    setBoxState(["show", false]);
+    console.log(activeUserDataState)
+    console.log(inTurnLocationState)
+
+    saveToPlayersState(activeUserDataState,playersDataState,setPlayersDataState)
+    props.saveChanges(activeUserDataState);
+  }
 
   const loadLocationCard = () => {
-    if (activeUserState.currentLocation) {
-      let currentLocationData = {};
-      gameboardDataState.find((rowOrColumn) => {
-        const ans = Object.values(rowOrColumn).find((singleAsset) => {
-          return singleAsset.fieldNum === activeUserState.currentLocation;
-        });
-        currentLocationData = ans;
-        return ans;
-      });
-      setinTurnLocationState(currentLocationData);
+    if (activeUserDataState.currentLocation) {
+      setinTurnLocationState(gameboardDataState[activeUserDataState.currentLocation])
+      console.log(inTurnLocationState)
     }
   };
 
+  useEffect(()=>{
+    loadLocationCard()
+    console.log(inTurnLocationState)
+  })
+
+
+  if(startBlockState) return <LandedOnStart
+    setActiveUserState={setActiveUserDataState}
+    setBoxState={setBoxState}
+    setStartBoxState={setStartBoxState}
+    activeUserState={activeUserDataState}
+    gameboardDataState={gameboardDataState} 
+    setgameboardData ={setgameboardData}
+
+  />
   return (
     <>
+     {/* <button onClick={findLocationCard}>click here for the test</button> */}
       <ActionBox
-        setActiveUserState={setActiveUserState}
-        activeUserState={activeUserState}
+        setActiveUserState={setActiveUserDataState}
+        activeUserState={activeUserDataState}
         inTurnLocationState={inTurnLocationState}
         setinTurnLocationState={setinTurnLocationState}
         boxState={boxState}
@@ -78,14 +109,14 @@ const ActiveUserManager = (props) => {
           <tbody>
             <tr>
               <th>users turn</th>
-              <td>{activeUserState.name}</td>
+              <td>{activeUserDataState.name}</td>
             </tr>
             <tr>
               <th>currentLocation</th>
 
               <td>
-                {activeUserState.currentLocation
-                  ? activeUserState.currentLocation
+                {activeUserDataState.currentLocation
+                  ? activeUserDataState.currentLocation
                   : ""}
               </td>
             </tr>
@@ -96,9 +127,16 @@ const ActiveUserManager = (props) => {
             </tr>
           </tbody>
         </table>
-        {diceState[3] && <button onClick={rollDice}>Roll Dice</button>}
+        {diceState[3] && 
+        <button onClick={rollDice}>Roll Dice</button>}
+        {diceState[4]&&
         <button onClick={finishTurn}>End turn</button>
-      </div>
+        }
+        {!diceState[3]&&!diceState[4] &&
+        <button onClick={startTurn}>start turn</button>
+        }
+
+      </div> 
     </>
   );
 };

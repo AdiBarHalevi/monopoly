@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";
 
 const PlayerTable = () => {
-  const [playersState, setplayersState] = useState([]);
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
 
-  useEffect(() => {
-    setplayersState(playersDataState);
-  }, [playersDataState]);
 
-  if (playersState)
+  if (playersDataState.length>1)
     return (
       <>
         <GameStatus>
@@ -26,8 +22,8 @@ const PlayerTable = () => {
             </tr>
           </thead>
           <tbody>
-            {playersState.map((player, i) => {
-              return (
+            {playersDataState.map((player, i) => {
+              return (        
                 <tr key={i}>
                   <Td>{player.playersTurnNumber}</Td>
                   <Td>{player.name}</Td>

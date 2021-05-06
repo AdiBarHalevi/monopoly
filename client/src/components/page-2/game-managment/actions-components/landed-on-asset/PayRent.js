@@ -1,5 +1,5 @@
 import axiosInstance from "../../../../../axioscall";
-
+import {saveToPlayersState} from "../../../../../UtilityFunctions"
 
 const PayTheRent =(props)=>{
 
@@ -13,10 +13,7 @@ const PayTheRent =(props)=>{
             reduceMoney()
             props.confirm()
         
-        }
-            // tempActiveUser[`balance`] -= tempLocationState[`price`]
-            // const tempActiveUser = {...activeUserState}
-            
+        }        
         }
         
     const reduceMoney = ()=>{

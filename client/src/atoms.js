@@ -14,3 +14,13 @@ export const gameboardData = atom({
   key: "gameboardData",
   default: [],
 });
+
+export const activeUserData = atom({
+  key: "activeUserData",
+  default: [],
+});
+
+export const tableRenderer = atom({
+  key: "tableRenderer",
+  default: [],
+});

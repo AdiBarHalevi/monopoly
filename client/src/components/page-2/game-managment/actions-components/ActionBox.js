@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+
+// components for the game play
 import LandedOnAsset from "./landed-on-asset/LandedOnAsset"
 import LandedOnChance from "./LandedOnChance"
 import LandedOnCommunityChest from "./LandedOnCommunityChest"
@@ -8,12 +10,20 @@ import GoToJail from "./GotoJail"
 import VisitJailOrParking from "./VisitJailOrParking"
 import LandedOnStart from "./LandedOnStart"
 
+// functions that save the users list
+import { useRecoilState } from "recoil";
+import { GamePlayDataState } from "../../../../atoms";
+import {saveToPlayersState} from "../../../../UtilityFunctions"
+
 const ActionBox = (props) => {
-  const { inTurnLocationState } = props;
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
+  const { inTurnLocationState,activeUserState } = props;
 
   const confirm = () => {
     props.setBoxState(["none", false]);
-    console.log(props.activeUserState)
+    saveToPlayersState(activeUserState,playersDataState,setPlayersDataState)
   };
 
 
