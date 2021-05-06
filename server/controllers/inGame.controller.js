@@ -2,9 +2,9 @@ const { gamePlateModel } = require("../models/duplication.model");
 const { PlayerStatusModel } = require("../models/playerStatus.model");
 
 const finduser = async (req, res) => {
-  let parsed = JSON.parse(req.body.body);
-  const { _id, currentLocation, isActive, balance } = parsed;
   try {
+    let parsed = JSON.parse(req.body.body);
+    const { _id, currentLocation, isActive, balance } = parsed;
     const ans = await PlayerStatusModel.findByIdAndUpdate(
       _id,
       { currentLocation, balance },

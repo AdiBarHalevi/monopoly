@@ -96,9 +96,8 @@ const genUser = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-  const relatedGame = req.params.relatedGame;
-
   try {
+    const relatedGame = req.params.relatedGame;
     const ans = await PlayerStatusModel.find({ relatedGameId: relatedGame });
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
 import { useRecoilState } from "recoil";
 import { gameboardData } from "../../../atoms";

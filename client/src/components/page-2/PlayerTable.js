@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../axioscall";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";

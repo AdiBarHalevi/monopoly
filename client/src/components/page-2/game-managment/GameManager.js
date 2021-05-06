@@ -16,7 +16,7 @@ const GameManager = () => {
   const updateUserReq = async () => {
     try {
       const body = JSON.stringify(activeUserState);
-      const ans = await axiosInstance.put(`/gameAPI/users/update`, {
+       await axiosInstance.put(`/gameAPI/users/update`, {
         body: body,
       });
     } catch (e) {
@@ -63,7 +63,7 @@ const GameManager = () => {
     saveChanges(activeUser);
   };
 
-  const buyAsset = (locationCard) => {};
+  // const buyAsset = (locationCard) => {};
 
   return (
     <>

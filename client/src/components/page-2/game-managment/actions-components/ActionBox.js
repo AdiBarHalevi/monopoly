@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import LandedOnAsset from "./LandedOnAsset"
 import LandedOnChance from "./LandedOnChance"
@@ -11,15 +11,15 @@ import LandedOnStart from "./LandedOnStart"
 const ActionBox = (props) => {
   const { inTurnLocationState } = props;
 
-  useEffect(() => {
-    turnEffect();
-  });
+  // useEffect(() => {
+  //   turnEffect();
+  // });
 
-  const rentOrBuy = () => {};
+  // const rentOrBuy = () => {};
 
-  const turnEffect = () => {
+  // const turnEffect = () => {
 
-  };
+  // };
 
   const buy = () => {
     props.setBoxState(["none", false]);
