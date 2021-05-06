@@ -48,6 +48,7 @@ const genGameData = async (req, res) => {
         price,
         forSale: true,
         type: "asset",
+        property:[],
         headerColor,
         cardDetails,
         displayImage,

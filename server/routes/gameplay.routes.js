@@ -36,6 +36,10 @@ router
     inGame.finduser(req, res);
   })
 
+  .put("/users/getPaid",async (req, res) => {
+    inGame.getPaid(req, res);
+  })
+
   .put("/gameCards/buy/:gameId/:fieldNum", async (req, res) => {
     inGame.buyAsset(req, res);
   });

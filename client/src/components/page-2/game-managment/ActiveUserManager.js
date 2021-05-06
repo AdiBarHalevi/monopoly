@@ -42,63 +42,8 @@ const ActiveUserManager = (props) => {
   // holds the function of the turn decides if the user can buy or has to pay rent
   const turnEffect = () => {
     loadLocationCard();
-    switch (inTurnLocationState.type) {
-      case "asset":
-        buyOrSale();
-        console.log("asset", inTurnLocationState.type);
-        break;
-
-      case "chance":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "comunityChest":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "incomeTax":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "goToJail":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "Jail":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "parking":
-        console.log(inTurnLocationState.type);
-        break;
-
-      case "luxurytax":
-        console.log(inTurnLocationState.type);
-        break;
-    }
   };
 
-  //
-  const buyOrSale = () => {
-    boxStateChange();
-    const payOrBuy = payRent();
-    if (payOrBuy) buy();
-  };
-
-  const buy = (adress) => {
-    console.log(inTurnLocationState);
-    // setgameboardData(adress)
-  };
-
-  const payRent = () => {
-    if (inTurnLocationState.forSale) {
-      console.log(` buy?`);
-      return true;
-    } else if (inTurnLocationState.cardDetails) {
-      console.log("pay");
-      return false;
-    }
-  };
 
   const boxStateChange = () => {
     setBoxState(["flex", false]);
@@ -115,15 +60,16 @@ const ActiveUserManager = (props) => {
         return ans;
       });
       setinTurnLocationState(currentLocationData);
-      console.log(inTurnLocationState);
     }
   };
 
   return (
     <>
       <ActionBox
+        setActiveUserState={setActiveUserState}
         activeUserState={activeUserState}
         inTurnLocationState={inTurnLocationState}
+        setinTurnLocationState={setinTurnLocationState}
         boxState={boxState}
         setBoxState={setBoxState}
       />
@@ -152,11 +98,6 @@ const ActiveUserManager = (props) => {
         </table>
         {diceState[3] && <button onClick={rollDice}>Roll Dice</button>}
         <button onClick={finishTurn}>End turn</button>
-        <button onClick={buyOrSale}>Buy/Sell</button>
-        {/* {props.diceState[3] && (
-        )}
-        <button onClick={loadLocationCard}>load Location Card</button>
-        */}
       </div>
     </>
   );

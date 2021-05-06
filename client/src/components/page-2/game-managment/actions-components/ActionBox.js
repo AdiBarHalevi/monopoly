@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import LandedOnAsset from "./LandedOnAsset"
+import LandedOnAsset from "./landed-on-asset/LandedOnAsset"
 import LandedOnChance from "./LandedOnChance"
 import LandedOnCommunityChest from "./LandedOnCommunityChest"
 import LandedOnTax from "./LandedOnTax"
@@ -11,18 +11,9 @@ import LandedOnStart from "./LandedOnStart"
 const ActionBox = (props) => {
   const { inTurnLocationState } = props;
 
-  // useEffect(() => {
-  //   turnEffect();
-  // });
-
-  // const rentOrBuy = () => {};
-
-  // const turnEffect = () => {
-
-  // };
-
-  const buy = () => {
+  const confirm = () => {
     props.setBoxState(["none", false]);
+    console.log(props.activeUserState)
   };
 
 
@@ -33,21 +24,26 @@ const ActionBox = (props) => {
       {console.log(props.inTurnLocationState)}
       <LandedOnAsset
        activeUserState={props.activeUserState}
-       buy={buy}
-       inTurnLocationState={props.inTurnLocationState}/>
+       setActiveUserState = {props.setActiveUserState}
+       confirm={confirm}
+       inTurnLocationState={props.inTurnLocationState}
+       setinTurnLocationState={props.setinTurnLocationState}
+       boxState = {props.boxState}
+       />
+       
        </Box>)
     case "chance":
-      return <Box boxState={props.boxState}><LandedOnChance buy={buy}/></Box>
+      return <Box boxState={props.boxState}><LandedOnChance buy={confirm}/></Box>
 
     case "comunityChest":
-      return <Box boxState={props.boxState}><LandedOnCommunityChest buy={buy}/></Box>
+      return <Box boxState={props.boxState}><LandedOnCommunityChest buy={confirm}/></Box>
 
     case "incomeTax"||"luxurytax":
       return <Box boxState={props.boxState}>
       {console.log(props.inTurnLocationState)}
       <LandedOnTax
        activeUserState={props.activeUserState}
-       buy={buy}
+       buy={confirm}
        inTurnLocationState={props.inTurnLocationState}/>
        </Box>
 
@@ -56,7 +52,7 @@ const ActionBox = (props) => {
       {console.log(props.inTurnLocationState)}
       <GoToJail
        activeUserState={props.activeUserState}
-       buy={buy}
+       buy={confirm}
        inTurnLocationState={props.inTurnLocationState}/>
        </Box>
 
@@ -65,7 +61,7 @@ const ActionBox = (props) => {
       {console.log(props.inTurnLocationState)}
       <VisitJailOrParking
        activeUserState={props.activeUserState}
-       buy={buy}
+       buy={confirm}
        inTurnLocationState={props.inTurnLocationState}/>
        </Box>
 
@@ -74,7 +70,7 @@ const ActionBox = (props) => {
       {console.log(props.inTurnLocationState)}
       <LandedOnStart
        activeUserState={props.activeUserState}
-       buy={buy}
+       buy={confirm}
        inTurnLocationState={props.inTurnLocationState}/>
        </Box>
 
