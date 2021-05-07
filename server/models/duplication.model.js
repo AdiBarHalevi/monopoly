@@ -10,8 +10,8 @@ const gamePlateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  property:{
-    type:Array
+  property: {
+    type: Array,
   },
   price: {
     type: Number,

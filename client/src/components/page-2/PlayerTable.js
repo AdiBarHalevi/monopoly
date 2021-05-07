@@ -8,8 +8,7 @@ const PlayerTable = () => {
     GamePlayDataState
   );
 
-
-  if (playersDataState.length>1)
+  if (playersDataState.length > 1)
     return (
       <>
         <GameStatus>
@@ -23,7 +22,7 @@ const PlayerTable = () => {
           </thead>
           <tbody>
             {playersDataState.map((player, i) => {
-              return (        
+              return (
                 <tr key={i}>
                   <Td>{player.playersTurnNumber}</Td>
                   <Td>{player.name}</Td>

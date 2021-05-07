@@ -3,11 +3,8 @@ import React from "react";
 const LandedOnTax = (props) => {
   return (
     <div>
-        Landed On Tax
-        <button onClick={props.buy}>   
-        OK
-    </button>
-        
+      Landed On Tax
+      <button onClick={props.buy}>OK</button>
     </div>
   );
 };

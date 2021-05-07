@@ -5,16 +5,20 @@ export const getRandomInt = (min, max) => {
 };
 
 // save to global var
-export  const saveToPlayersState = (activeUser,playersDataState,setPlayersDataState)=>{
-  if(playersDataState.length>1){
-      const updatePlayersGlobalState =[...playersDataState]
-      console.log(updatePlayersGlobalState)
+export const saveToPlayersState = (
+  activeUser,
+  playersDataState,
+  setPlayersDataState
+) => {
+  if (playersDataState.length > 1) {
+    const updatePlayersGlobalState = [...playersDataState];
+    console.log(updatePlayersGlobalState);
 
-      updatePlayersGlobalState.forEach((user,i)=>{
-        user[`name`]  === activeUser.name?
-       updatePlayersGlobalState[i] = activeUser: console.log()
-  })
-  setPlayersDataState(updatePlayersGlobalState)
- }
-}
-
+    updatePlayersGlobalState.forEach((user, i) => {
+      user[`name`] === activeUser.name
+        ? (updatePlayersGlobalState[i] = activeUser)
+        : console.log();
+    });
+    setPlayersDataState(updatePlayersGlobalState);
+  }
+};

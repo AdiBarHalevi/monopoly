@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState,activeUserData } from "../../../atoms";
+import { GamePlayDataState, activeUserData } from "../../../atoms";
 import ActiveUserManager from "./ActiveUserManager";
 import axiosInstance from "../../../axioscall";
 import CardDisplay from "../card-display/CardDisplay";
-
 
 const GameManager = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
 
-  const [activeUserDataState, setActiveUserDataState] = useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const [turnState, setTurnState] = useState(0);
 
@@ -19,7 +20,7 @@ const GameManager = () => {
   const updateUserReq = async () => {
     try {
       const body = JSON.stringify(activeUserDataState);
-       await axiosInstance.put(`/gameAPI/users/update`, {
+      await axiosInstance.put(`/gameAPI/users/update`, {
         body: body,
       });
     } catch (e) {
@@ -38,8 +39,7 @@ const GameManager = () => {
     const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
     setPlayersDataState(res.data);
     // setActiveUserState(res.data[turnState]);
-    setActiveUserDataState(res.data[turnState])
-    
+    setActiveUserDataState(res.data[turnState]);
   };
 
   // saves data to the API - updates the users data on both sides
@@ -54,7 +54,7 @@ const GameManager = () => {
     let turn = turnState;
     if (turn === playersDataState.length - 1) setTurnState(0);
     else setTurnState((turn += 1));
-    setActiveUserDataState(playersDataState[turnState])
+    setActiveUserDataState(playersDataState[turnState]);
     // setActiveUserState(playersDataState[turnState]);
   };
 
@@ -69,19 +69,15 @@ const GameManager = () => {
     saveChanges();
   };
 
-  useEffect(()=>{
-    console.log("changed to",activeUserDataState)
-  },[activeUserDataState])
-
+  useEffect(() => {
+    console.log("changed to", activeUserDataState);
+  }, [activeUserDataState]);
 
   return (
     <>
       <button onClick={primaryPlayersLoad}> Start the game</button>
       <CardDisplay />
-      <ActiveUserManager
-        endTurn={endTurn}
-        saveChanges={saveChanges}
-      />
+      <ActiveUserManager endTurn={endTurn} saveChanges={saveChanges} />
     </>
   );
 };

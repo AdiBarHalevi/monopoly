@@ -36,7 +36,7 @@ router
     inGame.finduser(req, res);
   })
 
-  .put("/users/getPaid",async (req, res) => {
+  .put("/users/getPaid", async (req, res) => {
     inGame.getPaid(req, res);
   })
 

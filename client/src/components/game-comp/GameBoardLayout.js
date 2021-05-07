@@ -17,11 +17,11 @@ import CornerCard from "./CornerCard";
 const GameBoardLayout = () => {
   // boards layout's state
   const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
-  const [layoutDataState,setlayoutDataState] = useState([])
+  const [layoutDataState, setlayoutDataState] = useState([]);
 
   // process the data from the API call
   const processData = (data) => {
-    const processForGlobalVar ={}
+    const processForGlobalVar = {};
     const lowerRow = {};
     const leftColumn = {};
     const topRow = {};
@@ -29,25 +29,24 @@ const GameBoardLayout = () => {
     data.forEach((singleCard) => {
       if (singleCard.fieldNum < 11) {
         lowerRow[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum]=singleCard
+        processForGlobalVar[singleCard.fieldNum] = singleCard;
       }
       if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19) {
         leftColumn[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum]=singleCard
+        processForGlobalVar[singleCard.fieldNum] = singleCard;
       }
 
       if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30) {
         topRow[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum]=singleCard
+        processForGlobalVar[singleCard.fieldNum] = singleCard;
       }
       if (singleCard.fieldNum > 30) {
         rightColumn[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum]=singleCard
+        processForGlobalVar[singleCard.fieldNum] = singleCard;
       }
     });
-    setlayoutDataState([lowerRow, leftColumn, topRow, rightColumn])
+    setlayoutDataState([lowerRow, leftColumn, topRow, rightColumn]);
     setgameboardData(processForGlobalVar);
-
   };
 
   // Call the API for the game board

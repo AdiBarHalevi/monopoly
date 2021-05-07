@@ -19,26 +19,22 @@ const finduser = async (req, res) => {
   }
 };
 
-
 const getPaid = async (req, res) => {
   let parsed = JSON.parse(req.body.body);
   try {
     const ans = await PlayerStatusModel.findByIdAndUpdate(
       parsed.payTo,
-      {$inc:{ balance:parsed.amount}},
-      { new: true })
+      { $inc: { balance: parsed.amount } },
+      { new: true }
+    );
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
     return res.send(ans);
-
   } catch (e) {
     res.send("unable to fetch");
   }
 };
-
-
-
 
 // const buyAsset =async (req, res) =>{
 //     console.log(req.params.fieldNum)
@@ -74,5 +70,5 @@ const buyAsset = async (req, res) => {
 module.exports = {
   finduser,
   buyAsset,
-  getPaid
+  getPaid,
 };

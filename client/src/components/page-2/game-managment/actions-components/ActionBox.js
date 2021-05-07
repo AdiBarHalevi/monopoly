@@ -2,114 +2,112 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 // components for the game play
-import LandedOnAsset from "./landed-on-asset/LandedOnAsset"
-import LandedOnChance from "./LandedOnChance"
-import LandedOnCommunityChest from "./LandedOnCommunityChest"
-import LandedOnTax from "./LandedOnTax"
-import GoToJail from "./GotoJail"
-import VisitJailOrParking from "./VisitJailOrParking"
-import LandedOnStart from "./LandedOnStart"
+import LandedOnAsset from "./landed-on-asset/LandedOnAsset";
+import LandedOnChance from "./LandedOnChance";
+import LandedOnCommunityChest from "./LandedOnCommunityChest";
+import LandedOnTax from "./LandedOnTax";
+import GoToJail from "./GotoJail";
+import VisitJailOrParking from "./VisitJailOrParking";
+import LandedOnStart from "./LandedOnStart";
+import {ActionBoxContainer} from "../../../common-components/ActionBoxContainer"
+
 
 // functions that save the users list
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../../../atoms";
-import {saveToPlayersState} from "../../../../UtilityFunctions"
+import { saveToPlayersState } from "../../../../UtilityFunctions";
 
 const ActionBox = (props) => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const { inTurnLocationState,activeUserState } = props;
+  const { inTurnLocationState, activeUserState } = props;
 
   const confirm = () => {
     props.setBoxState(["none", false]);
-    saveToPlayersState(activeUserState,playersDataState,setPlayersDataState)
+    saveToPlayersState(activeUserState, playersDataState, setPlayersDataState);
   };
-
-
 
   switch (inTurnLocationState.type) {
     case "asset":
-      return (<Box boxState={props.boxState}>
-      {console.log(props.inTurnLocationState)}
-      <LandedOnAsset
-       activeUserState={props.activeUserState}
-       setActiveUserState = {props.setActiveUserState}
-       confirm={confirm}
-       inTurnLocationState={props.inTurnLocationState}
-       setinTurnLocationState={props.setinTurnLocationState}
-       boxState = {props.boxState}
-       />
-       
-       </Box>)
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          <LandedOnAsset
+            activeUserState={props.activeUserState}
+            setActiveUserState={props.setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={props.inTurnLocationState}
+            setinTurnLocationState={props.setinTurnLocationState}
+            boxState={props.boxState}
+          />
+        </ActionBoxContainer>
+      );
     case "chance":
-      return <Box boxState={props.boxState}><LandedOnChance buy={confirm}/></Box>
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          <LandedOnChance buy={confirm} />
+        </ActionBoxContainer>
+      );
 
     case "comunityChest":
-      return <Box boxState={props.boxState}><LandedOnCommunityChest buy={confirm}/></Box>
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          <LandedOnCommunityChest buy={confirm} />
+        </ActionBoxContainer>
+      );
 
-    case "incomeTax"||"luxurytax":
-      return <Box boxState={props.boxState}>
-      {console.log(props.inTurnLocationState)}
-      <LandedOnTax
-       activeUserState={props.activeUserState}
-       buy={confirm}
-       inTurnLocationState={props.inTurnLocationState}/>
-       </Box>
+    case "incomeTax" || "luxurytax":
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          {console.log(props.inTurnLocationState)}
+          <LandedOnTax
+            activeUserState={props.activeUserState}
+            buy={confirm}
+            inTurnLocationState={props.inTurnLocationState}
+          />
+        </ActionBoxContainer>
+      );
 
     case "goToJail":
-      return <Box boxState={props.boxState}>
-      {console.log(props.inTurnLocationState)}
-      <GoToJail
-       activeUserState={props.activeUserState}
-       buy={confirm}
-       inTurnLocationState={props.inTurnLocationState}/>
-       </Box>
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          {console.log(props.inTurnLocationState)}
+          <GoToJail
+            activeUserState={props.activeUserState}
+            buy={confirm}
+            inTurnLocationState={props.inTurnLocationState}
+          />
+        </ActionBoxContainer>
+      );
 
-    case "Jail"||"parking":
-      return <Box boxState={props.boxState}>
-      {console.log(props.inTurnLocationState)}
-      <VisitJailOrParking
-       activeUserState={props.activeUserState}
-       buy={confirm}
-       inTurnLocationState={props.inTurnLocationState}/>
-       </Box>
+    case "Jail" || "parking":
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          {console.log(props.inTurnLocationState)}
+          <VisitJailOrParking
+            activeUserState={props.activeUserState}
+            buy={confirm}
+            inTurnLocationState={props.inTurnLocationState}
+          />
+        </ActionBoxContainer>
+      );
 
     case "start":
-      return <Box boxState={props.boxState}>
-      {console.log(props.inTurnLocationState)}
-      <LandedOnStart
-       activeUserState={props.activeUserState}
-       buy={confirm}
-       inTurnLocationState={props.inTurnLocationState}/>
-       </Box>
+      return (
+        <ActionBoxContainer boxState={props.boxState[0]}>
+          {console.log(props.inTurnLocationState)}
+          <LandedOnStart
+            activeUserState={props.activeUserState}
+            buy={confirm}
+            inTurnLocationState={props.inTurnLocationState}
+          />
+        </ActionBoxContainer>
+      );
 
-      default:
-        return <></>
+    default:
+      return <></>;
   }
 };
 
 export default ActionBox;
 
-const showUpAnimation = keyframes`
-    0%{
-        opacity:0
-    }
-    100%{
-        opacitiy:1
-
-    }
-`;
-const Box = styled.div`
-  background: blue;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  display: ${(props)=>props.boxState};
-  left: 0;
-  animation-name: ${showUpAnimation};
-  animation-duration: 0.5s;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.8;
-`;
