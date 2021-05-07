@@ -12,8 +12,6 @@ export const saveToPlayersState = (
 ) => {
   if (playersDataState.length > 1) {
     const updatePlayersGlobalState = [...playersDataState];
-    console.log(updatePlayersGlobalState);
-
     updatePlayersGlobalState.forEach((user, i) => {
       user[`name`] === activeUser.name
         ? (updatePlayersGlobalState[i] = activeUser)
@@ -22,3 +20,17 @@ export const saveToPlayersState = (
     setPlayersDataState(updatePlayersGlobalState);
   }
 };
+
+export const takeMoneyFromActiveUser = (activeUserState,setActiveUserState,inTurnLocationState) => {
+  const tempActiveUser = { ...activeUserState };
+  tempActiveUser[`balance`] -= inTurnLocationState[`price`];
+  setActiveUserState(tempActiveUser);
+};
+
+export const SendUserToLocation =(activeUserState,setActiveUserState,detinationCardNum)=>{
+  const tempActiveUser = { ...activeUserState };
+  tempActiveUser[`currentLocation`] = detinationCardNum
+  setActiveUserState(tempActiveUser)
+
+}
+

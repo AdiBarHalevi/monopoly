@@ -5,7 +5,7 @@ const LandedOnChance = (props) => {
   return (
     <AssetCardsContainer>
       Landed on Chance
-      <button onClick={props.buy}>OK</button>
+      <button onClick={props.confirm}>OK</button>
     </AssetCardsContainer>
   );
 };

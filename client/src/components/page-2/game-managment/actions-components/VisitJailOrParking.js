@@ -1,13 +1,17 @@
 import React from "react";
+import {AssetCardsContainer} from "../../../common-components/AssetCardsContainer"
+
 
 const VisitJailOrParking = (props) => {
-  if (props.inTurnLocationState.forSale)
+  const {activeUserState,inTurnLocationState,confirm}=props
     return (
-      <div>
-        visiting in Jail
-        <button onClick={props.buy}>Make a move</button>
-      </div>
+      <AssetCardsContainer>
+        {activeUserState.name} is visiting  at {inTurnLocationState.name}
+        <button onClick={confirm}>confirm</button>
+      </AssetCardsContainer>
     );
 };
 
 export default VisitJailOrParking;
+
+

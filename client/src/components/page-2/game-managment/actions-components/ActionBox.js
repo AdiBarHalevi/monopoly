@@ -21,7 +21,7 @@ const ActionBox = (props) => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const { inTurnLocationState, activeUserState } = props;
+  const { inTurnLocationState,setinTurnLocationState, activeUserState,setActiveUserState,boxState} = props;
 
   const confirm = () => {
     props.setBoxState(["none", false]);
@@ -31,81 +31,110 @@ const ActionBox = (props) => {
   switch (inTurnLocationState.type) {
     case "asset":
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
+        <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnAsset
-            activeUserState={props.activeUserState}
-            setActiveUserState={props.setActiveUserState}
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
             confirm={confirm}
-            inTurnLocationState={props.inTurnLocationState}
-            setinTurnLocationState={props.setinTurnLocationState}
-            boxState={props.boxState}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
+            boxState={boxState}
           />
         </ActionBoxContainer>
       );
     case "chance":
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
-          <LandedOnChance buy={confirm} />
+        <ActionBoxContainer boxState={boxState[0]}>
+          <LandedOnChance
+                      activeUserState={activeUserState}
+                      setActiveUserState={setActiveUserState}
+                      confirm={confirm}
+                      inTurnLocationState={inTurnLocationState}
+                      setinTurnLocationState={setinTurnLocationState}
+                      boxState={boxState}/>
         </ActionBoxContainer>
       );
 
-    case "comunityChest":
+    case "communityChest":
+      {console.log(props.inTurnLocationState)}
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
-          <LandedOnCommunityChest buy={confirm} />
+        <ActionBoxContainer boxState={boxState[0]}>
+          <LandedOnCommunityChest 
+           activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
+            boxState={boxState} />
         </ActionBoxContainer>
       );
 
     case "incomeTax" || "luxurytax":
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
-          {console.log(props.inTurnLocationState)}
+        <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnTax
-            activeUserState={props.activeUserState}
-            buy={confirm}
-            inTurnLocationState={props.inTurnLocationState}
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
+            boxState={boxState}
           />
         </ActionBoxContainer>
       );
 
-    case "goToJail":
+    case "goTojail":
       return (
         <ActionBoxContainer boxState={props.boxState[0]}>
-          {console.log(props.inTurnLocationState)}
           <GoToJail
-            activeUserState={props.activeUserState}
-            buy={confirm}
-            inTurnLocationState={props.inTurnLocationState}
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
+            boxState={boxState}
           />
         </ActionBoxContainer>
       );
 
-    case "Jail" || "parking":
+    case "jail":
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
-          {console.log(props.inTurnLocationState)}
+        <ActionBoxContainer boxState={boxState[0]}>
           <VisitJailOrParking
-            activeUserState={props.activeUserState}
-            buy={confirm}
-            inTurnLocationState={props.inTurnLocationState}
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
+          />
+        </ActionBoxContainer>
+      );
+    case  "parking":
+      return (
+        <ActionBoxContainer boxState={boxState[0]}>
+          <VisitJailOrParking
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
           />
         </ActionBoxContainer>
       );
 
     case "start":
       return (
-        <ActionBoxContainer boxState={props.boxState[0]}>
-          {console.log(props.inTurnLocationState)}
+        <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnStart
-            activeUserState={props.activeUserState}
+            activeUserState={activeUserState}
             buy={confirm}
-            inTurnLocationState={props.inTurnLocationState}
+            inTurnLocationState={inTurnLocationState}
           />
         </ActionBoxContainer>
       );
 
     default:
-      return <></>;
+      return <>
+       {console.log(inTurnLocationState.type)}
+       </>;
   }
 };
 

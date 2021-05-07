@@ -1,11 +1,13 @@
 import React from "react";
+import {AssetCardsContainer} from "../../../common-components/AssetCardsContainer"
+
 
 const LandedOnCommunityChest = (props) => {
   return (
-    <div>
+    <AssetCardsContainer>
       Landed On Community Chest
-      <button onClick={props.buy}>OK</button>
-    </div>
+      <button onClick={props.confirm}>OK</button>
+    </AssetCardsContainer>
   );
 };
 
