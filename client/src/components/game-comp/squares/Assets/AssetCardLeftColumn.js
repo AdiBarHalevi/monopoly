@@ -4,13 +4,13 @@ import AssetCard from "./AssetsCard";
 const AssetCardLeftColumn = (data) => {
   return (
     <AssetCard
-      assetHeight="1.77rem"
-      assetWidth="3.5rem"
-      headerheight="1.77rem"
-      headerWidth="1.313rem"
+      assetHeight="3.4rem"
+      assetWidth="6rem"
+      headerheight="4em"
+      headerWidth="1.2rem"
       headerDirection="row-reverse"
       headerRotation="rotate(90deg)"
-      abosoluteTopPosition="0.2rem"
+      abosoluteTopPosition="0.6rem"
       abosoluteLeftPosition="-2rem"
       data={data}
     ></AssetCard>

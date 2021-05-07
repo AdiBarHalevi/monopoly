@@ -38,8 +38,8 @@ const PicContainer = styled.div`
   border: 1px solid black;
   background-position: center;
   background-size: cover;
-  height: 12rem;
-  width: 12rem;
+  height: 8rem;
+  width: 6rem;
 `;
 
 const CardDetailsBack = styled.table`
@@ -47,7 +47,7 @@ const CardDetailsBack = styled.table`
   line-height: 1.5;
   padding: 2px;
   text-align: left;
-  font-size: 12px;
+  font-size: 10px;
   align-items: center;
   justify-content: center;
   display: flex;

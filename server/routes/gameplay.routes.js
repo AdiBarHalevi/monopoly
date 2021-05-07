@@ -42,6 +42,10 @@ router
 
   .put("/gameCards/buy/:gameId/:fieldNum", async (req, res) => {
     inGame.buyAsset(req, res);
-  });
+  })
+
+  .put("/users/retirePlayer/:id", async (req, res) => {
+    inGame.retirePlayer(req, res);
+  })
 
 module.exports = router;

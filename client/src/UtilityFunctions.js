@@ -34,3 +34,10 @@ export const SendUserToLocation =(activeUserState,setActiveUserState,detinationC
 
 }
 
+export const reduceMoney = (activeUserState,setActiveUserState,amount) => {
+  const tempActiveUser = { ...activeUserState };
+  tempActiveUser[`balance`] -= amount;
+  setActiveUserState(tempActiveUser);
+};
+
+

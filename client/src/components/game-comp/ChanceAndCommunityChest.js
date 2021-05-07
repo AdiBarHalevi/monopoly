@@ -15,8 +15,7 @@ const ChanceAndCommunityChest = () => {
 export default ChanceAndCommunityChest;
 
 const Container = styled.div`
-  height: 15rem;
-  width: 15rem;
+  width: 36rem;
   background: #d7e6d5;
   display: flex;
   flex-direction: column;

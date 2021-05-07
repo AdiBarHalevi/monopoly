@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 const GameBoard = () => {
   return (
-    <>
+    <PageContainer>
       <GameBoardLayout />
       <Container>
         <GameManager />
         <PlayerTable />
       </Container>
-    </>
+    </PageContainer>
   );
 };
 
@@ -23,5 +23,15 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
+  // width:95%
+  width:10rem;
   justify-content: space-around;
+`;
+
+export const PageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  width:95%;
 `;

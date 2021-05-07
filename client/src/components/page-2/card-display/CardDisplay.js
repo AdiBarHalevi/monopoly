@@ -115,30 +115,30 @@ const CardsContainer = styled.div`
 
 const Container = styled.div`
   border: 1px solid black;
-  height: 12rem;
-  width: 9rem;
+  height:8rem;
+  width: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size:10px
 `;
 
 const AreaColor = styled.div`
   background: ${(props) => props.cardColor};
-  height: 3rem;
+  height: 2rem;
 `;
 
 const CardDetailsFront = styled.div`
-  height: 3rem;
+  // height: 3rem;
   text-align: center;
   line-height: 3;
 `;
 
 const CardDetailsBack = styled.table`
-  border: 1px solid black;
   line-height: 1.5;
   padding: 2px;
   text-align: left;
-  font-size: 12px;
+  font-size: 7.5px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -154,6 +154,6 @@ const PicContainer = styled.div`
   border: 1px solid black;
   background-position: center;
   background-size: cover;
-  height: 12rem;
-  width: 12rem;
+  height: 8rem;
+  width: 6rem;
 `;

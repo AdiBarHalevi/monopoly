@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
-import axiosInstance from "../../axioscall";
+import {getGameBoard} from "../../axioscall";
 import { gameboardData } from "../../atoms";
 import { useRecoilState } from "recoil";
 
@@ -49,21 +49,14 @@ const GameBoardLayout = () => {
     setgameboardData(processForGlobalVar);
   };
 
-  // Call the API for the game board
-  const sendreq = async () => {
-    // i've blocked this option in order to have on game plate, later on this comment has to be removed
-    // const req = await axiosInstance.post(`/gameAPI/gameCards`);
-    const res = await axiosInstance.get(`/gameAPI/gameplay`);
-    try {
-      processData(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  useEffect(()=>{
+    getGameBoard(processData)
+    console.log("gameBoard renders")
+  },[])
+
 
   return (
     <div>
-      <button onClick={sendreq}>Click here</button>
       {layoutDataState.length > 0 && (
         <FlexBox alignItems="center" flexDirection="column">
           <FlexBox>

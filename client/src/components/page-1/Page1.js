@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";
-import axiosInstance from "../../axioscall";
+import {axiosInstance,postUser} from "../../axioscall";
 
 const WelcomPage = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
@@ -10,17 +10,6 @@ const WelcomPage = () => {
 
   const [registrated, setregistrated] = useState([]);
   const textInput = useRef();
-
-  const postUser = async (user, turnNum) => {
-    try {
-      const res = await axiosInstance.post(
-        `/gameAPI/genUser/${user}/${turnNum}`
-      );
-      console.log(res);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const saveUser = () => {
     const add = registrated;

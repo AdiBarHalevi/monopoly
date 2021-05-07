@@ -1,5 +1,6 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+
+import {ActionBoxContainer} from "../../../common-components/ActionBoxContainer"
 
 // components for the game play
 import LandedOnAsset from "./landed-on-asset/LandedOnAsset";
@@ -9,7 +10,6 @@ import LandedOnTax from "./LandedOnTax";
 import GoToJail from "./GotoJail";
 import VisitJailOrParking from "./VisitJailOrParking";
 import LandedOnStart from "./LandedOnStart";
-import {ActionBoxContainer} from "../../../common-components/ActionBoxContainer"
 
 
 // functions that save the users list
@@ -28,7 +28,7 @@ const ActionBox = (props) => {
     saveToPlayersState(activeUserState, playersDataState, setPlayersDataState);
   };
 
-  switch (inTurnLocationState.type) {
+  switch (inTurnLocationState.typeOfCard) {
     case "asset":
       return (
         <ActionBoxContainer boxState={boxState[0]}>
@@ -69,7 +69,7 @@ const ActionBox = (props) => {
         </ActionBoxContainer>
       );
 
-    case "incomeTax" || "luxurytax":
+    case "incomeTax" || "luxuryTax":
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnTax
@@ -78,21 +78,18 @@ const ActionBox = (props) => {
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
             setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
           />
         </ActionBoxContainer>
       );
 
     case "goTojail":
       return (
+        // {activeUserState,setActiveUserState}
         <ActionBoxContainer boxState={props.boxState[0]}>
           <GoToJail
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
             confirm={confirm}
-            inTurnLocationState={inTurnLocationState}
-            setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
           />
         </ActionBoxContainer>
       );

@@ -13,6 +13,9 @@ const CardSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
+  typeOfCard: {
+    type: String,
+  },
   headerColor: {
     type: String,
   },
@@ -23,33 +26,33 @@ const CardSchema = new mongoose.Schema({
     type: String,
   },
   cardDetails: {
-    rent: {
-      type: Number,
-    },
-    rentWithColorSet: {
-      type: Number,
-    },
-    rentWith1house: {
-      type: Number,
-    },
-    rentWith2house: {
-      type: Number,
-    },
-    rentWith3house: {
-      type: Number,
-    },
-    rentWith4house: {
-      type: Number,
-    },
-    rentWithHotel: {
-      type: Number,
-    },
-    hotelCost: {
-      type: Number,
-    },
-    houseCost: {
-      type: Number,
-    },
+        rent: {
+          type: Number,
+        },
+        rentWithColorSet: {
+          type: Number,
+        },
+        rentWith1house: {
+          type: Number,
+        },
+        rentWith2house: {
+          type: Number,
+        },
+        rentWith3house: {
+          type: Number,
+        },
+        rentWith4house: {
+          type: Number,
+        },
+        rentWithHotel: {
+          type: Number,
+        },
+        hotelCost: {
+          type: Number,
+        },
+        houseCost: {
+          type: Number,
+        },
   },
 });
 

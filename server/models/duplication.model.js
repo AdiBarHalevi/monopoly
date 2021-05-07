@@ -16,7 +16,7 @@ const gamePlateSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
-  type: {
+  typeOfCard: {
     type: String,
   },
   forSale: {

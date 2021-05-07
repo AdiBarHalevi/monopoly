@@ -23,8 +23,8 @@ export default CornerCard;
 
 const Container = styled.div`
   & {
-    height: 3.5rem;
-    width: 3.5rem;
+    height: 4rem;
+    width: 6rem;
     background-image: url(${(props) => props.image});
     background-position: center;
     background-size: cover;
