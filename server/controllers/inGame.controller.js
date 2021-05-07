@@ -67,27 +67,25 @@ const buyAsset = async (req, res) => {
   res.send("in here");
 };
 
-
- const retirePlayer = async (req, res) => {
-    try {
-      const ans = await PlayerStatusModel.findByIdAndUpdate(
-        req.params.id,
-        {isActive:false},
-        { new: true }
-      );
-      if (!ans || ans.length === 0) {
-        return res.send("unable to fetch, invalid search term");
-      }
-      return res.send(ans);
-    } catch (e) {
-      res.send("unable to fetch");
+const retirePlayer = async (req, res) => {
+  try {
+    const ans = await PlayerStatusModel.findByIdAndUpdate(
+      req.params.id,
+      { isActive: false },
+      { new: true }
+    );
+    if (!ans || ans.length === 0) {
+      return res.send("unable to fetch, invalid search term");
     }
-  };
-
+    return res.send(ans);
+  } catch (e) {
+    res.send("unable to fetch");
+  }
+};
 
 module.exports = {
   finduser,
   buyAsset,
   getPaid,
-  retirePlayer
+  retirePlayer,
 };

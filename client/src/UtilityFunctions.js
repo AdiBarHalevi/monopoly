@@ -21,23 +21,28 @@ export const saveToPlayersState = (
   }
 };
 
-export const takeMoneyFromActiveUser = (activeUserState,setActiveUserState,inTurnLocationState) => {
+export const takeMoneyFromActiveUser = (
+  activeUserState,
+  setActiveUserState,
+  inTurnLocationState
+) => {
   const tempActiveUser = { ...activeUserState };
   tempActiveUser[`balance`] -= inTurnLocationState[`price`];
   setActiveUserState(tempActiveUser);
 };
 
-export const SendUserToLocation =(activeUserState,setActiveUserState,detinationCardNum)=>{
+export const SendUserToLocation = (
+  activeUserState,
+  setActiveUserState,
+  detinationCardNum
+) => {
   const tempActiveUser = { ...activeUserState };
-  tempActiveUser[`currentLocation`] = detinationCardNum
-  setActiveUserState(tempActiveUser)
+  tempActiveUser[`currentLocation`] = detinationCardNum;
+  setActiveUserState(tempActiveUser);
+};
 
-}
-
-export const reduceMoney = (activeUserState,setActiveUserState,amount) => {
+export const reduceMoney = (activeUserState, setActiveUserState, amount) => {
   const tempActiveUser = { ...activeUserState };
   tempActiveUser[`balance`] -= amount;
   setActiveUserState(tempActiveUser);
 };
-
-

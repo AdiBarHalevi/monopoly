@@ -1,5 +1,5 @@
 import React from "react";
-import {AssetCardsContainer} from "../../../../common-components/AssetCardsContainer"
+import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 
 const BuytheAsset = (props) => {
   const confirm = () => {
@@ -16,4 +16,3 @@ const BuytheAsset = (props) => {
 };
 
 export default BuytheAsset;
-

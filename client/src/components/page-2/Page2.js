@@ -5,9 +5,9 @@ import GameBoard from "../game-comp/GameBoard";
 const Page2 = () => {
   return (
     <>
-    <PageLayout>
-    <GameBoard />
-    </PageLayout>
+      <PageLayout>
+        <GameBoard />
+      </PageLayout>
     </>
   );
 };

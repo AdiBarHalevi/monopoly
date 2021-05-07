@@ -1,6 +1,6 @@
 import React from "react";
 
-import {ActionBoxContainer} from "../../../common-components/ActionBoxContainer"
+import { ActionBoxContainer } from "../../../common-components/ActionBoxContainer";
 
 // components for the game play
 import LandedOnAsset from "./landed-on-asset/LandedOnAsset";
@@ -11,7 +11,6 @@ import GoToJail from "./GotoJail";
 import VisitJailOrParking from "./VisitJailOrParking";
 import LandedOnStart from "./LandedOnStart";
 
-
 // functions that save the users list
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../../../atoms";
@@ -21,7 +20,13 @@ const ActionBox = (props) => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const { inTurnLocationState,setinTurnLocationState, activeUserState,setActiveUserState,boxState} = props;
+  const {
+    inTurnLocationState,
+    setinTurnLocationState,
+    activeUserState,
+    setActiveUserState,
+    boxState,
+  } = props;
 
   const confirm = () => {
     props.setBoxState(["none", false]);
@@ -46,26 +51,30 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnChance
-                      activeUserState={activeUserState}
-                      setActiveUserState={setActiveUserState}
-                      confirm={confirm}
-                      inTurnLocationState={inTurnLocationState}
-                      setinTurnLocationState={setinTurnLocationState}
-                      boxState={boxState}/>
-        </ActionBoxContainer>
-      );
-
-    case "communityChest":
-      {console.log(props.inTurnLocationState)}
-      return (
-        <ActionBoxContainer boxState={boxState[0]}>
-          <LandedOnCommunityChest 
-           activeUserState={activeUserState}
+            activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
             setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState} />
+            boxState={boxState}
+          />
+        </ActionBoxContainer>
+      );
+
+    case "communityChest":
+      {
+        console.log(props.inTurnLocationState);
+      }
+      return (
+        <ActionBoxContainer boxState={boxState[0]}>
+          <LandedOnCommunityChest
+            activeUserState={activeUserState}
+            setActiveUserState={setActiveUserState}
+            confirm={confirm}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
+            boxState={boxState}
+          />
         </ActionBoxContainer>
       );
 
@@ -105,7 +114,7 @@ const ActionBox = (props) => {
           />
         </ActionBoxContainer>
       );
-    case  "parking":
+    case "parking":
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <VisitJailOrParking
@@ -129,11 +138,8 @@ const ActionBox = (props) => {
       );
 
     default:
-      return <>
-       {console.log(inTurnLocationState.type)}
-       </>;
+      return <>{console.log(inTurnLocationState.type)}</>;
   }
 };
 
 export default ActionBox;
-

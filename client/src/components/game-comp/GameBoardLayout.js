@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
-import {getGameBoard} from "../../axioscall";
+import { getGameBoard } from "../../axioscall";
 import { gameboardData } from "../../atoms";
 import { useRecoilState } from "recoil";
 
@@ -49,11 +49,10 @@ const GameBoardLayout = () => {
     setgameboardData(processForGlobalVar);
   };
 
-  useEffect(()=>{
-    getGameBoard(processData)
-    console.log("gameBoard renders")
-  },[])
-
+  useEffect(() => {
+    getGameBoard(processData);
+    console.log("gameBoard renders");
+  }, []);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {AssetCardsContainer} from "../../../common-components/AssetCardsContainer"
+import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
 
 const LandedOnChance = (props) => {
   return (

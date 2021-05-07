@@ -24,7 +24,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100%;
   // width:95%
-  width:10rem;
+  width: 10rem;
   justify-content: space-around;
 `;
 
@@ -33,5 +33,5 @@ export const PageContainer = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
-  width:95%;
+  width: 95%;
 `;

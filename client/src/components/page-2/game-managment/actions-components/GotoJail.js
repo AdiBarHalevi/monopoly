@@ -1,15 +1,14 @@
 import React from "react";
-import {AssetCardsContainer} from "../../../common-components/AssetCardsContainer"
-import {SendUserToLocation} from "../../../../UtilityFunctions"
-
+import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
+import { SendUserToLocation } from "../../../../UtilityFunctions";
 
 const GoToJail = (props) => {
   // SendUserToLocation =(activeUserState,setActiveUserState,detinationCardNum)
-  const {activeUserState,setActiveUserState}=props
-  const confirm =()=>{
-    SendUserToLocation(activeUserState,setActiveUserState,10)
-    props.confirm()
-  }
+  const { activeUserState, setActiveUserState } = props;
+  const confirm = () => {
+    SendUserToLocation(activeUserState, setActiveUserState, 10);
+    props.confirm();
+  };
 
   return (
     <AssetCardsContainer>
@@ -20,7 +19,6 @@ const GoToJail = (props) => {
 };
 
 export default GoToJail;
-
 
 // activeUserState={activeUserState}
 // setActiveUserState={setActiveUserState}

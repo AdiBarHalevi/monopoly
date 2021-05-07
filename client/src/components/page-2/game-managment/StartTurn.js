@@ -1,6 +1,6 @@
 import React from "react";
-import {AssetCardsContainer} from "../../common-components/AssetCardsContainer"
-import {ActionBoxContainer} from "../../common-components/ActionBoxContainer"
+import { AssetCardsContainer } from "../../common-components/AssetCardsContainer";
+import { ActionBoxContainer } from "../../common-components/ActionBoxContainer";
 
 // functions that save the users list
 import { useRecoilState } from "recoil";
@@ -21,8 +21,8 @@ const StartTurn = (props) => {
   return (
     <ActionBoxContainer boxState={props.boxState}>
       <AssetCardsContainer>
-      <div> this is {activeUserDataState.name}'s turn </div>
-      <button onClick={confirm}>Start turn</button>
+        <div> this is {activeUserDataState.name}'s turn </div>
+        <button onClick={confirm}>Start turn</button>
       </AssetCardsContainer>
     </ActionBoxContainer>
   );

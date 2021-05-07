@@ -115,12 +115,12 @@ const CardsContainer = styled.div`
 
 const Container = styled.div`
   border: 1px solid black;
-  height:8rem;
+  height: 8rem;
   width: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size:10px
+  font-size: 10px;
 `;
 
 const AreaColor = styled.div`

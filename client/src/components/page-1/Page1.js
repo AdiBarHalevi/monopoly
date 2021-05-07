@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";
-import {axiosInstance,postUser} from "../../axioscall";
+import { axiosInstance, postUser } from "../../axioscall";
 
 const WelcomPage = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(

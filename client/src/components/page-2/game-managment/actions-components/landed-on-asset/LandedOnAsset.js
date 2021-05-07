@@ -1,7 +1,7 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import BuytheAsset from "./BuytheAsset";
 import PayTheRent from "./PayRent";
-import {AssetCardsContainer} from "../../../../common-components/AssetCardsContainer"
+import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 
 const LandedOnAsset = (props) => {
   const { inTurnLocationState, activeUserState, confirm } = props;
@@ -30,8 +30,13 @@ const LandedOnAsset = (props) => {
     if (inTurnLocationState.forSale)
       return (
         <AssetCardsContainer>
-          <h4>{activeUserState.name} moved to {inTurnLocationState.name} </h4>
-          <div>Would you like to purchase the asset in the price of {inTurnLocationState.price}</div>
+          <h4>
+            {activeUserState.name} moved to {inTurnLocationState.name}{" "}
+          </h4>
+          <div>
+            Would you like to purchase the asset in the price of{" "}
+            {inTurnLocationState.price}
+          </div>
           <div>Your Current balance is:{activeUserState.balance}</div>
           <div>
             <button onClick={buyAsset}> buy</button>
@@ -60,4 +65,3 @@ const LandedOnAsset = (props) => {
 };
 
 export default LandedOnAsset;
-

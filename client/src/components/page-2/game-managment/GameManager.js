@@ -1,8 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../atoms";
 import ActiveUserManager from "./ActiveUserManager";
-import {retirePlayer,updateUserReq,primaryPlayersLoad,getaUserListFromApi} from "../../../axioscall";
+import {
+  retirePlayer,
+  updateUserReq,
+  primaryPlayersLoad,
+  getaUserListFromApi,
+} from "../../../axioscall";
 import CardDisplay from "../card-display/CardDisplay";
 
 const GameManager = () => {
@@ -16,18 +21,16 @@ const GameManager = () => {
 
   const [turnState, setTurnState] = useState(0);
 
-  
-  
-  const retirePlayerFunc =async()=>{
+  const retirePlayerFunc = async () => {
     // must have a player to retire
-    retirePlayer()
-  }
-  
+    retirePlayer();
+  };
+
   // saves data to the API - updates the users data on both sides
   const savetoAPI = () => {
     // updates the last active user state and saves the changes
     updateUserReq(activeUserDataState);
-    // by the end of each turn the users list updates with the server and requests all the active users 
+    // by the end of each turn the users list updates with the server and requests all the active users
     getaUserListFromApi(setPlayersDataState);
   };
 
@@ -45,10 +48,10 @@ const GameManager = () => {
     savetoAPI();
   };
 
-  useEffect(()=>{
-    console.log("primaryPlayersLoad")
-    primaryPlayersLoad(setPlayersDataState,setActiveUserDataState,turnState)
-  },[])
+  useEffect(() => {
+    console.log("primaryPlayersLoad");
+    primaryPlayersLoad(setPlayersDataState, setActiveUserDataState, turnState);
+  }, []);
 
   return (
     <>
