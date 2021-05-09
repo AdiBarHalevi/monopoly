@@ -23,7 +23,7 @@ const ActiveUserManager = (props) => {
   );
 
   const [diceState, setdiceState] = useState([0, 0, "start-turn"]);
-  const [boxState, setBoxState] = useState(["flex", true]);
+  const [boxState, setBoxState] = useState("flex");
   const [startBlockState, setStartBoxState] = useState(false);
   // const [activeUserState, setActiveUserState] = useState({});
 
@@ -67,7 +67,7 @@ const ActiveUserManager = (props) => {
     props.endTurn();
     props.saveChanges();
     setdiceState([diceState[0], diceState[1], "start-turn"]);
-    setBoxState(["flex", false]);
+    setBoxState("flex");
   };
 
   const loadLocationCard = () => {
@@ -116,7 +116,7 @@ const ActiveUserManager = (props) => {
             </button>
           </>
         )}
-        {diceState[2] === "end-turn" && (
+        {diceState[2] === "end-turn" &&  (
           <>
             <ActionBox
               setActiveUserState={setActiveUserDataState}

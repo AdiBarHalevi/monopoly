@@ -2,9 +2,9 @@ import React from "react";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 
 const BuytheAsset = (props) => {
+
   const confirm = () => {
     props.confirm();
-    props.setbuytheAssetState(false);
   };
 
   return (

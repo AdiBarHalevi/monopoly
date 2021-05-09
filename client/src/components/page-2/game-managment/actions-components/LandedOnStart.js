@@ -22,7 +22,7 @@ const LandedOnStart = (props) => {
 
   return (
     <>
-      <ActionBoxContainer boxState={props.boxState[0]}>
+      <ActionBoxContainer boxState={props.boxState}>
         <AssetCardsContainer>
           <div>{activeUserState.name} has landed on start</div>
           <div>With the balance of : {activeUserState.balance}</div>

@@ -8,6 +8,6 @@ export const AssetCardsContainer = styled.div`
   align-items: center;
   text-align: center;
   width: 30rem;
-  height: 20rem;
+  height: 30rem;
   position: absolute;
 `;

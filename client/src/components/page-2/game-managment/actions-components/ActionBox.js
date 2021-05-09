@@ -26,17 +26,18 @@ const ActionBox = (props) => {
     activeUserState,
     setActiveUserState,
     boxState,
+    setBoxState
   } = props;
 
   const confirm = () => {
-    props.setBoxState(["none", false]);
+    setBoxState("none");
     saveToPlayersState(activeUserState, playersDataState, setPlayersDataState);
   };
 
   switch (inTurnLocationState.typeOfCard) {
     case "asset":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <LandedOnAsset
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -49,7 +50,7 @@ const ActionBox = (props) => {
       );
     case "chance":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <LandedOnChance
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -66,7 +67,7 @@ const ActionBox = (props) => {
         console.log(props.inTurnLocationState);
       }
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <LandedOnCommunityChest
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -80,7 +81,7 @@ const ActionBox = (props) => {
 
     case "incomeTax" || "luxuryTax":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <LandedOnTax
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -94,7 +95,7 @@ const ActionBox = (props) => {
     case "goTojail":
       return (
         // {activeUserState,setActiveUserState}
-        <ActionBoxContainer boxState={props.boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <GoToJail
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -105,7 +106,7 @@ const ActionBox = (props) => {
 
     case "jail":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <VisitJailOrParking
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -116,7 +117,7 @@ const ActionBox = (props) => {
       );
     case "parking":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <VisitJailOrParking
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -128,7 +129,7 @@ const ActionBox = (props) => {
 
     case "start":
       return (
-        <ActionBoxContainer boxState={boxState[0]}>
+        <ActionBoxContainer boxState={boxState}>
           <LandedOnStart
             activeUserState={activeUserState}
             buy={confirm}

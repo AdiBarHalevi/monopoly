@@ -14,6 +14,11 @@ const PlayerStatusSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  property: {
+    type: Array,
+    required: true,
+  },
+
   balance: {
     type: Number,
     required: true,

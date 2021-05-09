@@ -18,6 +18,15 @@ export const getGameBoard = async (processData) => {
   }
 };
 
+export const updatedGameBoardData = async () => {
+  try {
+    return await axiosInstance.get(`/gameAPI/gameplay`);
+    
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const primaryPlayersLoad = async (
   setPlayersDataState,
   setActiveUserDataState,
@@ -66,7 +75,6 @@ export const postUser = async (user, turnNum) => {
 
 export const retirePlayer = async (playerID) => {
   try {
-    // const playerID = `60924b514400c20b5c890f62`
     const res = await axiosInstance.put(
       `/gameAPI/users/retirePlayer/${playerID}`
     );
@@ -75,3 +83,26 @@ export const retirePlayer = async (playerID) => {
     console.log(e);
   }
 };
+
+export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
+  try {
+    const res = await axiosInstance.put(
+      `/gameAPI/gameCards/changeOwnerShip/${fieldNum}/${player}`
+    );
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const mortgageAnAssetAPI = async(fieldNum)=>{
+  try {
+    const res = await axiosInstance.put(
+      `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}`
+    );
+    return res
+  } catch (e) {
+    console.log(e);
+  }
+};
+

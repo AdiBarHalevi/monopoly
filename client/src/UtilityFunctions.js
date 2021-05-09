@@ -46,3 +46,32 @@ export const reduceMoney = (activeUserState, setActiveUserState, amount) => {
   tempActiveUser[`balance`] -= amount;
   setActiveUserState(tempActiveUser);
 };
+
+
+export const processData = (data,setgameboardData) => {
+  const processForGlobalVar = {};
+  const lowerRow = {};
+  const leftColumn = {};
+  const topRow = {};
+  const rightColumn = {};
+  data.forEach((singleCard) => {
+    if (singleCard.fieldNum < 11) {
+      lowerRow[singleCard.fieldNum] = singleCard;
+      processForGlobalVar[singleCard.fieldNum] = singleCard;
+    }
+    if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19) {
+      leftColumn[singleCard.fieldNum] = singleCard;
+      processForGlobalVar[singleCard.fieldNum] = singleCard;
+    }
+
+    if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30) {
+      topRow[singleCard.fieldNum] = singleCard;
+      processForGlobalVar[singleCard.fieldNum] = singleCard;
+    }
+    if (singleCard.fieldNum > 30) {
+      rightColumn[singleCard.fieldNum] = singleCard;
+      processForGlobalVar[singleCard.fieldNum] = singleCard;
+    }
+  });
+  setgameboardData(processForGlobalVar);
+};

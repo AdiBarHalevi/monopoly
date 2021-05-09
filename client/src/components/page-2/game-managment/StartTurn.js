@@ -15,13 +15,14 @@ const StartTurn = (props) => {
   const confirm = () => {
     props.loadLocationCard();
     props.setdiceState([props.diceState[0], props.diceState[1], "roll-dice"]);
-    props.setBoxState(["none", false]);
+    props.setBoxState("none");
   };
 
   return (
     <ActionBoxContainer boxState={props.boxState}>
       <AssetCardsContainer>
-        <div> this is {activeUserDataState.name}'s turn </div>
+        <div> this is {activeUserDataState&&
+        activeUserDataState.name}'s turn </div>
         <button onClick={confirm}>Start turn</button>
       </AssetCardsContainer>
     </ActionBoxContainer>

@@ -49,6 +49,7 @@ const genGameData = async (req, res) => {
         name,
         price,
         forSale: true,
+        isActive:true,
         typeOfCard,
         property: [],
         headerColor,
@@ -88,6 +89,7 @@ const genUser = async (req, res) => {
       balance: 1000,
       isActive: true,
       relatedGameId: 1,
+      property: [],
     });
     User.save((err) => {
       if (err) return res.json({ error: err });

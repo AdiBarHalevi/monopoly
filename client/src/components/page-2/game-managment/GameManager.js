@@ -35,7 +35,7 @@ const GameManager = () => {
   };
 
   // validates the turn, once a turn is over it passes the turn to the next player
-  const turnValidator = () => {
+  const turnUpdate = () => {
     let turn = turnState;
     if (turn === playersDataState.length - 1) setTurnState(0);
     else setTurnState((turn += 1));
@@ -44,7 +44,7 @@ const GameManager = () => {
 
   // ends the turn, saves the changes
   const endTurn = () => {
-    turnValidator();
+    turnUpdate();
     savetoAPI();
   };
 

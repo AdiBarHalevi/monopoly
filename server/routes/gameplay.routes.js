@@ -40,8 +40,12 @@ router
     inGame.getPaid(req, res);
   })
 
-  .put("/gameCards/buy/:gameId/:fieldNum", async (req, res) => {
-    inGame.buyAsset(req, res);
+  .put("/gameCards/changeOwnerShip/:fieldNum/:newOwner", async (req, res) => {
+    inGame.changeAssetOwnerShip(req, res);
+  })
+
+  .put("/gameCards/mortgageAnAsset/:fieldNum", async (req, res) => {
+    inGame.mortgageAnAsset(req, res);
   })
 
   .put("/users/retirePlayer/:id", async (req, res) => {

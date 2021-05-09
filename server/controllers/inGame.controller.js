@@ -51,20 +51,31 @@ const getPaid = async (req, res) => {
 //     res.send("in here")
 // }
 
-const buyAsset = async (req, res) => {
-  console.log(req.params.fieldNum);
+const changeAssetOwnerShip = async (req, res) => {
+  const { newOwner, fieldNum } = req.params;
   try {
-    // const ans = await gamePlateModel.findById(req.params.gameId).findOne({"fieldNum":"5"});
-    const ans = await gamePlateModel.find({ gamedata: 0 });
-    console.log(ans);
+    const ans = await gamePlateModel.findOneAndUpdate(
+      { fieldNum: fieldNum },
+      { property: [{ ownedby: newOwner, Assets: "none" }], forSale: false },
+      { new: true }
+    );
+    const getTheUser = await PlayerStatusModel.findOne({
+      playersTurnNumber: newOwner,
+    });
+    const updateProperty = [...getTheUser.property, ans];
+    const updateUser = await PlayerStatusModel.findOneAndUpdate(
+      { playersTurnNumber: newOwner },
+      { property: updateProperty },
+      { new: true }
+    );
+
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
-    return res.send(ans);
+    return res.json({ success: [updateUser, ans] });
   } catch (e) {
     res.send("unable to fetch");
   }
-  res.send("in here");
 };
 
 const retirePlayer = async (req, res) => {
@@ -83,9 +94,28 @@ const retirePlayer = async (req, res) => {
   }
 };
 
+const mortgageAnAsset = async (req, res) => {
+  const fieldNum = parseInt(req.params.fieldNum)
+  try {
+    const ans = await gamePlateModel.findOneAndUpdate(
+      { fieldNum:fieldNum },
+      { isActive: false },
+      { new: true }
+    );
+    console.log(ans)
+    if (!ans || ans.length === 0) {
+      return res.send("unable to fetch, invalid search term");
+    }
+    return res.send(ans);
+  } catch (e) {
+    res.send("unable to fetch");
+  }
+};
+
 module.exports = {
   finduser,
-  buyAsset,
+  changeAssetOwnerShip,
   getPaid,
   retirePlayer,
+  mortgageAnAsset
 };

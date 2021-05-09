@@ -15,9 +15,9 @@ const Page2 = () => {
 export default Page2;
 
 const PageLayout = styled.div`
-  // width;100vw;
+  width: 105vw;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   position: relative;
 `;
