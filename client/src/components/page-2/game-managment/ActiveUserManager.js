@@ -75,14 +75,12 @@ const ActiveUserManager = (props) => {
       setinTurnLocationState(
         gameboardDataState[activeUserDataState.currentLocation]
       );
-      console.log(inTurnLocationState);
     }
   };
 
-  // useEffect(()=>{
-  //   loadLocationCard()
-  //   console.log(inTurnLocationState)
-  // })
+  useEffect(()=>{
+    loadLocationCard()
+  })
 
   if (startBlockState)
     return (
@@ -125,6 +123,7 @@ const ActiveUserManager = (props) => {
               setinTurnLocationState={setinTurnLocationState}
               boxState={boxState}
               setBoxState={setBoxState}
+              endTurn={props.endTurn}
             />
             <button onClick={finishTurn}>end turn</button>
           </>

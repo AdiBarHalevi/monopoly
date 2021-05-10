@@ -7,13 +7,12 @@ import {mortgageAnAssetAPI,updatedGameBoardData,retirePlayer} from "../../../../
 import {processData} from "../../../../../UtilityFunctions"
 
 
-const SellAsset = ()=>{
+const SellAsset = (props)=>{
     const [activeUserDataState, setActiveUserDataState] = useRecoilState(
         activeUserData
       );
     const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
-      
-      
+            
     const mortgageaAssets=async (asset)=>{    
         await mortgageAnAssetAPI(asset.fieldNum)
         const newBoard = await updatedGameBoardData()
@@ -22,7 +21,9 @@ const SellAsset = ()=>{
 
     const bankrupcy = ()=>{
         retirePlayer(activeUserDataState._id)
-        
+        props.setSellAssetState(false)
+        props.confirm()
+        props.endTurn()
     }
 
     if(activeUserDataState.property) return (

@@ -43,9 +43,21 @@ const GameManager = () => {
   };
 
   // ends the turn, saves the changes
+  const endGameCheck =()=>{
+    const filterIt = playersDataState.filter((user)=>{
+      if (user.isActive) return user 
+    })
+    if(filterIt.length===1) return true
+    return false
+
+
+  }
   const endTurn = () => {
-    turnUpdate();
-    savetoAPI();
+    if(!endGameCheck()){
+      turnUpdate();
+      savetoAPI();
+    }
+    else {window.alert("you are the winner!")}
   };
 
   useEffect(() => {

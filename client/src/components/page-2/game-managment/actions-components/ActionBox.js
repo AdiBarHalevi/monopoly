@@ -45,6 +45,7 @@ const ActionBox = (props) => {
             inTurnLocationState={inTurnLocationState}
             setinTurnLocationState={setinTurnLocationState}
             boxState={boxState}
+            endTurn = {props.endTurn}
           />
         </ActionBoxContainer>
       );

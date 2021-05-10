@@ -4,12 +4,14 @@ import PayTheRent from "./PayRent";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { changeAssetOwnerShipAPI } from "../../../../../axioscall";
 import { activeUserData } from "../../../../../atoms";
+import InsufficientFunds from "./InsufficientFunds"
 import Auction from "./Auction"
 
 const LandedOnAsset = (props) => {
   const { inTurnLocationState, activeUserState, confirm} = props;
 
   const [buyTheAssetState, setbuytheAssetState] = useState(false);
+  const [auctionState, setAuctionState] = useState(false);
 
   const buyAsset = () => {
     changeAssetOwnerShipAPI(
@@ -33,7 +35,7 @@ const LandedOnAsset = (props) => {
     setbuytheAssetState(true);
   };
   
-  
+  // if the user wants to buy the asset
   if (buyTheAssetState) {
     return (
       <>
@@ -44,7 +46,16 @@ const LandedOnAsset = (props) => {
           />
       </>
     );
+  // if buy the asset state is set to false (its defualt)
   } else if (!buyTheAssetState) {
+    if(auctionState) return(
+    <AssetCardsContainer>
+          <Auction
+           setAuctionState={setAuctionState}
+           inTurnLocationState={inTurnLocationState}
+           confirm={confirm}
+          />
+    </AssetCardsContainer>)
     // if the Asset is for sale
     if (inTurnLocationState.forSale) {
       if(activeUserState.balance>inTurnLocationState.price){
@@ -60,15 +71,16 @@ const LandedOnAsset = (props) => {
           <div>Your Current balance is:{activeUserState.balance}</div>
           <div>
             <button onClick={buyAsset}> buy</button>
-            <button onClick={confirm}> decline</button>
+            <button onClick={()=>setAuctionState(true)}> decline and go to an auction</button>
+            {/* <button onClick={confirm}> decline</button> */}
           </div>
         </AssetCardsContainer>
         );
       }else return (
       <>
         <AssetCardsContainer>
-          <Auction>
-          </Auction>
+          <InsufficientFunds confirm={props.confirm} endTurn={props.endTurn}>
+          </InsufficientFunds>
         </AssetCardsContainer>
       </>)
     }
