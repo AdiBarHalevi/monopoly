@@ -50,6 +50,10 @@ router
 
   .put("/users/retirePlayer/:id", async (req, res) => {
     inGame.retirePlayer(req, res);
+  })
+
+  .put("/users/reduceMoney", async (req, res) => {
+    inGame.takeMoneyfromUser(req, res);
   });
 
 module.exports = router;

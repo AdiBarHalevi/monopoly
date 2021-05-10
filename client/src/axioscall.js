@@ -57,7 +57,7 @@ export const getPaid = async (details) => {
   try {
     const body = JSON.stringify(details);
     await axiosInstance.put(`/gameAPI/users/getPaid`, {
-      body: body,
+      body: body
     });
   } catch (e) {
     console.log(e);
@@ -106,3 +106,15 @@ export const mortgageAnAssetAPI = async(fieldNum)=>{
   }
 };
 
+export const takeMoneyfromUser = async(userId,amount) =>{
+  const body = JSON.stringify({userId,amount})
+  try {
+    const res = await axiosInstance.put(
+      `/gameAPI/users/reduceMoney`,{body:body}
+    );
+    return res
+  } catch (e) {
+    console.log(e);
+  }
+
+}

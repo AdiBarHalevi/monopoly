@@ -36,6 +36,29 @@ const getPaid = async (req, res) => {
   }
 };
 
+const takeMoneyfromUser = async(req,res)=>{
+  const parsedData = JSON.parse(req.body.body)
+  console.log(parsedData)
+  try {
+    const ans = await PlayerStatusModel.findByIdAndUpdate(
+      parsedData.userId,
+      { $inc: { balance: (parsedData.amount*-1) } },
+      { new: true }
+    );
+    console.log(ans)
+    if (!ans || ans.length === 0) {
+      return res.send("unable to fetch, invalid search term");
+    }
+    return res.send(ans);
+  } catch (e) {
+    res.send("unable to fetch");
+  }
+
+}
+
+
+
+
 // const buyAsset =async (req, res) =>{
 //     console.log(req.params.fieldNum)
 //     try {
@@ -117,5 +140,6 @@ module.exports = {
   changeAssetOwnerShip,
   getPaid,
   retirePlayer,
-  mortgageAnAsset
+  mortgageAnAsset,
+  takeMoneyfromUser
 };

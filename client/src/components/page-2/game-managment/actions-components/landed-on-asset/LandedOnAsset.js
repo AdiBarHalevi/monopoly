@@ -79,7 +79,7 @@ const LandedOnAsset = (props) => {
       }else return (
       <>
         <AssetCardsContainer>
-          <InsufficientFunds confirm={props.confirm} endTurn={props.endTurn}>
+          <InsufficientFunds confirm={confirm} endTurn={props.endTurn}>
           </InsufficientFunds>
         </AssetCardsContainer>
       </>)
