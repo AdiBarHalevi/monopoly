@@ -41,9 +41,14 @@ const Auction = (props)=>{
                 return currentPlayerIndex = i
             }
         })
+
+        console.log(currentPlayerIndex)
         // // update active user
         if(currentPlayerIndex===Object.keys(auctionPlayersState).length-1) setActiveTurnState(0)
-        else setActiveTurnState(currentPlayerIndex++)
+        else {
+            currentPlayerIndex++
+            setActiveTurnState(currentPlayerIndex)
+        }
 
     }
 
