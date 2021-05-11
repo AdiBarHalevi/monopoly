@@ -95,6 +95,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 768px) {
+    width:3rem;
+    height:3rem;
+  }
+
 `;
 
 const Header = styled.div`
@@ -127,4 +132,8 @@ const Container2 = styled.div`
   background-size: cover;
   display: inline-block;
   border: 1px solid black;
+  @media (max-width: 768px) {
+    width:3rem;
+    height:3rem;
+  }
 `;

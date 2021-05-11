@@ -111,6 +111,12 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    position:absolute;
+    top:45rem;
+    left:0rem;
+    z-index:2;
+  }
 `;
 
 const Container = styled.div`
@@ -121,6 +127,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   font-size: 10px;
+
 `;
 
 const AreaColor = styled.div`

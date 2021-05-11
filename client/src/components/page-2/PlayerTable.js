@@ -43,6 +43,12 @@ export default PlayerTable;
 const GameStatus = styled.table`
   text-align: center;
   font-size: 12px;
+  @media (max-width: 768px) {
+    position:absolute;
+    top:44rem;
+    left:12rem;
+  }
+  
 `;
 
 const Td = styled.td`

@@ -22,4 +22,7 @@ const Container = styled.div`
   align-content: space-around;
   justify-content: space-around;
   padding: 1rem;
+  @media (max-width: 768px) {
+    width:26rem;
+  }
 `;

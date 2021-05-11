@@ -149,5 +149,9 @@ export default ActiveUserManager;
 
 const Trying = styled.div`
   display:flex;
-  justify-content:center'
+  justify-content:center';
+  left: 10rem;
+  z-index: 1;
+  top: 40rem;
+  position:absolute;
 `;

@@ -30,5 +30,9 @@ const Container = styled.div`
     background-size: cover;
     display: inline-block;
     border: 1px solid black;
+    @media (max-width: 768px) {
+      width:3rem;
+      height:3rem;
+    }
   }
 `;
