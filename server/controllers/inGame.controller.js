@@ -36,16 +36,14 @@ const getPaid = async (req, res) => {
   }
 };
 
-const takeMoneyfromUser = async(req,res)=>{
-  const parsedData = JSON.parse(req.body.body)
-  console.log(parsedData)
+const takeMoneyfromUser = async (req, res) => {
+  const parsedData = JSON.parse(req.body.body);
   try {
     const ans = await PlayerStatusModel.findByIdAndUpdate(
       parsedData.userId,
-      { $inc: { balance: (parsedData.amount*-1) } },
+      { $inc: { balance: parsedData.amount * -1 } },
       { new: true }
     );
-    console.log(ans)
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
@@ -53,8 +51,7 @@ const takeMoneyfromUser = async(req,res)=>{
   } catch (e) {
     res.send("unable to fetch");
   }
-
-}
+};
 
 // const buyAsset =async (req, res) =>{
 //     console.log(req.params.fieldNum)
@@ -114,41 +111,40 @@ const retirePlayer = async (req, res) => {
   }
 };
 
-const updateTheGameLayout = async(req,res)=>{
-  const fieldNum = parseInt(req.params.fieldNum)
-  const parsed = JSON.parse(req.body.body)
-  console.log(parsed.newLocationData.avatar )
-
+const updateTheGameLayout = async (req, res) => {
+  const fieldNum = parseInt(req.params.fieldNum);
+  const parsed = JSON.parse(req.body.body);
+  console.log(parsed.avatar)
   try {
-    const de = await gamePlateModel.findOneAndUpdate(
-      { fieldNum:parsed.previousLocation },
-      { avatar: ""},
+    await gamePlateModel.findOneAndUpdate(
+      { fieldNum: parsed.previousLocation },
+      { avatar: "" },
       { new: true }
     );
+
     const ans = await gamePlateModel.findOneAndUpdate(
-      { fieldNum:fieldNum },
-      { avatar: parsed.newLocationData.avatar },
+      { fieldNum: fieldNum },
+      { avatar: parsed.avatar },
       { new: true }
-      );
+    )
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
+    console.log(ans)
     return res.send(ans);
   } catch (e) {
     res.send("unable to fetch");
   }
-
-}
+};
 
 const mortgageAnAsset = async (req, res) => {
-  const fieldNum = parseInt(req.params.fieldNum)
+  const fieldNum = parseInt(req.params.fieldNum);
   try {
     const ans = await gamePlateModel.findOneAndUpdate(
-      { fieldNum:fieldNum },
+      { fieldNum: fieldNum },
       { isActive: false },
       { new: true }
     );
-    console.log(ans)
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
@@ -165,5 +161,5 @@ module.exports = {
   retirePlayer,
   mortgageAnAsset,
   takeMoneyfromUser,
-  updateTheGameLayout
+  updateTheGameLayout,
 };

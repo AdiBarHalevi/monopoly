@@ -61,6 +61,10 @@ const PayTheRent = (props) => {
       case "allfacility":
         setRentState(inTurnLocationState.cardDetails.allfacility);
         break;
+      default:
+        setRentState(0);
+        break;
+      
     }
   };
 
@@ -92,7 +96,7 @@ const PayTheRent = (props) => {
       amount: activeUserState.balance,
     };
     getPaid(details);
-    setbankruptState(false)
+    setbankruptState(false);
     props.confirm();
   };
 
@@ -109,7 +113,7 @@ const PayTheRent = (props) => {
             {activeUserState.name} has landed on {inTurnLocationState.name}
           </div>
 
-          <div>this asset is owned by {ownerState &&ownerState.name}</div>
+          <div>this asset is owned by {ownerState && ownerState.name}</div>
           <div>
             {activeUserState.name} has to pay rent of ${rentState}
           </div>
@@ -120,7 +124,8 @@ const PayTheRent = (props) => {
       {bankruptState && (
         <div>
           <div>
-            you do not have the funds to pay rent to {ownerState &&ownerState.name}
+            you do not have the funds to pay rent to{" "}
+            {ownerState && ownerState.name}
           </div>
           <button onClick={declareBankrupcy}>declare bankrupcy</button>
         </div>

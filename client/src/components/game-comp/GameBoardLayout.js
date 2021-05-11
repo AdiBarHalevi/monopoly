@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
 import { getGameBoard } from "../../axioscall";
-import { gameboardData,renderState } from "../../atoms";
+import { gameboardData, renderState } from "../../atoms";
 import { useRecoilState } from "recoil";
 
 // assetes Column/Row Parent components
@@ -50,16 +50,16 @@ const GameBoardLayout = () => {
     setgameboardData(processForGlobalVar);
   };
 
-
   useEffect(() => {
     getGameBoard(processData);
     setrenderState(false)
     console.log("gameBoard renders");
-
   }, [renderGlobalState]);
+
 
   return (
     <div>
+      <button onClick={()=>getGameBoard(processData)}>render button </button>
       {layoutDataState.length > 0 && (
         <FlexBox alignItems="center" flexDirection="column">
           <FlexBox>

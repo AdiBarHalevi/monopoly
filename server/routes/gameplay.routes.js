@@ -55,6 +55,11 @@ router
   .put("/users/reduceMoney", async (req, res) => {
     inGame.takeMoneyfromUser(req, res);
   })
+
+  .delete("/deleteGame", async (req, res) => {
+    initiateGame.delGame(req, res);
+  })
+
   .put("/gameCards/updateLayout/:fieldNum", async (req, res) => {
     inGame.updateTheGameLayout(req, res);
   });

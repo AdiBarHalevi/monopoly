@@ -21,8 +21,10 @@ const StartTurn = (props) => {
   return (
     <ActionBoxContainer boxState={props.boxState}>
       <AssetCardsContainer>
-        <div> this is {activeUserDataState&&
-        activeUserDataState.name}'s turn </div>
+        <div>
+          {" "}
+          this is {activeUserDataState && activeUserDataState.name}'s turn{" "}
+        </div>
         <button onClick={confirm}>Start turn</button>
       </AssetCardsContainer>
     </ActionBoxContainer>

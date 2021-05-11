@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { cardWindowState } from "../../../../atoms";
+import Avatar from "../../../common-components/AvatarDiv";
 
 const AssetCard = ({
   assetHeight,
@@ -25,7 +26,7 @@ const AssetCard = ({
     displayImage,
     originalImage,
     forSale,
-    avatar
+    avatar,
   } = data.rowItems;
 
   const handleHover = () => {
@@ -55,9 +56,12 @@ const AssetCard = ({
         assetWidth={assetWidth}
         headerDirection={headerDirection}
         image={displayImage}
-      ></Container2>
+      >
+        <Avatar avatar={avatar} />
+      </Container2>
     );
   }
+
   return (
     <Container
       onMouseOver={handleHover}
@@ -74,8 +78,7 @@ const AssetCard = ({
         headerColor={headerColor}
         name={name}
       ></Header>
-    <Avatar avatar={avatar}/>
-
+      <Avatar avatar={avatar} />
     </Container>
   );
 };
@@ -125,12 +128,3 @@ const Container2 = styled.div`
   display: inline-block;
   border: 1px solid black;
 `;
-
-const Avatar = styled.div`
-height:2rem;
-width:2rem;
-background-image: url(${(props) => props.avatar});
-background-position: center;
-background-size: cover;
-
-`

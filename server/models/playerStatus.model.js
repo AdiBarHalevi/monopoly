@@ -31,9 +31,9 @@ const PlayerStatusSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  avatar:{
-    type:String
-  }
+  avatar: {
+    type: String,
+  },
 });
 
 const PlayerStatusModel = mongoose.model("Player", PlayerStatusSchema);

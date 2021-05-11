@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { cardWindowState } from "../../atoms";
+import Avatar from "../common-components/AvatarDiv";
 
 const CornerCard = (props) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
@@ -12,10 +13,9 @@ const CornerCard = (props) => {
   };
 
   return (
-    <Container
-      image={props.rowItems.displayImage}
-      onMouseEnter={handleHover}
-    ></Container>
+    <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
+      <Avatar avatar={props.rowItems.avatar} />
+    </Container>
   );
 };
 

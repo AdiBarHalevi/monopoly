@@ -22,15 +22,15 @@ const gamePlateSchema = new mongoose.Schema({
   forSale: {
     type: Boolean,
   },
-  isActive:{
-    type:Boolean,
-    required:true
+  isActive: {
+    type: Boolean,
+    required: true,
   },
   headerColor: {
     type: String,
   },
-  avatar:{
-    type:String
+  avatar: {
+    type: String,
   },
   displayImage: {
     type: String,

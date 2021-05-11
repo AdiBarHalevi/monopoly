@@ -47,8 +47,7 @@ export const reduceMoney = (activeUserState, setActiveUserState, amount) => {
   setActiveUserState(tempActiveUser);
 };
 
-
-export const processData = (data,setgameboardData) => {
+export const processData = (data, setgameboardData) => {
   const processForGlobalVar = {};
   const lowerRow = {};
   const leftColumn = {};
@@ -75,4 +74,3 @@ export const processData = (data,setgameboardData) => {
   });
   setgameboardData(processForGlobalVar);
 };
-

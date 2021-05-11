@@ -49,14 +49,14 @@ const genGameData = async (req, res) => {
         name,
         price,
         forSale: true,
-        isActive:true,
+        isActive: true,
         typeOfCard,
         property: [],
         headerColor,
         cardDetails,
         displayImage,
         originalImage,
-        avatar:""
+        avatar: "",
       });
       newGameCard.save();
     });
@@ -82,7 +82,7 @@ const getCardbyFieldNum = async (req, res) => {
 const genUser = async (req, res) => {
   const name = req.params.name;
   const turn = req.params.turn;
-  const avatar = req.body.body.avatar
+  const avatar = req.body.body.avatar;
   try {
     const User = new PlayerStatusModel({
       name,
@@ -92,7 +92,7 @@ const genUser = async (req, res) => {
       isActive: true,
       relatedGameId: 1,
       property: [],
-      avatar
+      avatar,
     });
     User.save((err) => {
       if (err) return res.json({ error: err });
@@ -119,6 +119,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const delGame = async (req, res) => {
+  try {
+    await PlayerStatusModel.collection.drop();
+    await gamePlateModel.collection.drop();
+
+    if (!ans || ans.length === 0) {
+      return res.send("unable to fetch, invalid search term");
+    }
+    return res.send("sucess,game is deleted");
+  } catch (e) {
+    res.send("unable to fetch");
+  }
+};
+
 module.exports = {
   getCards,
   getCardbyFieldNum,
@@ -126,4 +140,5 @@ module.exports = {
   fetchGameLayout,
   genUser,
   getAllUsers,
+  delGame,
 };

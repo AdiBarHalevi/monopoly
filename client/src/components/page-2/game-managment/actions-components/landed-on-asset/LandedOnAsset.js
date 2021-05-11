@@ -3,12 +3,11 @@ import BuytheAsset from "./BuytheAsset";
 import PayTheRent from "./PayRent";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { changeAssetOwnerShipAPI } from "../../../../../axioscall";
-import { activeUserData } from "../../../../../atoms";
-import InsufficientFunds from "./InsufficientFunds"
-import Auction from "./Auction"
+import InsufficientFunds from "./InsufficientFunds";
+import Auction from "./Auction";
 
 const LandedOnAsset = (props) => {
-  const { inTurnLocationState, activeUserState, confirm} = props;
+  const { inTurnLocationState, activeUserState, confirm } = props;
 
   const [buyTheAssetState, setbuytheAssetState] = useState(false);
   const [auctionState, setAuctionState] = useState(false);
@@ -34,7 +33,7 @@ const LandedOnAsset = (props) => {
     props.setActiveUserState(tempActiveUser);
     setbuytheAssetState(true);
   };
-  
+
   // if the user wants to buy the asset
   if (buyTheAssetState) {
     return (
@@ -43,51 +42,60 @@ const LandedOnAsset = (props) => {
           activeUserState={activeUserState}
           confirm={confirm}
           setbuytheAssetState={setbuytheAssetState}
-          />
+        />
       </>
     );
-  // if buy the asset state is set to false (its defualt)
+    // if buy the asset state is set to false (its defualt)
   } else if (!buyTheAssetState) {
-    if(auctionState) return(
-    <AssetCardsContainer>
+    if (auctionState)
+      return (
+        <AssetCardsContainer>
           <Auction
-           setAuctionState={setAuctionState}
-           inTurnLocationState={inTurnLocationState}
-           confirm={confirm}
+            setAuctionState={setAuctionState}
+            inTurnLocationState={inTurnLocationState}
+            confirm={confirm}
           />
-    </AssetCardsContainer>)
+        </AssetCardsContainer>
+      );
     // if the Asset is for sale
     if (inTurnLocationState.forSale) {
-      if(activeUserState.balance>inTurnLocationState.price){
+      if (activeUserState.balance > inTurnLocationState.price) {
         return (
-        <AssetCardsContainer>
-          <h4>
-            {activeUserState.name} moved to {inTurnLocationState.name}{" "}
-          </h4>
-          <div>
-            Would you like to purchase the asset in the price of{" "}
-            {inTurnLocationState.price}
-          </div>
-          <div>Your Current balance is:{activeUserState.balance}</div>
-          <div>
-            <button onClick={buyAsset}> buy</button>
-            <button onClick={()=>setAuctionState(true)}> decline and go to an auction</button>
-            {/* <button onClick={confirm}> decline</button> */}
-          </div>
-        </AssetCardsContainer>
+          <AssetCardsContainer>
+            <h4>
+              {activeUserState.name} moved to {inTurnLocationState.name}{" "}
+            </h4>
+            <div>
+              Would you like to purchase the asset in the price of{" "}
+              {inTurnLocationState.price}
+            </div>
+            <div>Your Current balance is:{activeUserState.balance}</div>
+            <div>
+              <button onClick={buyAsset}> buy</button>
+              <button onClick={() => setAuctionState(true)}>
+                {" "}
+                decline and go to an auction
+              </button>
+              {/* <button onClick={confirm}> decline</button> */}
+            </div>
+          </AssetCardsContainer>
         );
-      }else return (
-      <>
-        <AssetCardsContainer>
-          <InsufficientFunds confirm={confirm} endTurn={props.endTurn}>
-          </InsufficientFunds>
-        </AssetCardsContainer>
-      </>)
+      } else
+        return (
+          <>
+            <AssetCardsContainer>
+              <InsufficientFunds
+                confirm={confirm}
+                endTurn={props.endTurn}
+              ></InsufficientFunds>
+            </AssetCardsContainer>
+          </>
+        );
     }
 
     // if the owner of the asset is not the Active user and the property is not for sale
     else if (
-      inTurnLocationState.property[0].ownedby !=
+      inTurnLocationState.property[0].ownedby !==
       activeUserState.playersTurnNumber
     ) {
       return (

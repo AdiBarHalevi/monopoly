@@ -5,14 +5,19 @@ import {
   gameboardData,
   GamePlayDataState,
   activeUserData,
+  renderState,
 } from "../../../atoms";
 
 import ActionBox from "./actions-components/ActionBox";
 import LandedOnStart from "./actions-components/LandedOnStart";
 import { saveToPlayersState } from "../../../UtilityFunctions";
 import StartTurn from "./StartTurn";
+import styled from "styled-components";
+
+import { updateLocationOnMap } from "../../../axioscall";
 
 const ActiveUserManager = (props) => {
+  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
   const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
@@ -25,7 +30,6 @@ const ActiveUserManager = (props) => {
   const [diceState, setdiceState] = useState([0, 0, "start-turn"]);
   const [boxState, setBoxState] = useState("flex");
   const [startBlockState, setStartBoxState] = useState(false);
-  // const [activeUserState, setActiveUserState] = useState({});
 
   const rollDice = async () => {
     setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), "end-turn"]);
@@ -36,12 +40,21 @@ const ActiveUserManager = (props) => {
       setPlayersDataState
     );
     props.saveChanges(activeUserDataState);
-    setBoxState(["flex", true]);
+    setBoxState("flex");
+  };
+
+  const updatePlayerMovement = (previousLocation, newLocation) => {
+    // active player's avatar
+    // field num for the API request
+    const newLocationUpdate = { ...newLocation };
+    newLocationUpdate[`avatar`] = activeUserDataState.avatar;
+    updateLocationOnMap(previousLocation, newLocationUpdate);
   };
 
   // updates the user's location and saves it on its state
-  const updateLocation = () => {
+  const updateLocation = async () => {
     const update = { ...activeUserDataState };
+    let previousLocation = update.currentLocation;
     let newLocation = update[`currentLocation`] + diceState[1] + diceState[0];
     if (newLocation < 40) {
       update[`currentLocation`] = newLocation;
@@ -55,6 +68,9 @@ const ActiveUserManager = (props) => {
       playersDataState,
       setPlayersDataState
     );
+    await updatePlayerMovement(previousLocation, update);
+    setrenderState(true);
+
   };
 
   // finishes the turn with click of a button saves the next user as active, resets the dice state and saves changes
@@ -78,9 +94,9 @@ const ActiveUserManager = (props) => {
     }
   };
 
-  useEffect(()=>{
-    loadLocationCard()
-  })
+  useEffect(() => {
+    loadLocationCard();
+  });
 
   if (startBlockState)
     return (
@@ -95,67 +111,43 @@ const ActiveUserManager = (props) => {
       />
     );
   return (
-    <>
-      <div>
-        {diceState[2] === "start-turn" && (
-          <StartTurn
-            setBoxState={setBoxState}
+    <div>
+      {diceState[2] === "start-turn" && (
+        <StartTurn
+          setBoxState={setBoxState}
+          boxState={boxState}
+          diceState={diceState}
+          setdiceState={setdiceState}
+          loadLocationCard={loadLocationCard}
+        />
+      )}
+      {diceState[2] === "roll-dice" && (
+        <Trying>
+          <button onClick={rollDice}>Roll Dice</button>
+          <button onClick={() => console.log("action")}>make an action</button>
+        </Trying>
+      )}
+      {diceState[2] === "end-turn" && (
+        <Trying>
+          <ActionBox
+            setActiveUserState={setActiveUserDataState}
+            activeUserState={activeUserDataState}
+            inTurnLocationState={inTurnLocationState}
+            setinTurnLocationState={setinTurnLocationState}
             boxState={boxState}
-            diceState={diceState}
-            setdiceState={setdiceState}
-            loadLocationCard={loadLocationCard}
+            setBoxState={setBoxState}
+            endTurn={props.endTurn}
           />
-        )}
-        {diceState[2] === "roll-dice" && (
-          <>
-            <button onClick={rollDice}>Roll Dice</button>
-            <button onClick={() => console.log("action")}>
-              make an action
-            </button>
-          </>
-        )}
-        {diceState[2] === "end-turn" &&  (
-          <>
-            <ActionBox
-              setActiveUserState={setActiveUserDataState}
-              activeUserState={activeUserDataState}
-              inTurnLocationState={inTurnLocationState}
-              setinTurnLocationState={setinTurnLocationState}
-              boxState={boxState}
-              setBoxState={setBoxState}
-              endTurn={props.endTurn}
-            />
-            <button onClick={finishTurn}>end turn</button>
-          </>
-        )}
-      </div>
-    </>
+          <button onClick={finishTurn}>end turn</button>
+        </Trying>
+      )}
+    </div>
   );
 };
 
 export default ActiveUserManager;
 
-{
-  /* <table>
-          <tbody>
-            <tr>
-              <th>users turn</th>
-              <td>{activeUserDataState.name}</td>
-            </tr>
-            <tr>
-              <th>currentLocation</th>
-
-              <td>
-                {activeUserDataState.currentLocation
-                  ? activeUserDataState.currentLocation
-                  : ""}
-              </td>
-            </tr>
-            <tr>
-              <th>Dice score</th>
-              <td>{diceState[0]}</td>
-              <td>{diceState[1]}</td>
-            </tr>
-          </tbody>
-        </table> */
-}
+const Trying = styled.div`
+  display:flex;
+  justify-content:center'
+`;

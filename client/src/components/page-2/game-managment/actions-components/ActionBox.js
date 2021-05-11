@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ActionBoxContainer } from "../../../common-components/ActionBoxContainer";
+import styled from "styled-components";
 
 // components for the game play
 import LandedOnAsset from "./landed-on-asset/LandedOnAsset";
@@ -26,7 +27,7 @@ const ActionBox = (props) => {
     activeUserState,
     setActiveUserState,
     boxState,
-    setBoxState
+    setBoxState,
   } = props;
 
   const confirm = () => {
@@ -45,7 +46,7 @@ const ActionBox = (props) => {
             inTurnLocationState={inTurnLocationState}
             setinTurnLocationState={setinTurnLocationState}
             boxState={boxState}
-            endTurn = {props.endTurn}
+            endTurn={props.endTurn}
           />
         </ActionBoxContainer>
       );
@@ -96,7 +97,7 @@ const ActionBox = (props) => {
     case "goTojail":
       return (
         // {activeUserState,setActiveUserState}
-        <ActionBoxContainer boxState={boxState}>
+        <ActionBoxContainer boxState={boxState[0]}>
           <GoToJail
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -107,7 +108,7 @@ const ActionBox = (props) => {
 
     case "jail":
       return (
-        <ActionBoxContainer boxState={boxState}>
+        <ActionBoxContainer boxState={boxState[0]}>
           <VisitJailOrParking
             activeUserState={activeUserState}
             setActiveUserState={setActiveUserState}
@@ -130,7 +131,7 @@ const ActionBox = (props) => {
 
     case "start":
       return (
-        <ActionBoxContainer boxState={boxState}>
+        <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnStart
             activeUserState={activeUserState}
             buy={confirm}
@@ -140,7 +141,7 @@ const ActionBox = (props) => {
       );
 
     default:
-      return <>{console.log(inTurnLocationState.type)}</>;
+      return <></>;
   }
 };
 
