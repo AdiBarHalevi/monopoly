@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState, activeUserData } from "../../../atoms";
+import { GamePlayDataState, activeUserData,gameboardData,renderState } from "../../../atoms";
 import ActiveUserManager from "./ActiveUserManager";
 import {
   retirePlayer,
   updateUserReq,
   primaryPlayersLoad,
   getaUserListFromApi,
+  updateTheGameLayout
 } from "../../../axioscall";
 import CardDisplay from "../card-display/CardDisplay";
+import { set } from "mongoose";
 
 const GameManager = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
+  const [gameboardDataState, setlayoutDataState] = useRecoilState(gameboardData);
+
+  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+
 
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
@@ -61,13 +67,26 @@ const GameManager = () => {
   };
 
   useEffect(() => {
-    console.log("primaryPlayersLoad");
     primaryPlayersLoad(setPlayersDataState, setActiveUserDataState, turnState);
   }, []);
+
+  const logit = ()=>{
+    // active player's avatar 
+    // field num for the API request
+    const previousLocation = playersDataState[activeUserDataState.playersTurnNumber-1].currentLocation
+    const gameboardDatatry = {...gameboardDataState}
+    const changeAvatarToNewLocation = {...gameboardDatatry[activeUserDataState.currentLocation]}
+    changeAvatarToNewLocation[`avatar`]=activeUserDataState.avatar
+    const updates={newLocationData:changeAvatarToNewLocation,
+      previousLocation}
+    updateTheGameLayout(activeUserDataState.currentLocation,updates)
+    setrenderState(true)
+  }
 
   return (
     <>
       <CardDisplay />
+      <button onClick={logit}>logit</button>
       <ActiveUserManager endTurn={endTurn} saveChanges={savetoAPI} />
     </>
   );

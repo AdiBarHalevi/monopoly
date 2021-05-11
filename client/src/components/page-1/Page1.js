@@ -2,6 +2,10 @@ import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../../atoms";
 import { axiosInstance, postUser } from "../../axioscall";
+import ironAvatar  from "../../img/iron-avatar.jpg"
+import hatAvatar from "../../img/hat-avatar.jpg"
+import shoeAvatar from "../../img/shoe-avatar.jpg"
+import carAvatar from "../../img/car-avatar.jpg"
 
 const WelcomPage = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
@@ -10,6 +14,7 @@ const WelcomPage = () => {
 
   const [registrated, setregistrated] = useState([]);
   const textInput = useRef();
+
 
   const saveUser = () => {
     const add = registrated;
@@ -21,9 +26,9 @@ const WelcomPage = () => {
   const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
   const startGame = () => {
+    const avatars =[ironAvatar,carAvatar,shoeAvatar,hatAvatar]
     shuffle(registrated).forEach((user, index) => {
-      postUser(user, index + 1);
-      console.log(user, index);
+      postUser(user, index + 1,avatars[index]);
     });
   };
 

@@ -20,7 +20,7 @@ export const activeUserData = atom({
   default: [],
 });
 
-export const tableRenderer = atom({
-  key: "tableRenderer",
-  default: [],
+export const renderState = atom({
+  key: "renderState",
+  default: true,
 });

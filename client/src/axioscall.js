@@ -64,9 +64,11 @@ export const getPaid = async (details) => {
   }
 };
 
-export const postUser = async (user, turnNum) => {
+export const postUser = async (user, turnNum,avatar) => {
+  const body = {avatar}
   try {
-    const res = await axiosInstance.post(`/gameAPI/genUser/${user}/${turnNum}`);
+    const res = await axiosInstance.post(`/gameAPI/genUser/${user}/${turnNum}`,{body:body});
+
     console.log(res);
   } catch (e) {
     console.log(e);
@@ -111,6 +113,19 @@ export const takeMoneyfromUser = async(userId,amount) =>{
   try {
     const res = await axiosInstance.put(
       `/gameAPI/users/reduceMoney`,{body:body}
+    );
+    return res
+  } catch (e) {
+    console.log(e);
+  }
+
+}
+
+export const updateTheGameLayout = async(fieldNum,data) =>{
+  const body = JSON.stringify({...data})
+  try {
+    const res = await axiosInstance.put(
+      `gameAPI/gameCards/updateLayout/${fieldNum}`,{body:body}
     );
     return res
   } catch (e) {

@@ -56,6 +56,7 @@ const genGameData = async (req, res) => {
         cardDetails,
         displayImage,
         originalImage,
+        avatar:""
       });
       newGameCard.save();
     });
@@ -81,6 +82,7 @@ const getCardbyFieldNum = async (req, res) => {
 const genUser = async (req, res) => {
   const name = req.params.name;
   const turn = req.params.turn;
+  const avatar = req.body.body.avatar
   try {
     const User = new PlayerStatusModel({
       name,
@@ -90,6 +92,7 @@ const genUser = async (req, res) => {
       isActive: true,
       relatedGameId: 1,
       property: [],
+      avatar
     });
     User.save((err) => {
       if (err) return res.json({ error: err });

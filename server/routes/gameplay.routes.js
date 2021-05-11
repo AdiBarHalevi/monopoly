@@ -54,6 +54,9 @@ router
 
   .put("/users/reduceMoney", async (req, res) => {
     inGame.takeMoneyfromUser(req, res);
+  })
+  .put("/gameCards/updateLayout/:fieldNum", async (req, res) => {
+    inGame.updateTheGameLayout(req, res);
   });
 
 module.exports = router;

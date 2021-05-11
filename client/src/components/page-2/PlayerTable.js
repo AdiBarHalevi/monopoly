@@ -22,9 +22,11 @@ const PlayerTable = () => {
           </thead>
           <tbody>
             {playersDataState.map((player, i) => {
+              console.log(player.avatar)
+              
               return (
                 <tr key={i}>
-                  <Td>{player.playersTurnNumber}</Td>
+                  <AvatarTd avatar={player.avatar}></AvatarTd>
                   <Td>{player.name}</Td>
                   <Td>{player.balance}</Td>
                   <Td>{player.currentLocation}</Td>
@@ -50,3 +52,11 @@ const Td = styled.td`
   border: 1px solid;
   width: 6rem;
 `;
+
+const AvatarTd = styled.td`
+  height:2rem;
+  width:2rem;
+  background-image: url(${(props) => props.avatar});
+  background-position: center;
+  background-size: cover;
+`

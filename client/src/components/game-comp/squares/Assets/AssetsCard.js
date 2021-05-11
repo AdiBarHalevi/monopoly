@@ -25,6 +25,7 @@ const AssetCard = ({
     displayImage,
     originalImage,
     forSale,
+    avatar
   } = data.rowItems;
 
   const handleHover = () => {
@@ -73,6 +74,8 @@ const AssetCard = ({
         headerColor={headerColor}
         name={name}
       ></Header>
+    <Avatar avatar={avatar}/>
+
     </Container>
   );
 };
@@ -86,7 +89,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: ${(props) => props.headerDirection};
   border: 1px solid black;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   overflow: hidden;
 `;
@@ -122,3 +125,12 @@ const Container2 = styled.div`
   display: inline-block;
   border: 1px solid black;
 `;
+
+const Avatar = styled.div`
+height:2rem;
+width:2rem;
+background-image: url(${(props) => props.avatar});
+background-position: center;
+background-size: cover;
+
+`

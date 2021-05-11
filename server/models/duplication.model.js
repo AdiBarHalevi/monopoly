@@ -29,6 +29,9 @@ const gamePlateSchema = new mongoose.Schema({
   headerColor: {
     type: String,
   },
+  avatar:{
+    type:String
+  },
   displayImage: {
     type: String,
   },
