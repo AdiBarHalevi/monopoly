@@ -59,7 +59,6 @@ const GameBoardLayout = () => {
 
   return (
     <div>
-      <button onClick={()=>getGameBoard(processData)}>render button </button>
       {layoutDataState.length > 0 && (
         <FlexBox alignItems="center" flexDirection="column">
           <FlexBox>

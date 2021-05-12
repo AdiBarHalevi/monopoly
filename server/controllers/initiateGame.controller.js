@@ -30,7 +30,6 @@ const genGameData = async (req, res) => {
   try {
     const ans = await CardModel.find({});
     ans.forEach((value) => {
-      console.log(value.typeOfCard);
       const {
         _id,
         fieldNum,
@@ -42,7 +41,6 @@ const genGameData = async (req, res) => {
         displayImage,
         originalImage,
       } = value;
-      console.log(value.typeOfCard);
       const newGameCard = new gamePlateModel({
         _id,
         fieldNum,
@@ -51,7 +49,7 @@ const genGameData = async (req, res) => {
         forSale: true,
         isActive: true,
         typeOfCard,
-        property: [],
+        property: [""],
         headerColor,
         cardDetails,
         displayImage,
@@ -110,7 +108,7 @@ const getAllUsers = async (req, res) => {
       relatedGameId: relatedGame,
       isActive: true,
     });
-    if (!ans || ans.length === 0) {
+    if (!ans) {
       return res.send("unable to fetch, invalid search term");
     }
     return res.send(ans);

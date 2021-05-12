@@ -44,7 +44,7 @@ router
     inGame.changeAssetOwnerShip(req, res);
   })
 
-  .put("/gameCards/mortgageAnAsset/:fieldNum", async (req, res) => {
+  .put("/gameCards/mortgageAnAsset/:fieldNum/:userId/:mortgageValue", async (req, res) => {
     inGame.mortgageAnAsset(req, res);
   })
 
@@ -62,6 +62,9 @@ router
 
   .put("/gameCards/updateLayout/:fieldNum", async (req, res) => {
     inGame.updateTheGameLayout(req, res);
+  })
+  .put("/buyhouse" , async (req, res) => {
+    inGame.buyHouse(req, res);
   });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { cardWindowState } from "../../../../atoms";
+import { cardWindowState,GamePlayDataState} from "../../../../atoms";
 import Avatar from "../../../common-components/AvatarDiv";
 
 const AssetCard = ({
@@ -16,6 +16,9 @@ const AssetCard = ({
   data,
 }) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
 
   const {
     cardDetails,
@@ -27,10 +30,14 @@ const AssetCard = ({
     originalImage,
     forSale,
     avatar,
+    isActive,
+    property
   } = data.rowItems;
 
   const handleHover = () => {
-    // console.log(cardDetails,fieldNum,card)
+    console.log(isActive)
+    // console.log(data.rowItems.property[0])
+    // console.log(playersDataState[data.rowItems.property[0].ownedby-1].avatar)
     if (displayImage) return setCardWindow([data]);
     setCardWindow([data]);
   };
@@ -48,39 +55,91 @@ const AssetCard = ({
     );
   };
 
+  const validateActiveAsset = ()=>{
+    if(isActive) {return "#d7e6d5"}
+    else return "#d7e622"
+  }
+
+  const activityColor =validateActiveAsset()
   if (displayImage) {
-    return (
+    if(data.rowItems.property[0]){
+      return (
+        <Container2
+          onMouseEnter={handleHover}
+          assetHeight={assetHeight}
+          assetWidth={assetWidth}
+          headerDirection={headerDirection}
+          image={displayImage}
+          ownerAvatar = {playersDataState[data.rowItems.property[0].ownedby-1].avatar}
+          backgroundColor="white"
+        >
+          <Avatar avatar={avatar} />
+        </Container2>
+      );
+      
+    }
+    else return (
       <Container2
         onMouseEnter={handleHover}
         assetHeight={assetHeight}
         assetWidth={assetWidth}
         headerDirection={headerDirection}
         image={displayImage}
+        ownerAvatar=""
       >
         <Avatar avatar={avatar} />
       </Container2>
     );
   }
 
-  return (
-    <Container
-      onMouseOver={handleHover}
-      assetHeight={assetHeight}
-      assetWidth={assetWidth}
-      headerDirection={headerDirection}
-    >
-      <Header
-        headerheight={headerheight}
-        headerWidth={headerWidth}
-        headerRotation={headerRotation}
-        abosoluteTopPosition={abosoluteTopPosition}
-        abosoluteLeftPosition={abosoluteLeftPosition}
-        headerColor={headerColor}
-        name={name}
-      ></Header>
-      <Avatar avatar={avatar} />
-    </Container>
+  if(playersDataState[data.rowItems.property[0].ownedby-1])
+    return (
+      <Container
+        onMouseOver={handleHover}
+        assetHeight={assetHeight}
+        assetWidth={assetWidth}
+        headerDirection={headerDirection}
+        activityColor={activityColor}
+      >
+        <Header
+          headerheight={headerheight}
+          headerWidth={headerWidth}
+          headerRotation={headerRotation}
+          abosoluteTopPosition={abosoluteTopPosition}
+          abosoluteLeftPosition={abosoluteLeftPosition}
+          headerColor={headerColor}
+          name={name}
+          ownerAvatar = {playersDataState[data.rowItems.property[0].ownedby-1].avatar}
+          backgroundColor = "white"
+        >
+        </Header>
+        <Avatar avatar={avatar} />
+      </Container>
   );
+  else return (
+    <Container
+    onMouseOver={handleHover}
+    assetHeight={assetHeight}
+    assetWidth={assetWidth}
+    headerDirection={headerDirection}
+    activityColor={activityColor}
+  >
+    <Header
+      headerheight={headerheight}
+      headerWidth={headerWidth}
+      headerRotation={headerRotation}
+      abosoluteTopPosition={abosoluteTopPosition}
+      abosoluteLeftPosition={abosoluteLeftPosition}
+      headerColor={headerColor}
+      name={name}
+      ownerAvatar =""
+      backgroundColor = ""
+
+    >
+    </Header>
+    <Avatar avatar={avatar} />
+  </Container>
+  )
 };
 
 export default AssetCard;
@@ -88,7 +147,7 @@ export default AssetCard;
 const Container = styled.div`
   height: ${(props) => props.assetHeight};
   width: ${(props) => props.assetWidth};
-  background: #d7e6d5;
+  background:${(props) => props.activityColor};
   display: flex;
   flex-direction: ${(props) => props.headerDirection};
   border: 1px solid black;
@@ -121,6 +180,17 @@ const Header = styled.div`
       text-align: center;
     
     }
+  &:before{
+    content:"";
+    background-image: url(${(props) => props.ownerAvatar});
+    transform:${(props) => props.headerRotation};
+    background-color:${(props) => props.backgroundColor};
+    background-position: center;
+    background-size: cover;
+    width: 20px;
+    height:15px;
+    position:absolute;
+    }
   }
 `;
 
@@ -130,8 +200,22 @@ const Container2 = styled.div`
   background-image: url(${(props) => props.image});
   background-position: center;
   background-size: cover;
+  position:relative;
   display: inline-block;
   border: 1px solid black;
+    &:before{
+    content:"";
+    background-image: url(${(props) => props.ownerAvatar});
+    transform:${(props) => props.headerRotation};
+    background-color:${(props) => props.backgroundColor};
+    background-position: center;
+    background-size: cover;
+    width: 20px;
+    height:15px;
+    position:absolute;
+    right:0;
+  }
+  
   @media (max-width: 768px) {
     width:3rem;
     height:3rem;

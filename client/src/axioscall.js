@@ -99,10 +99,10 @@ export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
   }
 };
 
-export const mortgageAnAssetAPI = async (fieldNum) => {
+export const mortgageAnAssetAPI = async (fieldNum,userId,mortgageValue) => {
   try {
     const res = await axiosInstance.put(
-      `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}`
+      `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
     );
     return res;
   } catch (e) {
@@ -150,3 +150,17 @@ export const deleteGame = async () => {
     console.log(e);
   }
 };
+
+export const buyAhouseAPI = async (inputData)=>{
+  const body = JSON.stringify(inputData);
+  try {
+    const res = await axiosInstance.put(`gameAPI/buyhouse`, {
+      body: body,
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+  console.log(body)
+
+}

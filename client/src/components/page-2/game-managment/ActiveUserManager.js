@@ -12,7 +12,8 @@ import ActionBox from "./actions-components/ActionBox";
 import LandedOnStart from "./actions-components/LandedOnStart";
 import { saveToPlayersState } from "../../../UtilityFunctions";
 import StartTurn from "./StartTurn";
-import styled from "styled-components";
+import {FlexBox} from "../../common-components/FlexBox"
+import MakeAmoveMenu from "./MakeAmoveMenu"
 
 import { updateLocationOnMap } from "../../../axioscall";
 
@@ -29,7 +30,9 @@ const ActiveUserManager = (props) => {
 
   const [diceState, setdiceState] = useState([0, 0, "start-turn"]);
   const [boxState, setBoxState] = useState("flex");
+
   const [startBlockState, setStartBoxState] = useState(false);
+  const [makeAmoveState, setMakeAmoveState] = useState(false);
 
   const rollDice = async () => {
     setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), "end-turn"]);
@@ -96,9 +99,9 @@ const ActiveUserManager = (props) => {
 
   useEffect(() => {
     loadLocationCard();
-  });
+  },[diceState]);
 
-  if (startBlockState)
+  if (startBlockState){
     return (
       <LandedOnStart
         setActiveUserState={setActiveUserDataState}
@@ -110,7 +113,14 @@ const ActiveUserManager = (props) => {
         setgameboardData={setgameboardData}
       />
     );
-  return (
+  }
+  else if (makeAmoveState){
+    return <MakeAmoveMenu setMakeAmoveState={setMakeAmoveState}>
+      
+
+    </MakeAmoveMenu>
+  }
+  else return (
     <div>
       {diceState[2] === "start-turn" && (
         <StartTurn
@@ -122,13 +132,14 @@ const ActiveUserManager = (props) => {
         />
       )}
       {diceState[2] === "roll-dice" && (
-        <Trying>
+        <FlexBox alignItems="center" flexDirection="row">
           <button onClick={rollDice}>Roll Dice</button>
-          <button onClick={() => console.log("action")}>make an action</button>
-        </Trying>
+          <button onClick={() => console.log(setMakeAmoveState(true))}>make an action</button>
+        </FlexBox>
       )}
       {diceState[2] === "end-turn" && (
-        <Trying>
+
+        <FlexBox alignItems="center" flexDirection="row">
           <ActionBox
             setActiveUserState={setActiveUserDataState}
             activeUserState={activeUserDataState}
@@ -139,19 +150,10 @@ const ActiveUserManager = (props) => {
             endTurn={props.endTurn}
           />
           <button onClick={finishTurn}>end turn</button>
-        </Trying>
+        </FlexBox>
       )}
     </div>
   );
 };
 
 export default ActiveUserManager;
-
-const Trying = styled.div`
-  display:flex;
-  justify-content:center';
-  left: 10rem;
-  z-index: 1;
-  top: 40rem;
-  position:absolute;
-`;

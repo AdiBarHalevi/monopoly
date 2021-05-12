@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { GamePlayDataState } from "../../../../../atoms";
+import { GamePlayDataState,renderState } from "../../../../../atoms";
 import { useRecoilState } from "recoil";
 import {
   changeAssetOwnerShipAPI,
@@ -24,11 +24,12 @@ const Auction = (props) => {
   const [auctionPlayersState, setAuctionActivePlayersState] = useState({
     ...playersDataState,
   });
+
+  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+
   const bidRef = useRef(0);
 
   const endAuction = async () => {
-    console.log(Object.values(auctionPlayersState)[0]);
-    console.log(Object.values(auctionPlayersState)[0]._id);
     await changeAssetOwnerShipAPI(
       props.inTurnLocationState.fieldNum,
       Object.entries(auctionPlayersState)[0][1].playersTurnNumber
@@ -38,6 +39,7 @@ const Auction = (props) => {
       bidState
     );
     props.confirm();
+    setrenderState(true)
   };
 
   const changebidingPlayer = () => {
@@ -56,7 +58,6 @@ const Auction = (props) => {
       return ""
     });
 
-    console.log(currentPlayerIndex);
     // // update active user
     if (currentPlayerIndex === Object.keys(auctionPlayersState).length - 1)
       setActiveTurnState(0);
@@ -70,7 +71,6 @@ const Auction = (props) => {
     let currentPlayerIndex = 0;
     const newAuctionPlayerList = { ...auctionPlayersState };
     delete newAuctionPlayerList[activeTurnState];
-    console.log(newAuctionPlayerList);
     Object.values(auctionPlayersState).find((user, i) => {
       if (
         user.playersTurnNumber ===

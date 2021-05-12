@@ -6,6 +6,9 @@ import ironAvatar from "../../img/iron-avatar.png";
 import hatAvatar from "../../img/hat-avatar.png";
 import shoeAvatar from "../../img/shoe-avatar.png";
 import carAvatar from "../../img/car_avatar.png";
+import styled from "styled-components";
+import { BrowserRouter as Link } from "react-router-dom";
+
 
 const WelcomPage = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
@@ -32,31 +35,38 @@ const WelcomPage = () => {
   };
 
   return (
-    <div className="welcome-page">
-      <div>
-        registrated players:
-        {registrated.map((player, i) => {
-          return <div key={i}>{player}</div>;
-        })}
-      </div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Player's name</th>
-            <td>
-              <input type="text" ref={textInput}></input>
-            </td>
-            <td>
-              <button onClick={saveUser}>Submit</button>
-            </td>
-            <td>
-              <button onClick={startGame}>startGame</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <WelcomePage>
+      <WelcomeSign>
+      <h1>Welcome to My final Project!</h1>
+        <Paragraph>
+          this App is a mock of the game Monopoly.
+          click <Link to="/explain">here</Link> to learn more about the building process
+          or <Link to="/Register">Register</Link>  a new game
+        </Paragraph>
+      </WelcomeSign>
+    </WelcomePage>
   );
 };
 
 export default WelcomPage;
+
+
+const WelcomePage = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content:center;
+  height:90vh;
+`;
+
+const WelcomeSign = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+`
+const Paragraph = styled.p`
+  width:18rem;
+  text-align:center;
+`
+
