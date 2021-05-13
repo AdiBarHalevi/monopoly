@@ -3,7 +3,7 @@ import PlayerTable from "../page-2/PlayerTable";
 import GameManager from "../page-2/game-managment/GameManager";
 import GameBoardLayout from "./GameBoardLayout";
 import styled from "styled-components";
-import CardDisplay from "../page-2/card-display/CardDisplay"
+import CardDisplay from "../page-2/card-display/CardDisplay";
 
 const GameBoard = () => {
   return (
@@ -11,7 +11,7 @@ const GameBoard = () => {
       <GameBoardLayout />
       <Container>
         <CardDisplay />
-         <PlayerTable />
+        <PlayerTable />
         <GameManager />
       </Container>
     </PageContainer>
@@ -21,12 +21,13 @@ const GameBoard = () => {
 export default GameBoard;
 
 const Container = styled.div`
+  align-self: center;
   display: flex;
   align-items: center;
-  align-self:flex-start;
   flex-direction: column;
-  background:1rem solid black;
+  background: 1rem solid black;
   width: 10rem;
+  margin-left: 15px;
   justify-content: space-around;
 `;
 

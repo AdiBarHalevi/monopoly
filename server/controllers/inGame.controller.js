@@ -125,11 +125,11 @@ const updateTheGameLayout = async (req, res) => {
       { fieldNum: fieldNum },
       { avatar: parsed.avatar },
       { new: true }
-    )
+    );
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
     }
-    console.log(ans)
+    console.log(ans);
     return res.send(ans);
   } catch (e) {
     res.send("unable to fetch");
@@ -138,21 +138,20 @@ const updateTheGameLayout = async (req, res) => {
 
 const mortgageAnAsset = async (req, res) => {
   const fieldNum = parseInt(req.params.fieldNum);
-  const userId = req.params.userId
-  const mortgageValue = parseInt(req.params.mortgageValue)
+  const userId = req.params.userId;
+  const mortgageValue = parseInt(req.params.mortgageValue);
   try {
     const ans = await gamePlateModel.findOneAndUpdate(
       { fieldNum: fieldNum },
       { isActive: false },
       { new: true }
     );
-     await PlayerStatusModel.findByIdAndUpdate(
+    await PlayerStatusModel.findByIdAndUpdate(
       userId,
       { $inc: { balance: mortgageValue } },
       { new: true }
-      )
-    console.log(ans)
-
+    );
+    console.log(ans);
 
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
@@ -163,37 +162,36 @@ const mortgageAnAsset = async (req, res) => {
   }
 };
 
-const buyHouse =async (req, res)=>{
-  const parsed = JSON.parse(req.body.body)
+const buyHouse = async (req, res) => {
+  const parsed = JSON.parse(req.body.body);
   // let numberOfHousesCurrently = parsed.numberOfHousesCurrently
-  const houseCost = parsed.houseCost
-  const buyerId = parsed.buyerId
-  const fieldNum = parsed.fieldNum
-  const playerTurn = parsed.playersTurnNumber
+  const houseCost = parsed.houseCost;
+  const buyerId = parsed.buyerId;
+  const fieldNum = parsed.fieldNum;
+  const playerTurn = parsed.playersTurnNumber;
   // numberOfHousesCurrently++
 
-
-
-  try{
+  try {
     const currentAsset = await gamePlateModel.findOne({
-      "fieldNum":fieldNum
-    })
-    let numberOfHousesCurrently =currentAsset.property[0].Assets
-    numberOfHousesCurrently+=1
+      fieldNum: fieldNum,
+    });
+    let numberOfHousesCurrently = currentAsset.property[0].Assets;
+    numberOfHousesCurrently += 1;
     const ans = await gamePlateModel.findOneAndUpdate(
       { fieldNum: fieldNum },
-      { property: [{"ownedby":playerTurn ,"Assets":numberOfHousesCurrently}]},
+      { property: [{ ownedby: playerTurn, Assets: numberOfHousesCurrently }] },
       { new: true }
     );
     await PlayerStatusModel.findByIdAndUpdate(
       buyerId,
-      { $inc: { balance: (houseCost*-1) } },
+      { $inc: { balance: houseCost * -1 } },
       { new: true }
-      )
-      res.send(ans);
-
-  }catch(e){return res.send(e);}
-}
+    );
+    res.send(ans);
+  } catch (e) {
+    return res.send(e);
+  }
+};
 
 module.exports = {
   finduser,
@@ -203,5 +201,5 @@ module.exports = {
   mortgageAnAsset,
   takeMoneyfromUser,
   updateTheGameLayout,
-  buyHouse
+  buyHouse,
 };

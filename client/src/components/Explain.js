@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
-const Explain =()=>{
-    return <>Explain</>
-}
+const Explain = () => {
+  return <>Explain</>;
+};
 
-export default Explain
+export default Explain;

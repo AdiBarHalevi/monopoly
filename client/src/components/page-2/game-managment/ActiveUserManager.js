@@ -12,8 +12,8 @@ import ActionBox from "./actions-components/ActionBox";
 import LandedOnStart from "./actions-components/LandedOnStart";
 import { saveToPlayersState } from "../../../UtilityFunctions";
 import StartTurn from "./StartTurn";
-import {FlexBox} from "../../common-components/FlexBox"
-import MakeAmoveMenu from "./MakeAmoveMenu"
+import { FlexBox } from "../../common-components/FlexBox";
+import MakeAmoveMenu from "./MakeAmoveMenu";
 
 import { updateLocationOnMap } from "../../../axioscall";
 
@@ -73,7 +73,6 @@ const ActiveUserManager = (props) => {
     );
     await updatePlayerMovement(previousLocation, update);
     setrenderState(true);
-
   };
 
   // finishes the turn with click of a button saves the next user as active, resets the dice state and saves changes
@@ -99,9 +98,9 @@ const ActiveUserManager = (props) => {
 
   useEffect(() => {
     loadLocationCard();
-  },[diceState]);
+  }, [diceState]);
 
-  if (startBlockState){
+  if (startBlockState) {
     return (
       <LandedOnStart
         setActiveUserState={setActiveUserDataState}
@@ -113,47 +112,46 @@ const ActiveUserManager = (props) => {
         setgameboardData={setgameboardData}
       />
     );
-  }
-  else if (makeAmoveState){
-    return <MakeAmoveMenu setMakeAmoveState={setMakeAmoveState}>
-      
-
-    </MakeAmoveMenu>
-  }
-  else return (
-    <div>
-      {diceState[2] === "start-turn" && (
-        <StartTurn
-          setBoxState={setBoxState}
-          boxState={boxState}
-          diceState={diceState}
-          setdiceState={setdiceState}
-          loadLocationCard={loadLocationCard}
-        />
-      )}
-      {diceState[2] === "roll-dice" && (
-        <FlexBox alignItems="center" flexDirection="row">
-          <button onClick={rollDice}>Roll Dice</button>
-          <button onClick={() => console.log(setMakeAmoveState(true))}>make an action</button>
-        </FlexBox>
-      )}
-      {diceState[2] === "end-turn" && (
-
-        <FlexBox alignItems="center" flexDirection="row">
-          <ActionBox
-            setActiveUserState={setActiveUserDataState}
-            activeUserState={activeUserDataState}
-            inTurnLocationState={inTurnLocationState}
-            setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
+  } else if (makeAmoveState) {
+    return (
+      <MakeAmoveMenu setMakeAmoveState={setMakeAmoveState}></MakeAmoveMenu>
+    );
+  } else
+    return (
+      <div>
+        {diceState[2] === "start-turn" && (
+          <StartTurn
             setBoxState={setBoxState}
-            endTurn={props.endTurn}
+            boxState={boxState}
+            diceState={diceState}
+            setdiceState={setdiceState}
+            loadLocationCard={loadLocationCard}
           />
-          <button onClick={finishTurn}>end turn</button>
-        </FlexBox>
-      )}
-    </div>
-  );
+        )}
+        {diceState[2] === "roll-dice" && (
+          <FlexBox alignItems="center" flexDirection="row">
+            <button onClick={rollDice}>Roll Dice</button>
+            <button onClick={() => console.log(setMakeAmoveState(true))}>
+              make an action
+            </button>
+          </FlexBox>
+        )}
+        {diceState[2] === "end-turn" && (
+          <FlexBox alignItems="center" flexDirection="row">
+            <ActionBox
+              setActiveUserState={setActiveUserDataState}
+              activeUserState={activeUserDataState}
+              inTurnLocationState={inTurnLocationState}
+              setinTurnLocationState={setinTurnLocationState}
+              boxState={boxState}
+              setBoxState={setBoxState}
+              endTurn={props.endTurn}
+            />
+            <button onClick={finishTurn}>end turn</button>
+          </FlexBox>
+        )}
+      </div>
+    );
 };
 
 export default ActiveUserManager;

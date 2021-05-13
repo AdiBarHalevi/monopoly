@@ -23,8 +23,8 @@ const Container = styled.div`
   justify-content: space-around;
   padding: 1rem;
 
-  @media(max-height:799px)and(max-width:1200){
-   width:21.61rem;
+  @media (max-height: 799px) and(max-width:1200) {
+    width: 21.61rem;
   }
 
   @media (max-width: 768px) {

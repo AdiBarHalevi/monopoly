@@ -5,7 +5,6 @@ import { gameboardData, renderState } from "../../atoms";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
-
 // assetes Column/Row Parent components
 import AssetCardLeftColumn from "./squares/Assets/AssetCardLeftColumn";
 import AssetCardRightColumn from "./squares/Assets/AssetCardRightColumn";
@@ -54,10 +53,9 @@ const GameBoardLayout = () => {
 
   useEffect(() => {
     getGameBoard(processData);
-    setrenderState(false)
+    setrenderState(false);
     console.log("gameBoard renders");
   }, [renderGlobalState]);
-
 
   return (
     <BoardContainer>
@@ -129,17 +127,13 @@ const GameBoardLayout = () => {
 
 export default GameBoardLayout;
 
-
 const BoardContainer = styled.div`
-  border:5px solid #1C2E4A;
-  @media (max-width:600px){
+  border: 5px solid #1c2e4a;
+  @media (max-width: 600px) {
     height: 60vh;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    border:none;
-
-
+    border: none;
   }
-
 `;

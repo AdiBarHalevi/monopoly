@@ -64,7 +64,6 @@ const PayTheRent = (props) => {
       default:
         setRentState(0);
         break;
-      
     }
   };
 

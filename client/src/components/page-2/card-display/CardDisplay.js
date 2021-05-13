@@ -112,23 +112,21 @@ const CardsContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   @media (max-width: 768px) {
-    position:absolute;
-    top:10px;
-    right:0rem;
-
+    position: absolute;
+    top: 10px;
+    right: 0rem;
   }
 `;
 
 const Container = styled.div`
   border: 1px solid black;
-  height: 8.15rem;
-  width: 6rem;
-  background-color:#D7E6D5;
+  height: 8.35rem;
+  width: 5rem;
+  background-color: #d7e6d5;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: 10px;
-
 `;
 
 const AreaColor = styled.div`
@@ -142,13 +140,13 @@ const CardDetailsFront = styled.div`
 `;
 
 const CardDetailsBack = styled.table`
-  line-height: 1.5;
+  line-height: 1;
   padding: 2px;
   text-align: left;
   font-size: 7.5px;
   align-items: center;
   justify-content: center;
-  background-color:white;
+  background-color: white;
   display: flex;
   @media (max-width: 768px) {
     font-size: 7px;

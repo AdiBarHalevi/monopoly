@@ -58,7 +58,7 @@ const SellAsset = (props) => {
                   </Button>
                 </CardShow>
               );
-              else return <></>
+            else return <></>;
           })}
         </Container>
         <button onClick={bankrupcy}>declare bankrupcy</button>

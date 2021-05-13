@@ -1,6 +1,6 @@
 import React from "react";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
-import {renderState} from "../../../../../atoms"
+import { renderState } from "../../../../../atoms";
 import { useRecoilState } from "recoil";
 
 const BuytheAsset = (props) => {

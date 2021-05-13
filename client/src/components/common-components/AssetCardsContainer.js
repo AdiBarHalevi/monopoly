@@ -10,9 +10,8 @@ export const AssetCardsContainer = styled.div`
   width: 30rem;
   height: 30rem;
   position: absolute;
-  @media(max-width:500px){
+  @media (max-width: 500px) {
     width: 10rem;
     height: 10rem;
-
   }
 `;

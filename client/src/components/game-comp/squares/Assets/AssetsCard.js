@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { cardWindowState,GamePlayDataState} from "../../../../atoms";
+import { cardWindowState, GamePlayDataState } from "../../../../atoms";
 import Avatar from "../../../common-components/AvatarDiv";
 
 const AssetCard = ({
@@ -31,11 +31,11 @@ const AssetCard = ({
     forSale,
     avatar,
     isActive,
-    property
+    property,
   } = data.rowItems;
 
   const handleHover = () => {
-    console.log(isActive)
+    console.log(isActive);
     // console.log(data.rowItems.property[0])
     // console.log(playersDataState[data.rowItems.property[0].ownedby-1].avatar)
     if (displayImage) return setCardWindow([data]);
@@ -55,14 +55,15 @@ const AssetCard = ({
     );
   };
 
-  const validateActiveAsset = ()=>{
-    if(isActive) {return "#d7e6d5"}
-    else return "#d7e622"
-  }
+  const validateActiveAsset = () => {
+    if (isActive) {
+      return "#d7e6d5";
+    } else return "#d7e622";
+  };
 
-  const activityColor =validateActiveAsset()
+  const activityColor = validateActiveAsset();
   if (displayImage) {
-    if(data.rowItems.property[0]){
+    if (data.rowItems.property[0]) {
       return (
         <Container2
           onMouseEnter={handleHover}
@@ -70,29 +71,30 @@ const AssetCard = ({
           assetWidth={assetWidth}
           headerDirection={headerDirection}
           image={displayImage}
-          ownerAvatar = {playersDataState[data.rowItems.property[0].ownedby-1].avatar}
+          ownerAvatar={
+            playersDataState[data.rowItems.property[0].ownedby - 1].avatar
+          }
           backgroundColor="white"
         >
           <Avatar avatar={avatar} />
         </Container2>
       );
-      
-    }
-    else return (
-      <Container2
-        onMouseEnter={handleHover}
-        assetHeight={assetHeight}
-        assetWidth={assetWidth}
-        headerDirection={headerDirection}
-        image={displayImage}
-        ownerAvatar=""
-      >
-        <Avatar avatar={avatar} />
-      </Container2>
-    );
+    } else
+      return (
+        <Container2
+          onMouseEnter={handleHover}
+          assetHeight={assetHeight}
+          assetWidth={assetWidth}
+          headerDirection={headerDirection}
+          image={displayImage}
+          ownerAvatar=""
+        >
+          <Avatar avatar={avatar} />
+        </Container2>
+      );
   }
 
-  if(playersDataState[data.rowItems.property[0].ownedby-1])
+  if (playersDataState[data.rowItems.property[0].ownedby - 1])
     return (
       <Container
         onMouseOver={handleHover}
@@ -109,37 +111,37 @@ const AssetCard = ({
           abosoluteLeftPosition={abosoluteLeftPosition}
           headerColor={headerColor}
           name={name}
-          ownerAvatar = {playersDataState[data.rowItems.property[0].ownedby-1].avatar}
-          backgroundColor = "white"
-        >
-        </Header>
+          ownerAvatar={
+            playersDataState[data.rowItems.property[0].ownedby - 1].avatar
+          }
+          backgroundColor="white"
+        ></Header>
         <Avatar avatar={avatar} />
       </Container>
-  );
-  else return (
-    <Container
-    onMouseOver={handleHover}
-    assetHeight={assetHeight}
-    assetWidth={assetWidth}
-    headerDirection={headerDirection}
-    activityColor={activityColor}
-  >
-    <Header
-      headerheight={headerheight}
-      headerWidth={headerWidth}
-      headerRotation={headerRotation}
-      abosoluteTopPosition={abosoluteTopPosition}
-      abosoluteLeftPosition={abosoluteLeftPosition}
-      headerColor={headerColor}
-      name={name}
-      ownerAvatar =""
-      backgroundColor = ""
-
-    >
-    </Header>
-    <Avatar avatar={avatar} />
-  </Container>
-  )
+    );
+  else
+    return (
+      <Container
+        onMouseOver={handleHover}
+        assetHeight={assetHeight}
+        assetWidth={assetWidth}
+        headerDirection={headerDirection}
+        activityColor={activityColor}
+      >
+        <Header
+          headerheight={headerheight}
+          headerWidth={headerWidth}
+          headerRotation={headerRotation}
+          abosoluteTopPosition={abosoluteTopPosition}
+          abosoluteLeftPosition={abosoluteLeftPosition}
+          headerColor={headerColor}
+          name={name}
+          ownerAvatar=""
+          backgroundColor=""
+        ></Header>
+        <Avatar avatar={avatar} />
+      </Container>
+    );
 };
 
 export default AssetCard;
@@ -147,7 +149,7 @@ export default AssetCard;
 const Container = styled.div`
   height: ${(props) => props.assetHeight};
   width: ${(props) => props.assetWidth};
-  background:${(props) => props.activityColor};
+  background: ${(props) => props.activityColor};
   display: flex;
   flex-direction: ${(props) => props.headerDirection};
   border: 1px solid black;
@@ -155,23 +157,21 @@ const Container = styled.div`
   align-items: center;
   overflow: hidden;
 
-  @media(max-height:799px)and(max-width:1200px){
+  @media (max-height: 880px) and(max-width:1600px) {
     height: 2.5rem;
     width: 2.5rem;
-    background:${(props) => props.activityColor};
+    background: ${(props) => props.activityColor};
     display: flex;
     flex-direction: ${(props) => props.headerDirection};
     border: 1px solid black;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
-
   }
   @media (max-width: 768px) {
-    width:1.5rem;
-    height:1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-
 `;
 
 const Header = styled.div`
@@ -221,47 +221,47 @@ const Container2 = styled.div`
   background-image: url(${(props) => props.image});
   background-position: center;
   background-size: cover;
-  position:relative;
+  position: relative;
   display: inline-block;
   border: 1px solid black;
-    &:before{
-    content:"";
+  &:before {
+    content: "";
     background-image: url(${(props) => props.ownerAvatar});
-    transform:${(props) => props.headerRotation};
-    background-color:${(props) => props.backgroundColor};
+    transform: ${(props) => props.headerRotation};
+    background-color: ${(props) => props.backgroundColor};
     background-position: center;
     background-size: cover;
     width: 20px;
-    height:15px;
-    position:absolute;
-    right:0;
+    height: 15px;
+    position: absolute;
+    right: 0;
   }
 
-  @media(max-height:799px)and(max-width:1200){
+  @media (max-height: 799px) and(max-width:1200) {
     height: 2.5rem;
     width: 2.5rem;
     background-image: url(${(props) => props.image});
     background-position: center;
     background-size: cover;
-    position:relative;
+    position: relative;
     display: inline-block;
     border: 1px solid black;
-      &:before{
-      content:"";
+    &:before {
+      content: "";
       background-image: url(${(props) => props.ownerAvatar});
-      transform:${(props) => props.headerRotation};
-      background-color:${(props) => props.backgroundColor};
+      transform: ${(props) => props.headerRotation};
+      background-color: ${(props) => props.backgroundColor};
       background-position: center;
       background-size: cover;
       width: 20px;
-      height:15px;
-      position:absolute;
-      right:0;
-    }  
+      height: 15px;
+      position: absolute;
+      right: 0;
+    }
   }
-  
+
   @media (max-width: 768px) {
-    width:1.5rem;
-    height:1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;

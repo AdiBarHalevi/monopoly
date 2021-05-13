@@ -1,12 +1,11 @@
 import "./App.css";
 import Page1 from "./components/page-1/Page1";
 import Page2 from "./components/page-2/Page2";
-import Explain from "./components/Explain"
-import Register from "./components/Register"
+import Explain from "./components/Explain";
+import Register from "./components/Register";
 import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
-
 
 function App() {
   return (
@@ -15,22 +14,31 @@ function App() {
         <Router>
           <HeaderContainer>
             <Ul>
-              <li>
-              <Link to="/" style={{ textDecoration: "none",color: "#6d8d8a"  }}>
+              <Li>
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "#6d8d8a" }}
+                >
                   Home
-              </Link>
-              </li>
-              <li>
-                <Link to="/play" style={{ textDecoration: "none",color: "#6d8d8a"  }}>
+                </Link>
+              </Li>
+              <Li>
+                <Link
+                  to="/play"
+                  style={{ textDecoration: "none", color: "#6d8d8a" }}
+                >
                   Play
                 </Link>
-              </li>
+              </Li>
             </Ul>
-            <div>
-              <Link to="/explain" style={{ textDecoration: "none",color: "#6d8d8a" }}>
-                  About the APP
-                </Link>
-            </div>
+            <About>
+              <Link
+                to="/explain"
+                style={{ textDecoration: "none", color: "#6d8d8a" }}
+              >
+                About the APP
+              </Link>
+            </About>
           </HeaderContainer>
           <Switch>
             <Route path="/" exact component={Page1} />
@@ -50,9 +58,9 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #655057;
-  color: #6d8d8a;
-  padding:0 2rem 0 0;
+  background-color: #345167;
+  color: #8dc8d1;
+  padding: 0 2rem 0 0;
 `;
 
 const Ul = styled.ul`
@@ -60,4 +68,19 @@ const Ul = styled.ul`
   list-style: none;
   justify-content: space-between;
   width: 6.5rem;
-`
+`;
+
+const Li = styled.li`
+  border-bottom: 0px solid;
+
+  &:hover {
+    border-bottom: 1px solid;
+  }
+`;
+const About = styled.div`
+  border-bottom: 0px solid;
+
+  &:hover {
+    border-bottom: 1px solid;
+  }
+`;

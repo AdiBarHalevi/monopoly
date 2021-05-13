@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { GamePlayDataState,renderState } from "../../../../../atoms";
+import { GamePlayDataState, renderState } from "../../../../../atoms";
 import { useRecoilState } from "recoil";
 import {
   changeAssetOwnerShipAPI,
@@ -39,7 +39,7 @@ const Auction = (props) => {
       bidState
     );
     props.confirm();
-    setrenderState(true)
+    setrenderState(true);
   };
 
   const changebidingPlayer = () => {
@@ -55,7 +55,7 @@ const Auction = (props) => {
         )
           return (currentPlayerIndex = i);
       }
-      return ""
+      return "";
     });
 
     // // update active user
@@ -75,9 +75,9 @@ const Auction = (props) => {
       if (
         user.playersTurnNumber ===
         Object.values(auctionPlayersState)[activeTurnState][`playersTurnNumber`]
-      ){
+      ) {
         return (currentPlayerIndex = i);
-      }else return ""
+      } else return "";
     });
     // update active user
     if (currentPlayerIndex === playersDataState.length - 1)

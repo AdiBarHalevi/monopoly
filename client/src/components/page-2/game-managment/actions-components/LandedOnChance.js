@@ -11,4 +11,3 @@ const LandedOnChance = (props) => {
 };
 
 export default LandedOnChance;
-

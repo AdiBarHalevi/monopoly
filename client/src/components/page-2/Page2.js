@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import GameBoard from "../game-comp/GameBoard";
-import woodenFloor from "../../img/woodenFloor.png"
-import CardDisplay from "./card-display/CardDisplay"
-import PlayerTable from "./PlayerTable"
+import woodenFloor from "../../img/woodenFloor.png";
+import CardDisplay from "./card-display/CardDisplay";
+import PlayerTable from "./PlayerTable";
 
 const Page2 = () => {
   return (
@@ -19,16 +19,14 @@ export default Page2;
 
 const PageLayout = styled.div`
   display: flex;
-  flex-direction:column;
-  height:100vh;
+  flex-direction: column;
+  height: 140vh;
   justify-content: center;
   align-items: center;
-  position: relative;
   background-image: url(${(props) => props.background});
   background-position: center;
   background-size: cover;
-  @media (max-width:600px){
-    height:90vh;
-
+  @media (max-width: 600px) {
+    height: 90vh;
   }
 `;

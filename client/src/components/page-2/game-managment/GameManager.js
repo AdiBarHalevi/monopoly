@@ -14,7 +14,6 @@ import {
   getaUserListFromApi,
   updateLocationOnMap,
 } from "../../../axioscall";
-import CardDisplay from "../card-display/CardDisplay";
 import styled from "styled-components";
 
 const GameManager = () => {
@@ -90,7 +89,6 @@ const GameManager = () => {
     const previousLocation =
       playersDataState[activeUserDataState.playersTurnNumber - 1]
         .currentLocation;
-    console.log(previousLocation);
     const gameboardDatatry = { ...gameboardDataState };
     const changeAvatarToNewLocation = {
       ...gameboardDatatry[activeUserDataState.currentLocation],
@@ -120,13 +118,11 @@ const GameManager = () => {
 export default GameManager;
 
 const Container = styled.div`
-  background:black;
-  border:1px solid gold;
-  @media (max-width:600px){
-    font-size:12px;
-    position:absolute;
-    top:27%;
-    right:35%;
+  background: black;
+  @media (max-width: 600px) {
+    font-size: 12px;
+    position: absolute;
+    top: 27%;
+    right: 35%;
   }
-
-`
+`;

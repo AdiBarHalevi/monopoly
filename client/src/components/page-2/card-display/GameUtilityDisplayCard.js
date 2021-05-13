@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const GameUtilityDisplayCard = (props) => {
-  console.log(props)
+  console.log(props);
   return (
     <Container>
       <PicContainer picture={props.picture} />
@@ -16,22 +15,22 @@ const GameUtilityDisplayCard = (props) => {
             <th>Rent</th>
             <td>{props.rent}</td>
           </tr>
-          {props.with2RR &&
+          {props.with2RR && (
             <>
-                <tr>
-                  <th>with 2 Rail Roads</th>
-                  <td>{props.with2RR}</td>
-                </tr>
-                <tr>
-                  <th>with 3 Rail Roads</th>
-                  <td>{props.with3RR}</td>
-                </tr>
-                <tr>
-                  <th>with 4 Rail Roads</th>
-                  <td>{props.with4RR}</td>
-                </tr>
-          </>
-          }
+              <tr>
+                <th>with 2 Rail Roads</th>
+                <td>{props.with2RR}</td>
+              </tr>
+              <tr>
+                <th>with 3 Rail Roads</th>
+                <td>{props.with3RR}</td>
+              </tr>
+              <tr>
+                <th>with 4 Rail Roads</th>
+                <td>{props.with4RR}</td>
+              </tr>
+            </>
+          )}
         </tbody>
       </CardDetailsBack>
     </Container>
@@ -55,7 +54,7 @@ const CardDetailsBack = styled.table`
   padding: 2px;
   text-align: left;
   font-size: 10px;
-  background-color:white;
+  background-color: white;
   align-items: center;
   justify-content: center;
   display: flex;

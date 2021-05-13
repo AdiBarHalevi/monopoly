@@ -99,7 +99,7 @@ export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
   }
 };
 
-export const mortgageAnAssetAPI = async (fieldNum,userId,mortgageValue) => {
+export const mortgageAnAssetAPI = async (fieldNum, userId, mortgageValue) => {
   try {
     const res = await axiosInstance.put(
       `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
@@ -126,7 +126,6 @@ export const updateLocationOnMap = async (
   previousLocation,
   currentLocation
 ) => {
-
   const avatar = currentLocation.avatar;
   const fieldNum = currentLocation.currentLocation;
   let data = { previousLocation, avatar };
@@ -151,7 +150,7 @@ export const deleteGame = async () => {
   }
 };
 
-export const buyAhouseAPI = async (inputData)=>{
+export const buyAhouseAPI = async (inputData) => {
   const body = JSON.stringify(inputData);
   try {
     const res = await axiosInstance.put(`gameAPI/buyhouse`, {
@@ -161,6 +160,5 @@ export const buyAhouseAPI = async (inputData)=>{
   } catch (e) {
     console.log(e);
   }
-  console.log(body)
-
-}
+  console.log(body);
+};
