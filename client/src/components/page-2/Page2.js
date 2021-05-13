@@ -26,7 +26,7 @@ const PageLayout = styled.div`
   background-image: url(${(props) => props.background});
   background-position: center;
   background-size: cover;
-  @media (max-width: 600px) {
+  @media (max-width: 750px) {
     height: 90vh;
   }
 `;

@@ -35,9 +35,6 @@ const AssetCard = ({
   } = data.rowItems;
 
   const handleHover = () => {
-    console.log(isActive);
-    // console.log(data.rowItems.property[0])
-    // console.log(playersDataState[data.rowItems.property[0].ownedby-1].avatar)
     if (displayImage) return setCardWindow([data]);
     setCardWindow([data]);
   };
@@ -76,7 +73,7 @@ const AssetCard = ({
           }
           backgroundColor="white"
         >
-          <Avatar avatar={avatar} />
+          {/* <Avatar avatar={avatar} /> */}
         </Container2>
       );
     } else
@@ -89,7 +86,7 @@ const AssetCard = ({
           image={displayImage}
           ownerAvatar=""
         >
-          <Avatar avatar={avatar} />
+          {/* <Avatar avatar={avatar} /> */}
         </Container2>
       );
   }
@@ -116,7 +113,7 @@ const AssetCard = ({
           }
           backgroundColor="white"
         ></Header>
-        <Avatar avatar={avatar} />
+        {/* <Avatar avatar={avatar} /> */}
       </Container>
     );
   else
@@ -139,7 +136,7 @@ const AssetCard = ({
           ownerAvatar=""
           backgroundColor=""
         ></Header>
-        <Avatar avatar={avatar} />
+        {/* <Avatar avatar={avatar} /> */}
       </Container>
     );
 };
@@ -183,7 +180,6 @@ const Header = styled.div`
   
   }
   &:after{
-      content:"${(props) => props.name}";
       transform:${(props) => props.headerRotation};
       position: absolute;
       top:${(props) => props.abosoluteTopPosition};
@@ -197,20 +193,13 @@ const Header = styled.div`
     content:"";
     background-image: url(${(props) => props.ownerAvatar});
     transform:${(props) => props.headerRotation};
-    background-color:${(props) => props.backgroundColor};
+    background-color:none;
     background-position: center;
     background-size: cover;
-    width: 20px;
-    height:15px;
+    width: 3rem;
+    height:5rem;
     position:absolute;
-    }
-
-    @media(max-height:799px)and(max-width:1200px){
-      &:after{
-       content:""
-      
-      }
-
+    buttom:2rem;
     }
   }
 `;

@@ -50,18 +50,23 @@ const Register = () => {
       <div>
         {registrated.length < 4 && (
           <>
-            <input type="text" ref={textInput}></input>
-            <button onClick={() => saveUser(textInput.current.value)}>
+            <input
+             type="text" ref={textInput}
+             style={{background:"white",color: `#345167`,display:"block"}}></input>
+             
+             <br></br>
+
+            <Button onClick={() => saveUser(textInput.current.value)}>
               Submit
-            </button>
+            </Button>
           </>
         )}
-        <button onClick={startGame}>
+        <Button onClick={startGame} style={{marginLeft:"2rem"}}>
           {" "}
-          <Link to="/play">startGame </Link>
-        </button>
+          <Link to="/play" style={{textDecoration:"none",color: `#345167`}}>startGame </Link>
+        </Button>
       </div>
-      <div>
+      <div style={{textAlign:"center"}}>
         registrated players:
         <PlayerTable>
           <tbody>
@@ -90,11 +95,13 @@ const ErrorMsg = styled.div`
 `;
 
 const PlayerTable = styled.table`
-  border: 1px solid black;
+  // border: 1px solid black;
   text-align: center;
 `;
 
 const RegisterPage = styled.div`
+  background-color: #345167;
+  color: #6d8d8a;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -114,7 +121,22 @@ const Tr = styled.tr`
 `;
 
 const Td = styled.td`
-  border: 1px solid white;
+  // border: 1px solid white;
   height: 6rem;
   width: 8rem;
 `;
+
+const Button = styled.button`
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #345167;
+    background-color: #6d8d8a;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+`

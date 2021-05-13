@@ -29,6 +29,8 @@ const Container = styled.div`
   width: 10rem;
   margin-left: 15px;
   justify-content: space-around;
+  align-self: flex-end;
+
 `;
 
 const PageContainer = styled.div`

@@ -129,11 +129,12 @@ export default GameBoardLayout;
 
 const BoardContainer = styled.div`
   border: 5px solid #1c2e4a;
-  @media (max-width: 600px) {
-    height: 60vh;
+  @media (max-width: 750px) {
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     border: none;
+    
   }
 `;

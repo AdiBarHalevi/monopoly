@@ -9,41 +9,20 @@ import carAvatar from "../../img/car_avatar.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import rainingMoney from "../../img/raining-money.gif"
+import SignatureEffect from "./SignatureEffect"
+import MonopolyIMG from "../../img/MonopolyIMG.png"
 
 const WelcomPage = () => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
-
-  const [registrated, setregistrated] = useState([]);
-  const textInput = useRef();
-
-  const saveUser = () => {
-    const add = registrated;
-    add.push(textInput.current.value);
-    setregistrated(add);
-    console.log(registrated);
-  };
-
-  const shuffle = (array) => array.sort(() => Math.random() - 0.5);
-
-  const startGame = () => {
-    const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
-    shuffle(registrated).forEach((user, index) => {
-      postUser(user, index + 1, avatars[index]);
-    });
-  };
-
   return (
     <WelcomePage  background={rainingMoney}>
       <>
       <WelcomeSign>
-        <h1>Monopoly Full Stack Project</h1>
-        <Signature>by Adi Bar Halevi</Signature>
+         <h1>Monopoly Full Stack Project</h1>
+         <MonopolyLogo background={MonopolyIMG}/> <SignatureEffect/>
         <Paragraph>
-          this App is a mock of the game Monopoly. click{" "}
+          this App is a mock of the game Monopoly.<br/> click{" "}
           <Link to="/explain" style={{ textDecoration: "none", color: "#88CCD9" }}>here</Link> to learn more about the building
-          process or <Link to="/Register" style={{ textDecoration: "none", color: "#88CCD9" }}>Register</Link> a new game
+          process<br/> or <Link to="/Register" style={{ textDecoration: "none", color: "#88CCD9" }}>Register</Link> a new game
         </Paragraph>
       </WelcomeSign>
       </>
@@ -84,13 +63,17 @@ const WelcomeSign = styled.div`
   z-index:1;
 `;
 const Paragraph = styled.p`
-  width: 18rem;
+  width: 29rem;
   text-align: center;
   z-index:1;
 `;
 
-const Signature = styled.p`
-  font-family: Dancing Script, cursive;
-  font-size: 32px;
-  color: red;
-`;
+const MonopolyLogo = styled.div`
+    background-image: url(${(props) => props.background});
+    height:3rem;
+    width:10rem;
+    background-position: center;
+    background-size: cover;
+    display:inline-block
+`
+
