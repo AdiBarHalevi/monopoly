@@ -113,16 +113,17 @@ const CardsContainer = styled.div`
   justify-content: space-between;
   @media (max-width: 768px) {
     position:absolute;
-    top:45rem;
-    left:0rem;
-    z-index:2;
+    top:10px;
+    right:0rem;
+
   }
 `;
 
 const Container = styled.div`
   border: 1px solid black;
-  height: 8rem;
+  height: 8.15rem;
   width: 6rem;
+  background-color:#D7E6D5;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -136,7 +137,6 @@ const AreaColor = styled.div`
 `;
 
 const CardDetailsFront = styled.div`
-  // height: 3rem;
   text-align: center;
   line-height: 3;
 `;
@@ -148,7 +148,11 @@ const CardDetailsBack = styled.table`
   font-size: 7.5px;
   align-items: center;
   justify-content: center;
+  background-color:white;
   display: flex;
+  @media (max-width: 768px) {
+    font-size: 7px;
+  }
 `;
 
 const Price = styled.div`

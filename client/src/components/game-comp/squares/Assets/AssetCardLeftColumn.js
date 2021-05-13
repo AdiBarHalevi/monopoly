@@ -10,7 +10,7 @@ const AssetCardLeftColumn = (data) => {
       headerWidth="1.2rem"
       headerDirection="row-reverse"
       headerRotation="rotate(90deg)"
-      abosoluteTopPosition="0.6rem"
+      abosoluteTopPosition="1.6rem"
       abosoluteLeftPosition="-2rem"
       data={data}
     ></AssetCard>

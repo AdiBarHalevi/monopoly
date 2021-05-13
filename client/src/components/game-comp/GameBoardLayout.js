@@ -3,6 +3,8 @@ import { FlexBox } from "../common-components/FlexBox";
 import { getGameBoard } from "../../axioscall";
 import { gameboardData, renderState } from "../../atoms";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
+
 
 // assetes Column/Row Parent components
 import AssetCardLeftColumn from "./squares/Assets/AssetCardLeftColumn";
@@ -58,7 +60,7 @@ const GameBoardLayout = () => {
 
 
   return (
-    <div>
+    <BoardContainer>
       {layoutDataState.length > 0 && (
         <FlexBox alignItems="center" flexDirection="column">
           <FlexBox>
@@ -121,8 +123,23 @@ const GameBoardLayout = () => {
           </FlexBox>
         </FlexBox>
       )}
-    </div>
+    </BoardContainer>
   );
 };
 
 export default GameBoardLayout;
+
+
+const BoardContainer = styled.div`
+  border:5px solid #1C2E4A;
+  @media (max-width:600px){
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border:none;
+
+
+  }
+
+`;

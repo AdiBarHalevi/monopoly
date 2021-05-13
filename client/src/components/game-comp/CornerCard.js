@@ -30,9 +30,15 @@ const Container = styled.div`
     background-size: cover;
     display: inline-block;
     border: 1px solid black;
+
+    @media(max-height:799px)and(max-width:1200){
+      height:2.5rem;
+      width:2.5rem;
+    }
+
     @media (max-width: 768px) {
-      width:3rem;
-      height:3rem;
+      width:1.5rem;
+      height:1.5rem;
     }
   }
 `;

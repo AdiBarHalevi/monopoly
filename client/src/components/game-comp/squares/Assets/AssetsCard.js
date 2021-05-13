@@ -154,9 +154,22 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+
+  @media(max-height:799px)and(max-width:1200px){
+    height: 2.5rem;
+    width: 2.5rem;
+    background:${(props) => props.activityColor};
+    display: flex;
+    flex-direction: ${(props) => props.headerDirection};
+    border: 1px solid black;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+
+  }
   @media (max-width: 768px) {
-    width:3rem;
-    height:3rem;
+    width:1.5rem;
+    height:1.5rem;
   }
 
 `;
@@ -191,6 +204,14 @@ const Header = styled.div`
     height:15px;
     position:absolute;
     }
+
+    @media(max-height:799px)and(max-width:1200px){
+      &:after{
+       content:""
+      
+      }
+
+    }
   }
 `;
 
@@ -215,9 +236,32 @@ const Container2 = styled.div`
     position:absolute;
     right:0;
   }
+
+  @media(max-height:799px)and(max-width:1200){
+    height: 2.5rem;
+    width: 2.5rem;
+    background-image: url(${(props) => props.image});
+    background-position: center;
+    background-size: cover;
+    position:relative;
+    display: inline-block;
+    border: 1px solid black;
+      &:before{
+      content:"";
+      background-image: url(${(props) => props.ownerAvatar});
+      transform:${(props) => props.headerRotation};
+      background-color:${(props) => props.backgroundColor};
+      background-position: center;
+      background-size: cover;
+      width: 20px;
+      height:15px;
+      position:absolute;
+      right:0;
+    }  
+  }
   
   @media (max-width: 768px) {
-    width:3rem;
-    height:3rem;
+    width:1.5rem;
+    height:1.5rem;
   }
 `;

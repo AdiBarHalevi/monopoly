@@ -11,7 +11,7 @@ const AssetCardButtomRow = (data) => {
       headerDirection="column"
       headerRotation="0deg"
       abosoluteTopPosition="1.5rem"
-      abosoluteLeftPosition="0rem"
+      abosoluteLeftPosition="0.8rem"
       data={data}
     ></AssetCard>
   );

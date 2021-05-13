@@ -11,7 +11,7 @@ const AssetCardTopRow = (data) => {
       headerDirection="column-reverse"
       headerRotation="rotate(180deg)"
       abosoluteTopPosition="-1.8rem"
-      abosoluteLeftPosition="0rem"
+      abosoluteLeftPosition="0.8rem"
       data={data}
     />
   );

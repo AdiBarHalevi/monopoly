@@ -17,7 +17,7 @@ const PlayerTable = () => {
               <Td>player</Td>
               <Td> Name </Td>
               <Td> Balance </Td>
-              <Td> Location </Td>
+              {/* <Td> Location </Td> */}
             </tr>
           </thead>
           <tbody>
@@ -27,7 +27,7 @@ const PlayerTable = () => {
                   <AvatarTd avatar={player.avatar}></AvatarTd>
                   <Td>{player.name}</Td>
                   <Td>{player.balance}</Td>
-                  <Td>{player.currentLocation}</Td>
+                  {/* <Td>{player.currentLocation}</Td> */}
                 </tr>
               );
             })}
@@ -43,24 +43,37 @@ export default PlayerTable;
 const GameStatus = styled.table`
   text-align: center;
   font-size: 12px;
+
   @media (max-width: 768px) {
     position:absolute;
-    top:44rem;
-    left:12rem;
+    top:10px;
+    left:0rem;
   }
   
 `;
 
 const Td = styled.td`
-  background: pink;
+  background: #655057;
   border: 1px solid;
-  width: 6rem;
+  @media (max-width: 768px) {
+    height: 30px;
+    width: 15px;
+    font-size:8px;
+    line-height:1;
+
+  }
 `;
 
 const AvatarTd = styled.td`
   height: 2rem;
   width: 2rem;
   background-image: url(${(props) => props.avatar});
+  background-color:#655057;
   background-position: center;
   background-size: cover;
+  @media (max-width: 768px) {
+    height: 30px;
+    width: 15px;
+
+  }
 `;

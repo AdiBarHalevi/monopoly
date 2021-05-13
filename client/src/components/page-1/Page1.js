@@ -7,7 +7,7 @@ import hatAvatar from "../../img/hat-avatar.png";
 import shoeAvatar from "../../img/shoe-avatar.png";
 import carAvatar from "../../img/car_avatar.png";
 import styled from "styled-components";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const WelcomPage = () => {

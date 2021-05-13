@@ -15,6 +15,7 @@ import {
   updateLocationOnMap,
 } from "../../../axioscall";
 import CardDisplay from "../card-display/CardDisplay";
+import styled from "styled-components";
 
 const GameManager = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
@@ -106,15 +107,26 @@ const GameManager = () => {
   };
 
   return (
-    <>
-      <CardDisplay />
+    <Container>
       <ActiveUserManager
         endTurn={endTurn}
         saveChanges={savetoAPI}
         updatePlayerMovement={updatePlayerMovement}
       />
-    </>
+    </Container>
   );
 };
 
 export default GameManager;
+
+const Container = styled.div`
+  background:black;
+  border:1px solid gold;
+  @media (max-width:600px){
+    font-size:12px;
+    position:absolute;
+    top:27%;
+    right:35%;
+  }
+
+`

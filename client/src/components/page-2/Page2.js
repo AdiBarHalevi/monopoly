@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import GameBoard from "../game-comp/GameBoard";
+import woodenFloor from "../../img/woodenFloor.png"
+import CardDisplay from "./card-display/CardDisplay"
+import PlayerTable from "./PlayerTable"
 
 const Page2 = () => {
   return (
     <>
-      <PageLayout>
+      <PageLayout background={woodenFloor}>
         <GameBoard />
       </PageLayout>
     </>
@@ -15,9 +18,17 @@ const Page2 = () => {
 export default Page2;
 
 const PageLayout = styled.div`
-  width: 105vw;
   display: flex;
-  // justify-content: center;
+  flex-direction:column;
+  height:100vh;
+  justify-content: center;
   align-items: center;
   position: relative;
+  background-image: url(${(props) => props.background});
+  background-position: center;
+  background-size: cover;
+  @media (max-width:600px){
+    height:90vh;
+
+  }
 `;

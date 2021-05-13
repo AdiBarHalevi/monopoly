@@ -16,6 +16,8 @@ const Register = () => {
   const textInput = useRef();
   const [registrationErorState, setRegistrationErorState] = useState(false)
 
+  const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
+
   const saveUser = (userName) =>{ 
     if(registrated.length === 4) return setRegistrationErorState(true)
     setregistrated([...registrated, userName]);}
@@ -41,8 +43,12 @@ const Register = () => {
     <RegisterPage>
         <div>Register players for the game</div>
       <div>
+        {registrated.length<4 &&
+        <>
         <input type="text" ref={textInput}></input>
         <button onClick={() => saveUser(textInput.current.value)}>Submit</button>
+        </>
+        }
         <button onClick={startGame}>
           {" "}
           <Link to="/play">startGame </Link>
@@ -54,14 +60,16 @@ const Register = () => {
             <tbody>
         {registrated.map((player,i)=>{
             return(
-            <tr key={i}>
-                <th>
+            <Tr key={i}>
+                <Td>
                     {i+1}
-                </th>
-                <td>
+                </Td>
+                <Td>
                     {player}
-                </td>
-            </tr>)
+                </Td>
+                <Avatar avatar={avatars[i]}>
+                </Avatar>
+            </Tr>)
         })}
             </tbody>
         </PlayerTable>
@@ -81,13 +89,30 @@ const ErrorMsg = styled.div`
 
 const PlayerTable = styled.table`
     border:1px solid black;
-    background: purple;
+    text-align: center;
 `
 
 const RegisterPage = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content:center;
+  justify-content:space-around;
   height:90vh;
 `;
+
+const Avatar = styled.td`
+    height: 6rem;
+    width: 8rem;
+    background-image: url(${(props) => props.avatar});
+    background-position: center;
+    background-size: cover;
+`
+const Tr = styled.tr`
+  border-bottom:1px solid white;
+`
+
+const Td = styled.td`
+  border:1px solid white;
+  height:6rem;
+  width:8rem;
+`

@@ -3,14 +3,16 @@ import PlayerTable from "../page-2/PlayerTable";
 import GameManager from "../page-2/game-managment/GameManager";
 import GameBoardLayout from "./GameBoardLayout";
 import styled from "styled-components";
+import CardDisplay from "../page-2/card-display/CardDisplay"
 
 const GameBoard = () => {
   return (
     <PageContainer>
       <GameBoardLayout />
       <Container>
+        <CardDisplay />
+         <PlayerTable />
         <GameManager />
-        <PlayerTable />
       </Container>
     </PageContainer>
   );
@@ -18,17 +20,17 @@ const GameBoard = () => {
 
 export default GameBoard;
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
+  align-self:flex-start;
   flex-direction: column;
-  height: 100%;
-  // width:95%
+  background:1rem solid black;
   width: 10rem;
   justify-content: space-around;
 `;
 
-export const PageContainer = styled.div`
+const PageContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
