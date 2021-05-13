@@ -113,8 +113,8 @@ const CardsContainer = styled.div`
   justify-content: space-between;
   @media (max-width: 768px) {
     position: absolute;
-    top: 10px;
-    right: 0rem;
+    top: 5rem;
+    right: 2rem;
   }
 `;
 
@@ -165,4 +165,9 @@ const PicContainer = styled.div`
   background-size: cover;
   height: 8rem;
   width: 6rem;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+  }
 `;

@@ -119,10 +119,12 @@ export default GameManager;
 
 const Container = styled.div`
   background: black;
-  @media (max-width: 600px) {
+  @media (max-width: 750px) {
+    display:flex;
     font-size: 12px;
     position: absolute;
-    top: 27%;
-    right: 35%;
+    top: 40%;
+    right: 30%;
+    flex-direction:column;
   }
 `;

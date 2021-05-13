@@ -46,8 +46,8 @@ const GameStatus = styled.table`
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 10px;
-    left: 0rem;
+    top: 4rem;
+    left: 1rem;
   }
 `;
 

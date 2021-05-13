@@ -16,6 +16,7 @@ import { FlexBox } from "../../common-components/FlexBox";
 import MakeAmoveMenu from "./MakeAmoveMenu";
 
 import { updateLocationOnMap } from "../../../axioscall";
+import styled from "styled-components";
 
 const ActiveUserManager = (props) => {
   const [renderGlobalState, setrenderState] = useRecoilState(renderState);
@@ -155,3 +156,4 @@ const ActiveUserManager = (props) => {
 };
 
 export default ActiveUserManager;
+
