@@ -16,18 +16,15 @@ import { FlexBox } from "../../common-components/FlexBox";
 import MakeAmoveMenu from "./MakeAmoveMenu";
 
 import { updateLocationOnMap } from "../../../axioscall";
-import styled from "styled-components";
 
 const ActiveUserManager = (props) => {
   const [renderGlobalState, setrenderState] = useRecoilState(renderState);
   const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
-  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
-    activeUserData
-  );
+  const [activeUserDataState, setActiveUserDataState] =
+    useRecoilState(activeUserData);
   const [inTurnLocationState, setinTurnLocationState] = useState({});
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
+  const [playersDataState, setPlayersDataState] =
+    useRecoilState(GamePlayDataState);
 
   const [diceState, setdiceState] = useState([0, 0, "start-turn"]);
   const [boxState, setBoxState] = useState("flex");
@@ -132,7 +129,7 @@ const ActiveUserManager = (props) => {
         {diceState[2] === "roll-dice" && (
           <FlexBox alignItems="center" flexDirection="row">
             <button onClick={rollDice}>Roll Dice</button>
-            <button onClick={() => console.log(setMakeAmoveState(true))}>
+            <button onClick={() => setMakeAmoveState(true)}>
               make an action
             </button>
           </FlexBox>
@@ -156,4 +153,3 @@ const ActiveUserManager = (props) => {
 };
 
 export default ActiveUserManager;
-

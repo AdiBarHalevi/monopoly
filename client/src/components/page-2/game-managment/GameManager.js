@@ -83,6 +83,10 @@ const GameManager = () => {
     // if(activeUserDataState) updatePlayerMovement()
   }, [activeUserDataState]);
 
+  // useEffect(() => {
+  //   updatePlayerMovement()
+  // }, [renderGlobalState]);
+
   const updatePlayerMovement = () => {
     // active player's avatar
     // field num for the API request
@@ -94,8 +98,6 @@ const GameManager = () => {
       ...gameboardDatatry[activeUserDataState.currentLocation],
     };
     changeAvatarToNewLocation[`avatar`] = activeUserDataState.avatar;
-
-    console.log(changeAvatarToNewLocation);
     const updates = {
       newLocationData: changeAvatarToNewLocation,
       previousLocation,
@@ -120,11 +122,11 @@ export default GameManager;
 const Container = styled.div`
   background: black;
   @media (max-width: 750px) {
-    display:flex;
+    display: flex;
     font-size: 12px;
     position: absolute;
     top: 40%;
     right: 30%;
-    flex-direction:column;
+    flex-direction: column;
   }
 `;

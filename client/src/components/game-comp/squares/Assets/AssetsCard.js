@@ -112,8 +112,13 @@ const AssetCard = ({
             playersDataState[data.rowItems.property[0].ownedby - 1].avatar
           }
           backgroundColor="white"
-        ></Header>
-        {/* <Avatar avatar={avatar} /> */}
+        >
+          <Avatar
+            avatar={
+              playersDataState[data.rowItems.property[0].ownedby - 1].avatar
+            }
+          />
+        </Header>
       </Container>
     );
   else
@@ -179,28 +184,16 @@ const Header = styled.div`
   position:relative;
   
   }
-  &:after{
-      transform:${(props) => props.headerRotation};
-      position: absolute;
-      top:${(props) => props.abosoluteTopPosition};
-      left:${(props) => props.abosoluteLeftPosition};
-      font-size: 5.5px;
-      width: 26px;
-      text-align: center;
+  // &:after{
+  //     transform:${(props) => props.headerRotation};
+  //     position: absolute;
+  //     top:${(props) => props.abosoluteTopPosition};
+  //     left:${(props) => props.abosoluteLeftPosition};
+  //     font-size: 5.5px;
+  //     width: 26px;
+  //     text-align: center;
     
-    }
-  &:before{
-    content:"";
-    background-image: url(${(props) => props.ownerAvatar});
-    transform:${(props) => props.headerRotation};
-    background-color:none;
-    background-position: center;
-    background-size: cover;
-    width: 3rem;
-    height:5rem;
-    position:absolute;
-    buttom:2rem;
-    }
+  //   }
   }
 `;
 

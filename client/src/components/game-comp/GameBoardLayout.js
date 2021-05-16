@@ -135,6 +135,5 @@ const BoardContainer = styled.div`
     justify-content: center;
     align-items: flex-end;
     border: none;
-    
   }
 `;

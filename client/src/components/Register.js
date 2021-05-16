@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState } from "../atoms";
 import { postUser } from "../axioscall";
@@ -6,7 +6,15 @@ import ironAvatar from "../img/iron-avatar.png";
 import hatAvatar from "../img/hat-avatar.png";
 import shoeAvatar from "../img/shoe-avatar.png";
 import carAvatar from "../img/car_avatar.png";
-import styled from "styled-components";
+import {
+  Td,
+  Tr,
+  ErrorMsg,
+  Button,
+  PlayerTable,
+  RegisterPage,
+  Avatar,
+} from "./common-components/registerPage-stylecomp";
 import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
 
 const Register = () => {
@@ -51,22 +59,30 @@ const Register = () => {
         {registrated.length < 4 && (
           <>
             <input
-             type="text" ref={textInput}
-             style={{background:"white",color: `#345167`,display:"block"}}></input>
-             
-             <br></br>
+              type="text"
+              ref={textInput}
+              style={{
+                background: "white",
+                color: `#345167`,
+                display: "block",
+              }}
+            ></input>
+
+            <br></br>
 
             <Button onClick={() => saveUser(textInput.current.value)}>
               Submit
             </Button>
           </>
         )}
-        <Button onClick={startGame} style={{marginLeft:"2rem"}}>
+        <Button onClick={startGame} style={{ marginLeft: "2rem" }}>
           {" "}
-          <Link to="/play" style={{textDecoration:"none",color: `#345167`}}>startGame </Link>
+          <Link to="/play" style={{ textDecoration: "none", color: `#345167` }}>
+            startGame{" "}
+          </Link>
         </Button>
       </div>
-      <div style={{textAlign:"center"}}>
+      <div style={{ textAlign: "center" }}>
         registrated players:
         <PlayerTable>
           <tbody>
@@ -87,56 +103,3 @@ const Register = () => {
 };
 
 export default Register;
-
-const ErrorMsg = styled.div`
-  height: 100%;
-  background: blue;
-  width: 100%;
-`;
-
-const PlayerTable = styled.table`
-  // border: 1px solid black;
-  text-align: center;
-`;
-
-const RegisterPage = styled.div`
-  background-color: #345167;
-  color: #6d8d8a;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 90vh;
-`;
-
-const Avatar = styled.td`
-  height: 6rem;
-  width: 8rem;
-  background-image: url(${(props) => props.avatar});
-  background-position: center;
-  background-size: cover;
-`;
-const Tr = styled.tr`
-  border-bottom: 1px solid white;
-`;
-
-const Td = styled.td`
-  // border: 1px solid white;
-  height: 6rem;
-  width: 8rem;
-`;
-
-const Button = styled.button`
-    display: inline-block;
-    padding: 1px 5px;
-    font-size: 15px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #345167;
-    background-color: #6d8d8a;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 4px #999;
-`

@@ -23,7 +23,7 @@ const MakeAmoveMenu = (props) => {
     return (
       <ActionBoxContainer boxState="flex">
         <AssetCardsContainer>
-          wellcome to make a move mother fucker
+          make a move menu
           <button onClick={() => setInvestOrMortgageState(true)}>
             {" "}
             Invest Or mortgage your asset

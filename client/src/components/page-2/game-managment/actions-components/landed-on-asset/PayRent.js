@@ -3,7 +3,7 @@ import { getPaid, retirePlayer } from "../../../../../axioscall";
 import { reduceMoney } from "../../../../../UtilityFunctions";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../../../../../atoms";
+import { GamePlayDataState, renderState } from "../../../../../atoms";
 
 const PayTheRent = (props) => {
   const { activeUserState, inTurnLocationState, setActiveUserState } = props;
@@ -31,7 +31,7 @@ const PayTheRent = (props) => {
 
   const setRent = () => {
     switch (inTurnLocationState.property[0].Assets) {
-      case "none":
+      case 0:
         setRentState(inTurnLocationState.cardDetails.rent);
         break;
       case "ownscolorSet":

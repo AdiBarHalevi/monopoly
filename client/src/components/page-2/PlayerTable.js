@@ -17,7 +17,7 @@ const PlayerTable = () => {
               <Td>player</Td>
               <Td> Name </Td>
               <Td> Balance </Td>
-              {/* <Td> Location </Td> */}
+              <Td> Location </Td>
             </tr>
           </thead>
           <tbody>
@@ -27,7 +27,7 @@ const PlayerTable = () => {
                   <AvatarTd avatar={player.avatar}></AvatarTd>
                   <Td>{player.name}</Td>
                   <Td>{player.balance}</Td>
-                  {/* <Td>{player.currentLocation}</Td> */}
+                  <Td>{player.currentLocation}</Td>
                 </tr>
               );
             })}
@@ -42,7 +42,7 @@ export default PlayerTable;
 
 const GameStatus = styled.table`
   text-align: center;
-  font-size: 12px;
+  font-size: 8px;
 
   @media (max-width: 768px) {
     position: absolute;

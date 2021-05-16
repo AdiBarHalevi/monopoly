@@ -19,7 +19,7 @@ export const ActionBoxContainer = styled.div`
   justify-content: center;
   align-items: center;
   left: 0;
-  top: 0;
+  top: 8rem;
   animation-name: ${showUpAnimation};
   animation-duration: 0.5s;
   justify-content: center;

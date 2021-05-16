@@ -14,7 +14,7 @@ const CornerCard = (props) => {
 
   return (
     <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-      <Avatar avatar={props.rowItems.avatar} />
+      {/* <Avatar avatar={props.rowItems.avatar} /> */}
     </Container>
   );
 };
