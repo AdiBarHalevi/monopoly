@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
 import { useRecoilState } from "recoil";
 import {
-  gameboardData,
+  gameCardsData,
   GamePlayDataState,
   activeUserData,
-  renderState,
+  shouldLayoutChange,
 } from "../../../atoms";
 
 import ActionBox from "./actions-components/ActionBox";
@@ -18,8 +18,8 @@ import MakeAmoveMenu from "./MakeAmoveMenu";
 import { updateLocationOnMap } from "../../../axioscall";
 
 const ActiveUserManager = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
+  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
+  const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
   const [activeUserDataState, setActiveUserDataState] =
     useRecoilState(activeUserData);
   const [inTurnLocationState, setinTurnLocationState] = useState({});

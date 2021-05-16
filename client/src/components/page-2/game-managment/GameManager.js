@@ -3,8 +3,8 @@ import { useRecoilState } from "recoil";
 import {
   GamePlayDataState,
   activeUserData,
-  gameboardData,
-  renderState,
+  gameCardsData,
+  shouldLayoutChange,
 } from "../../../atoms";
 import ActiveUserManager from "./ActiveUserManager";
 import {
@@ -21,10 +21,10 @@ const GameManager = () => {
     GamePlayDataState
   );
   const [gameboardDataState, setlayoutDataState] = useRecoilState(
-    gameboardData
+    gameCardsData
   );
 
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
 
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData

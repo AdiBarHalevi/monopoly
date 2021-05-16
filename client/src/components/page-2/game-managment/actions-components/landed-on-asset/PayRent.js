@@ -3,7 +3,7 @@ import { getPaid, retirePlayer } from "../../../../../axioscall";
 import { reduceMoney } from "../../../../../UtilityFunctions";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState, renderState } from "../../../../../atoms";
+import { GamePlayDataState, shouldLayoutChange } from "../../../../../atoms";
 
 const PayTheRent = (props) => {
   const { activeUserState, inTurnLocationState, setActiveUserState } = props;

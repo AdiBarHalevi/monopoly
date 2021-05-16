@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { GamePlayDataState, renderState } from "../../../../../atoms";
+import { GamePlayDataState, shouldLayoutChange } from "../../../../../atoms";
 import { useRecoilState } from "recoil";
 import {
   changeAssetOwnerShipAPI,
@@ -25,7 +25,7 @@ const Auction = (props) => {
     ...playersDataState,
   });
 
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
 
   const bidRef = useRef(0);
 

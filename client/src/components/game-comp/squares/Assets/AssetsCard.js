@@ -38,19 +38,6 @@ const AssetCard = ({
     if (displayImage) return setCardWindow([data]);
     setCardWindow([data]);
   };
-  const unUsed = () => {
-    console.log(
-      cardDetails,
-      fieldNum,
-      headerColor,
-      name,
-      price,
-      displayImage,
-      originalImage,
-      forSale,
-      card
-    );
-  };
 
   const validateActiveAsset = () => {
     if (isActive) {
@@ -68,9 +55,6 @@ const AssetCard = ({
           assetWidth={assetWidth}
           headerDirection={headerDirection}
           image={displayImage}
-          ownerAvatar={
-            playersDataState[data.rowItems.property[0].ownedby - 1].avatar
-          }
           backgroundColor="white"
         >
           {/* <Avatar avatar={avatar} /> */}
@@ -177,24 +161,10 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  &{
   background:${(props) => props.headerColor};
   width: ${(props) => props.headerWidth};
   height:${(props) => props.headerheight};
   position:relative;
-  
-  }
-  // &:after{
-  //     transform:${(props) => props.headerRotation};
-  //     position: absolute;
-  //     top:${(props) => props.abosoluteTopPosition};
-  //     left:${(props) => props.abosoluteLeftPosition};
-  //     font-size: 5.5px;
-  //     width: 26px;
-  //     text-align: center;
-    
-  //   }
-  }
 `;
 
 const Container2 = styled.div`
@@ -206,18 +176,6 @@ const Container2 = styled.div`
   position: relative;
   display: inline-block;
   border: 1px solid black;
-  &:before {
-    content: "";
-    background-image: url(${(props) => props.ownerAvatar});
-    transform: ${(props) => props.headerRotation};
-    background-color: ${(props) => props.backgroundColor};
-    background-position: center;
-    background-size: cover;
-    width: 20px;
-    height: 15px;
-    position: absolute;
-    right: 0;
-  }
 
   @media (max-height: 799px) and(max-width:1200) {
     height: 2.5rem;
@@ -228,18 +186,7 @@ const Container2 = styled.div`
     position: relative;
     display: inline-block;
     border: 1px solid black;
-    &:before {
-      content: "";
-      background-image: url(${(props) => props.ownerAvatar});
-      transform: ${(props) => props.headerRotation};
-      background-color: ${(props) => props.backgroundColor};
-      background-position: center;
-      background-size: cover;
-      width: 20px;
-      height: 15px;
-      position: absolute;
-      right: 0;
-    }
+
   }
 
   @media (max-width: 768px) {

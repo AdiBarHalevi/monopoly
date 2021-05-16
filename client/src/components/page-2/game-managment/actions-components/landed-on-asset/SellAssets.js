@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { activeUserData, gameboardData } from "../../../../../atoms";
+import { activeUserData, gameCardsData } from "../../../../../atoms";
 import styled from "styled-components";
 import {
   mortgageAnAssetAPI,
@@ -13,7 +13,7 @@ const SellAsset = (props) => {
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
   );
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
+  const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
 
   const mortgageaAssets = async (asset) => {
     await mortgageAnAssetAPI(asset.fieldNum);
