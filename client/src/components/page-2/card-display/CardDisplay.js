@@ -1,11 +1,11 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { cardWindowState } from "../../../atoms";
 import GameUtilityDisplayCard from "./GameUtilityDisplayCard";
 
 const CardDisplay = () => {
-  const [card, setCardWindow] = useRecoilState(cardWindowState);
+  const card = useRecoilValue(cardWindowState);
   if (card.length === 0) return <></>;
   if (card[0].length)
     return (

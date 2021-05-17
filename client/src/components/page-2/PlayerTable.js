@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { GamePlayDataState } from "../../atoms";
 
 const PlayerTable = () => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
+  const playersDataState = useRecoilValue(
     GamePlayDataState
   );
 

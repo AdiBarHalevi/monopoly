@@ -15,7 +15,7 @@ import {
   RegisterPage,
   Avatar,
 } from "./common-components/registerPage-stylecomp";
-import { Route, Switch, BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
