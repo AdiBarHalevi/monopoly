@@ -3,13 +3,16 @@ import { getPaid, retirePlayer } from "../../../../../axioscall";
 import { reduceMoney } from "../../../../../UtilityFunctions";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState, shouldLayoutChange } from "../../../../../atoms";
+import { GamePlayDataState, activeUserData } from "../../../../../atoms";
+import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const PayTheRent = (props) => {
-  const { activeUserState, inTurnLocationState, setActiveUserState } = props;
+  const {  inTurnLocationState } = props;
   const [bankruptState, setbankruptState] = useState(false);
   const [ownerState, setOwnerState] = useState("");
   const [rentState, setRentState] = useState(0);
+  const [activeUserDataState, setActiveUserDataState] =
+  useRecoilState(activeUserData);
 
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
@@ -68,31 +71,42 @@ const PayTheRent = (props) => {
   };
 
   const payTheRent = () => {
-    if (activeUserState.balance - inTurnLocationState.cardDetails.rent < 0) {
+    if (activeUserDataState.balance - inTurnLocationState.cardDetails.rent < 0) {
       return setbankruptState(true);
     }
     // the case wich there are no houses/hotels yet
     if (!inTurnLocationState.property[3]) {
-      const details = {
-        payTo: inTurnLocationState.property[2],
-        amount: inTurnLocationState.cardDetails.rent,
-      };
-      getPaid(details);
-      // reduceMoney params = (activeUserState,setActiveUserState,amount)
-      reduceMoney(
-        activeUserState,
-        setActiveUserState,
-        inTurnLocationState.cardDetails.rent
+      const update = {...activeUserDataState}
+      let newBalance = update.balance-inTurnLocationState.cardDetails.rent
+      update[`balance`]=newBalance
+
+      // TODO
+      // const details = {
+      //   payTo: inTurnLocationState.property[2],
+      //   amount: inTurnLocationState.cardDetails.rent,
+      // };
+      // getPaid(details);
+      // // reduceMoney params = (activeUserDataState,setActiveUserDataState,amount)
+      // reduceMoney(
+      //   activeUserDataState,
+      //   setActiveUserDataState,
+      //   inTurnLocationState.cardDetails.rent
+      // );
+      setActiveUserDataState(update)
+      saveToPlayersState(
+        update,
+        playersDataState,
+        setPlayersDataState
       );
       props.confirm();
     }
   };
 
   const declareBankrupcy = () => {
-    retirePlayer(activeUserState._id);
+    retirePlayer(activeUserDataState._id);
     const details = {
       payTo: inTurnLocationState.property[0].ownedby,
-      amount: activeUserState.balance,
+      amount: activeUserDataState.balance,
     };
     getPaid(details);
     setbankruptState(false);
@@ -104,17 +118,19 @@ const PayTheRent = (props) => {
     findAssetOwner();
   }, []);
 
+
+
   return (
     <AssetCardsContainer>
       {!bankruptState && (
         <div>
           <div>
-            {activeUserState.name} has landed on {inTurnLocationState.name}
+            {activeUserDataState.name} has landed on {inTurnLocationState.name}
           </div>
 
           <div>this asset is owned by {ownerState && ownerState.name}</div>
           <div>
-            {activeUserState.name} has to pay rent of ${rentState}
+            {activeUserDataState.name} has to pay rent of ${rentState}
           </div>
           <button onClick={payTheRent}>pay rent</button>
         </div>

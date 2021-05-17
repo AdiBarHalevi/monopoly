@@ -1,10 +1,10 @@
 import React from "react";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { shouldLayoutChange } from "../../../../../atoms";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 const BuytheAsset = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
+  const setrenderState = useSetRecoilState(shouldLayoutChange);
 
   const confirm = () => {
     props.confirm();

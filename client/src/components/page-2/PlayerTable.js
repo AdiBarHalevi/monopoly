@@ -4,10 +4,7 @@ import { useRecoilValue } from "recoil";
 import { GamePlayDataState } from "../../atoms";
 
 const PlayerTable = () => {
-  const playersDataState = useRecoilValue(
-    GamePlayDataState
-  );
-
+  const playersDataState = useRecoilValue(GamePlayDataState);
   if (playersDataState.length > 1)
     return (
       <>

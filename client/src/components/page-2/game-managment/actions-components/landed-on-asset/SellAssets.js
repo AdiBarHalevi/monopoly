@@ -25,7 +25,6 @@ const SellAsset = (props) => {
     retirePlayer(activeUserDataState._id);
     props.setSellAssetState(false);
     props.confirm();
-    props.endTurn();
   };
 
   if (activeUserDataState.property)

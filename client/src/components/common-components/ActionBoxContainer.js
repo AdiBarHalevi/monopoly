@@ -15,7 +15,7 @@ export const ActionBoxContainer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  display: ${(props) => props.boxState};
+  display: ${(props) => props.boxState || 'flex'};
   justify-content: center;
   align-items: center;
   left: 0;

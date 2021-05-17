@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { cardWindowState } from "../../atoms";
-import Avatar from "../common-components/AvatarDiv";
+// import Avatar from "../common-components/AvatarDiv";
 
 const CornerCard = (props) => {
   const [card, setCardWindow] = useRecoilState(cardWindowState);

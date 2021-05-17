@@ -27,13 +27,8 @@ export const updatedGameBoardData = async () => {
 };
 
 export const primaryPlayersLoad = async (
-  setPlayersDataState,
-  setActiveUserDataState,
-  turnState
 ) => {
-  const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
-  setPlayersDataState(res.data);
-  setActiveUserDataState(res.data[turnState]);
+  return await axiosInstance.get(`/gameAPI/users/getAll/1`);
 };
 
 export const updateUserReq = async (activeUserDataState) => {

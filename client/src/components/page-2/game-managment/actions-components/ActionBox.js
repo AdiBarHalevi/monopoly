@@ -1,7 +1,7 @@
 import React from "react";
 
+
 import { ActionBoxContainer } from "../../../common-components/ActionBoxContainer";
-import styled from "styled-components";
 
 // components for the game play
 import LandedOnAsset from "./landed-on-asset/LandedOnAsset";
@@ -12,27 +12,16 @@ import GoToJail from "./GotoJail";
 import VisitJailOrParking from "./VisitJailOrParking";
 import LandedOnStart from "./LandedOnStart";
 
-// functions that save the users list
-import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../../../../atoms";
-import { saveToPlayersState } from "../../../../UtilityFunctions";
-
 const ActionBox = (props) => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
   const {
     inTurnLocationState,
     setinTurnLocationState,
-    activeUserState,
-    setActiveUserState,
     boxState,
     setBoxState,
   } = props;
 
   const confirm = () => {
     setBoxState("none");
-    saveToPlayersState(activeUserState, playersDataState, setPlayersDataState);
   };
 
   switch (inTurnLocationState.typeOfCard) {
@@ -40,13 +29,9 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState}>
           <LandedOnAsset
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
             setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
-            endTurn={props.endTurn}
           />
         </ActionBoxContainer>
       );
@@ -54,12 +39,7 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState}>
           <LandedOnChance
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
-            inTurnLocationState={inTurnLocationState}
-            setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
           />
         </ActionBoxContainer>
       );
@@ -71,12 +51,7 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState}>
           <LandedOnCommunityChest
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
-            inTurnLocationState={inTurnLocationState}
-            setinTurnLocationState={setinTurnLocationState}
-            boxState={boxState}
           />
         </ActionBoxContainer>
       );
@@ -85,22 +60,16 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState}>
           <LandedOnTax
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
-            setinTurnLocationState={setinTurnLocationState}
           />
         </ActionBoxContainer>
       );
 
     case "goTojail":
       return (
-        // {activeUserState,setActiveUserState}
         <ActionBoxContainer boxState={boxState[0]}>
           <GoToJail
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
           />
         </ActionBoxContainer>
@@ -110,8 +79,6 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <VisitJailOrParking
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
           />
@@ -121,8 +88,6 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState}>
           <VisitJailOrParking
-            activeUserState={activeUserState}
-            setActiveUserState={setActiveUserState}
             confirm={confirm}
             inTurnLocationState={inTurnLocationState}
           />
@@ -133,7 +98,6 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnStart
-            activeUserState={activeUserState}
             buy={confirm}
             inTurnLocationState={inTurnLocationState}
           />

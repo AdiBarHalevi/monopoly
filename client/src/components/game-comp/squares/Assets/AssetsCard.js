@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { cardWindowState, GamePlayDataState } from "../../../../atoms";
 import Avatar from "../../../common-components/AvatarDiv";
 
@@ -15,23 +15,21 @@ const AssetCard = ({
   abosoluteLeftPosition,
   data,
 }) => {
-  const [card, setCardWindow] = useRecoilState(cardWindowState);
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
+  const setCardWindow = useSetRecoilState(cardWindowState);
+  const playersDataState= useRecoilValue(GamePlayDataState);
 
   const {
-    cardDetails,
-    fieldNum,
+    // cardDetails,
+    // fieldNum,
     headerColor,
     name,
-    price,
+    // price,
     displayImage,
-    originalImage,
-    forSale,
-    avatar,
+    // originalImage,
+    // forSale,
+    // avatar,
     isActive,
-    property,
+    // property,
   } = data.rowItems;
 
   const handleHover = () => {

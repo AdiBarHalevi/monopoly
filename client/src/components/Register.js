@@ -1,6 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useRecoilState } from "recoil";
-import { GamePlayDataState } from "../atoms";
 import { postUser } from "../axioscall";
 import ironAvatar from "../img/iron-avatar.png";
 import hatAvatar from "../img/hat-avatar.png";
@@ -18,9 +16,6 @@ import {
 import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
   const [registrated, setregistrated] = useState([]);
   const textInput = useRef();
   const [registrationErorState, setRegistrationErorState] = useState(false);
