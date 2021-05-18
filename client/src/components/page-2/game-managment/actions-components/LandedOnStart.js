@@ -14,14 +14,15 @@ const LandedOnStart = (props) => {
   );
 
   const { setStartBoxState } = props;
-
   const confirm = () => {
     const updateActiveUser = { ...activeUserDataState };
     updateActiveUser["balance"] += 200;
     setActiveUserDataState(updateActiveUser);
     saveToPlayersState(updateActiveUser, playersDataState, setPlayersDataState);
     setStartBoxState(false);
+    props.confirm()
   };
+
 
   return (
     <>

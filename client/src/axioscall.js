@@ -105,15 +105,15 @@ export const mortgageAnAssetAPI = async (fieldNum, userId, mortgageValue) => {
 };
 
 export const takeMoneyfromUser = async (userId, amount) => {
-  // const body = JSON.stringify({ userId, amount });
-  // try {
-  //   const res = await axiosInstance.put(`/gameAPI/users/reduceMoney`, {
-  //     body: body,
-  //   });
-  //   return res;
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  const body = JSON.stringify({ userId, amount });
+  try {
+    const res = await axiosInstance.put(`/gameAPI/users/reduceMoney`, {
+      body: body,
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const updateLocationOnMap = async (

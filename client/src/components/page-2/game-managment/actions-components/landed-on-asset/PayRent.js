@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getPaid, retirePlayer } from "../../../../../axioscall";
+import { updateUserReq, retirePlayer } from "../../../../../axioscall";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../../../atoms";
@@ -89,19 +89,14 @@ const PayTheRent = (props) => {
     }
     // the case wich there are no houses/hotels yet
     if (!inTurnLocationState.property[3]) {
-      const update = { ...activeUserDataState };
-      let newBalance = update.balance - inTurnLocationState.cardDetails.rent;
-      update[`balance`] = newBalance;
+
       const ownerNum = inTurnLocationState.property[0].ownedby
-      const ownerUpdate = {...playersDataState[ownerNum - 1]}
 
-      let ownerNewBalance = ownerUpdate.balance + inTurnLocationState.cardDetails.rent
-      ownerUpdate[`balance`] = ownerNewBalance
-
-      const newPlayersStateAfterRent = playersDataState.map(player => {if(player.playersTurnNumber === Number(ownerNum))
-      return {...player, balance: player.balance + inTurnLocationState.cardDetails.rent ,leor: 'RULES'}
+      const newPlayersStateAfterRent = playersDataState.map(player =>
+         {if(player.playersTurnNumber === Number(ownerNum))
+      return {...player, balance: player.balance + inTurnLocationState.cardDetails.rent}
       if(player.playersTurnNumber === activeUserDataState.playersTurnNumber)
-      return {...player, balance: player.balance - inTurnLocationState.cardDetails.rent ,leor: 'SUPER'}
+      return {...player, balance: player.balance - inTurnLocationState.cardDetails.rent}
       else {
         return player
       }
@@ -109,20 +104,21 @@ const PayTheRent = (props) => {
 
       setActiveUserDataState(newPlayersStateAfterRent[ownerNum]);
       setPlayersDataState(newPlayersStateAfterRent)
+      updateUserReq(newPlayersStateAfterRent[ownerNum])
       
-      // props.confirm();
+      props.confirm();
     }
   };
 
   const declareBankrupcy = () => {
-    retirePlayer(activeUserDataState._id);
-    const details = {
-      payTo: inTurnLocationState.property[0].ownedby,
-      amount: activeUserDataState.balance,
-    };
-    getPaid(details);
-    setbankruptState(false);
-    props.confirm();
+    // retirePlayer(activeUserDataState._id);
+    // const details = {
+    //   payTo: inTurnLocationState.property[0].ownedby,
+    //   amount: activeUserDataState.balance,
+    // };
+    // getPaid(details);
+    // setbankruptState(false);
+    // props.confirm();
   };
 
   useEffect(() => {
