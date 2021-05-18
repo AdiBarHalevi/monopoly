@@ -1,49 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  GamePlayDataState,
-  activeUserData,
-  gameCardsData,
-  shouldLayoutChange,
-} from "../../../atoms";
-import ActiveUserManager from "./ActiveUserManager";
-import {
-  retirePlayer,
-  updateUserReq,
-  primaryPlayersLoad,
-  getaUserListFromApi,
-  updateLocationOnMap,
-} from "../../../axioscall";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
+import { GamePlayDataState, activeUserData } from "../../../atoms";
+import ActiveUserManager from "./ActiveUserManager";
+import { updateUserReq, primaryPlayersLoad } from "../../../axioscall";
+
 const GameManager = () => {
-  const [playersDataState, setPlayersDataState] = useRecoilState(
-    GamePlayDataState
-  );
+  const [playersDataState, setPlayersDataState] =
+    useRecoilState(GamePlayDataState);
   // const gameboardDataState = useRecoilValue(
   //   gameCardsData
   // );
 
   // const setrenderState = useSetRecoilState(shouldLayoutChange);
 
-  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
-    activeUserData
-  );
+  const [activeUserDataState, setActiveUserDataState] =
+    useRecoilState(activeUserData);
 
   const [turnState, setTurnState] = useState(0);
 
-  useEffect(async () => {
-    const {data} = await primaryPlayersLoad();
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await primaryPlayersLoad();
       setPlayersDataState(data);
       setActiveUserDataState(data[turnState]);
-  }, [setPlayersDataState, setActiveUserDataState,turnState]);
+    }
+    fetchData();
+  }, [setPlayersDataState, setActiveUserDataState, turnState]); // Or [] if effect doesn't need props or state
 
   // const retirePlayerFunc = async () => {
   //   // must have a player to retire
   //   retirePlayer();
   // };
-
-
 
   // validates the turn, once a turn is over it passes the turn to the next player
   const turnUpdate = () => {
@@ -60,9 +49,8 @@ const GameManager = () => {
 
   // ends the turn, saves the changes
   const endGameCheck = () => {
-    const filterIt = playersDataState.filter((user) => {
-      if (user.isActive) return user;
-    });
+    const filterIt = playersDataState.filter((user) => 
+     user.isActive);
     if (filterIt.length === 1) return true;
     return false;
   };
@@ -75,8 +63,6 @@ const GameManager = () => {
       window.alert("you are the winner!");
     }
   };
-
-
 
   // useEffect(() => {
   //   // if(activeUserDataState) updatePlayerMovement()

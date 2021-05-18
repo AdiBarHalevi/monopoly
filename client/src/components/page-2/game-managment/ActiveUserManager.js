@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   gameCardsData,
   GamePlayDataState,
   activeUserData,
-  shouldLayoutChange,
 } from "../../../atoms";
 
 import ActionBox from "./actions-components/ActionBox";
@@ -15,11 +14,11 @@ import StartTurn from "./StartTurn";
 import { FlexBox } from "../../common-components/FlexBox";
 import MakeAmoveMenu from "./MakeAmoveMenu";
 
-import { updateLocationOnMap,updateUserReq } from "../../../axioscall";
+import {updateUserReq } from "../../../axioscall";
 
 const ActiveUserManager = (props) => {
   // const setrenderState = useSetRecoilState(shouldLayoutChange);
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
+  const gameboardDataState = useRecoilValue(gameCardsData);
   const [activeUserDataState, setActiveUserDataState] =
     useRecoilState(activeUserData);
 
@@ -102,7 +101,7 @@ const ActiveUserManager = (props) => {
   else if (makeAmoveState) {
     return (
       <MakeAmoveMenu
-      //  setMakeAmoveState={setMakeAmoveState}
+       setMakeAmoveState={setMakeAmoveState}
        ></MakeAmoveMenu>
     );
   } else
@@ -123,9 +122,9 @@ const ActiveUserManager = (props) => {
         {diceState[2] === "roll-dice" && (
           <FlexBox alignItems="center" flexDirection="row">
             <button onClick={rollDice}>Roll Dice</button>
-            {/* <button onClick={() => setMakeAmoveState(true)}>
+            <button onClick={() => setMakeAmoveState(true)}>
               make an action
-            </button> */}
+            </button>
           </FlexBox>
         )}
         {diceState[2] === "end-turn" && (

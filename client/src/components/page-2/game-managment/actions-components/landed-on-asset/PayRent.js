@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getPaid, retirePlayer } from "../../../../../axioscall";
-import { reduceMoney } from "../../../../../UtilityFunctions";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../../../atoms";
@@ -18,7 +17,7 @@ const PayTheRent = (props) => {
     GamePlayDataState
   );
 
-  const findAssetOwner = () => {
+  const findAssetOwner = useCallback(() => {
     try {
       const owner = playersDataState.find((player) =>
         player.playersTurnNumber ===
@@ -30,9 +29,9 @@ const PayTheRent = (props) => {
     } catch (e) {
       console.log(e);
     }
-  };
+  }, [inTurnLocationState.property, playersDataState]);
 
-  const setRent = () => {
+  const setRent = useCallback(() => {
     switch (inTurnLocationState.property[0].Assets) {
       case 0:
         setRentState(inTurnLocationState.cardDetails.rent);
@@ -68,7 +67,17 @@ const PayTheRent = (props) => {
         setRentState(0);
         break;
     }
-  };
+  }, [setRentState, inTurnLocationState.cardDetails.allfacility,
+    inTurnLocationState.cardDetails.rent,
+    inTurnLocationState.cardDetails.rentWith1house,
+    inTurnLocationState.cardDetails.rentWith2house,
+    inTurnLocationState.cardDetails.rentWith3house,
+    inTurnLocationState.cardDetails.rentWithColorSet,
+    inTurnLocationState.cardDetails.rentWithHotel,
+    inTurnLocationState.cardDetails.with2RR,
+    inTurnLocationState.cardDetails.with3RR,
+    inTurnLocationState.cardDetails.with4RR])
+
 
   const payTheRent = () => {
     if (activeUserDataState.balance - inTurnLocationState.cardDetails.rent < 0) {
@@ -116,7 +125,7 @@ const PayTheRent = (props) => {
   useEffect(() => {
     setRent();
     findAssetOwner();
-  }, []);
+  }, [findAssetOwner, setRent]);
 
 
 

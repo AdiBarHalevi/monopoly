@@ -45,9 +45,8 @@ const ActionBox = (props) => {
       );
 
     case "communityChest":
-      {
-        console.log(props.inTurnLocationState);
-      }
+      console.log(props.inTurnLocationState);
+      
       return (
         <ActionBoxContainer boxState={boxState}>
           <LandedOnCommunityChest
@@ -105,7 +104,7 @@ const ActionBox = (props) => {
       );
 
     default:
-      return <></>;
+      return null;
   }
 };
 

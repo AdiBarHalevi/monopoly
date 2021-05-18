@@ -44,7 +44,7 @@ const AssetCard = ({
   };
 
   const playerAvatar = playersDataState.filter(player => player.currentLocation === fieldNum).map(player =>
-    <Avatar avatar={player.avatar} />              
+    <Avatar key={player.name} avatar={player.avatar} />              
     )
 
   const activityColor = validateActiveAsset();
