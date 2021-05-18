@@ -94,14 +94,14 @@ export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
 };
 
 export const mortgageAnAssetAPI = async (fieldNum, userId, mortgageValue) => {
-  // try {
-  //   const res = await axiosInstance.put(
-  //     `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
-  //   );
-  //   return res;
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    const res = await axiosInstance.put(
+      `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
+    );
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const takeMoneyfromUser = async (userId, amount) => {

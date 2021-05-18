@@ -39,7 +39,6 @@ const Auction = (props) => {
     const newPlayersStateAfterPurchase =playersDataState.map(player => {
       if(player.playersTurnNumber === auctionPlayersState[0].playersTurnNumber) {
         const newplayer =  {...player , balance:player.balance-bidPrice}
-        console.log( newplayer)
         return (newplayer)
       }
       return player
