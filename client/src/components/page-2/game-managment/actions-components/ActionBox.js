@@ -89,6 +89,7 @@ const ActionBox = (props) => {
       return (
         <ActionBoxContainer boxState={boxState[0]}>
           <LandedOnStart
+          setStartBoxState={props.setStartBoxState}
             buy={confirm}
             inTurnLocationState={inTurnLocationState}
           />

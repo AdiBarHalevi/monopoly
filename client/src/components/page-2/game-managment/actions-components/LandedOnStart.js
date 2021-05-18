@@ -20,7 +20,7 @@ const LandedOnStart = (props) => {
     updateActiveUser["balance"] += 200;
     setActiveUserDataState(updateActiveUser);
     saveToPlayersState(updateActiveUser, playersDataState, setPlayersDataState);
-    setStartBoxState && setStartBoxState(false);
+    setStartBoxState(false);
   };
 
   return (

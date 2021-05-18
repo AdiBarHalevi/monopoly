@@ -116,6 +116,7 @@ const ActiveUserManager = (props) => {
               setinTurnLocationState={setinTurnLocationState}
               boxState={boxState}
               setBoxState={setBoxState}
+              setStartBoxState={setStartBoxState}
             />
             <button onClick={finishTurn}>end turn</button>
           </FlexBox>

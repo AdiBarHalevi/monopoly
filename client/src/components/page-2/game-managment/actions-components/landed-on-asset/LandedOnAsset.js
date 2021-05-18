@@ -110,7 +110,7 @@ const LandedOnAsset = (props) => {
 
     // if the owner of the asset is not the Active user and the property is not for sale
     else if (
-      inTurnLocationState.property[0].ownedby !==
+      parseInt(inTurnLocationState.property[0].ownedby) !==
       activeUserDataState.playersTurnNumber
     ) {
       return (

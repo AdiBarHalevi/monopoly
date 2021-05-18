@@ -21,10 +21,8 @@ const PayTheRent = (props) => {
   const findAssetOwner = useCallback(() => {
     try {
       const owner = playersDataState.find((player) =>
-        player.playersTurnNumber ===
-        parseInt(inTurnLocationState.property[0].ownedby)
-          ? player
-          : ""
+        player.playersTurnNumber ===parseInt(inTurnLocationState.property[0].ownedby)
+
       );
       setOwnerState(owner);
     } catch (e) {
@@ -94,22 +92,25 @@ const PayTheRent = (props) => {
       const update = { ...activeUserDataState };
       let newBalance = update.balance - inTurnLocationState.cardDetails.rent;
       update[`balance`] = newBalance;
+      const ownerNum = inTurnLocationState.property[0].ownedby
+      const ownerUpdate = {...playersDataState[ownerNum - 1]}
 
-      // TODO
-      // const details = {
-      //   payTo: inTurnLocationState.property[2],
-      //   amount: inTurnLocationState.cardDetails.rent,
-      // };
-      // getPaid(details);
-      // // reduceMoney params = (activeUserDataState,setActiveUserDataState,amount)
-      // reduceMoney(
-      //   activeUserDataState,
-      //   setActiveUserDataState,
-      //   inTurnLocationState.cardDetails.rent
-      // );
-      setActiveUserDataState(update);
-      saveToPlayersState(update, playersDataState, setPlayersDataState);
-      props.confirm();
+      let ownerNewBalance = ownerUpdate.balance + inTurnLocationState.cardDetails.rent
+      ownerUpdate[`balance`] = ownerNewBalance
+
+      const newPlayersStateAfterRent = playersDataState.map(player => {if(player.playersTurnNumber === Number(ownerNum))
+      return {...player, balance: player.balance + inTurnLocationState.cardDetails.rent ,leor: 'RULES'}
+      if(player.playersTurnNumber === activeUserDataState.playersTurnNumber)
+      return {...player, balance: player.balance - inTurnLocationState.cardDetails.rent ,leor: 'SUPER'}
+      else {
+        return player
+      }
+      })
+
+      setActiveUserDataState(newPlayersStateAfterRent[ownerNum]);
+      setPlayersDataState(newPlayersStateAfterRent)
+      
+      // props.confirm();
     }
   };
 
