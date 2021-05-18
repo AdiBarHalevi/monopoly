@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import { ActionBoxContainer } from "../../../common-components/ActionBoxContainer";
 
 // components for the game play
@@ -19,7 +18,6 @@ const ActionBox = (props) => {
     boxState,
     setBoxState,
   } = props;
-
   const confirm = () => {
     setBoxState("none");
   };
@@ -38,20 +36,16 @@ const ActionBox = (props) => {
     case "chance":
       return (
         <ActionBoxContainer boxState={boxState}>
-          <LandedOnChance
-            confirm={confirm}
-          />
+          <LandedOnChance confirm={confirm} />
         </ActionBoxContainer>
       );
 
     case "communityChest":
       console.log(props.inTurnLocationState);
-      
+
       return (
         <ActionBoxContainer boxState={boxState}>
-          <LandedOnCommunityChest
-            confirm={confirm}
-          />
+          <LandedOnCommunityChest confirm={confirm} />
         </ActionBoxContainer>
       );
 
@@ -68,9 +62,7 @@ const ActionBox = (props) => {
     case "goTojail":
       return (
         <ActionBoxContainer boxState={boxState[0]}>
-          <GoToJail
-            confirm={confirm}
-          />
+          <GoToJail confirm={confirm} />
         </ActionBoxContainer>
       );
 

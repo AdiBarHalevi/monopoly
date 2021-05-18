@@ -43,9 +43,9 @@ const AssetCard = ({
     } else return "#d7e622";
   };
 
-  const playerAvatar = playersDataState.filter(player => player.currentLocation === fieldNum).map(player =>
-    <Avatar key={player.name} avatar={player.avatar} />              
-    )
+  const playerAvatar = playersDataState
+    .filter((player) => player.currentLocation === fieldNum)
+    .map((player) => <Avatar key={player.name} avatar={player.avatar} />);
 
   const activityColor = validateActiveAsset();
   if (displayImage) {
@@ -59,9 +59,7 @@ const AssetCard = ({
           image={displayImage}
           backgroundColor="white"
         >
-          {
-            playerAvatar
-          }
+          {playerAvatar}
         </Container2>
       );
     } else
@@ -74,9 +72,8 @@ const AssetCard = ({
           image={displayImage}
           ownerAvatar=""
         >
- {
-            playerAvatar
-          }        </Container2>
+          {playerAvatar}{" "}
+        </Container2>
       );
   }
 
@@ -108,9 +105,7 @@ const AssetCard = ({
             }
           />
         </Header>
-        {
-            playerAvatar
-          }
+        {playerAvatar}
       </Container>
     );
   else
@@ -133,7 +128,7 @@ const AssetCard = ({
           ownerAvatar=""
           backgroundColor=""
         ></Header>
-         {playerAvatar}
+        {playerAvatar}
       </Container>
     );
 };

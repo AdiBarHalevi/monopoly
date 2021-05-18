@@ -6,8 +6,9 @@ import { useRecoilState } from "recoil";
 
 const GoToJail = (props) => {
   // SendUserToLocation =(activeUserState,setActiveUserState,detinationCardNum)
-  const [activeUserDataState, setActiveUserDataState] =
-  useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const confirm = () => {
     SendUserToLocation(activeUserDataState, setActiveUserDataState, 10);

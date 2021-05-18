@@ -20,10 +20,7 @@ const InsufficientFunds = (props) => {
     );
 
   return (
-    <SellAssets
-      confirm={props.confirm}
-      setSellAssetState={setSellAssetState}
-    />
+    <SellAssets confirm={props.confirm} setSellAssetState={setSellAssetState} />
   );
 };
 

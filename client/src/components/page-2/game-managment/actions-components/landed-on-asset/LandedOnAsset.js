@@ -5,38 +5,52 @@ import { AssetCardsContainer } from "../../../../common-components/AssetCardsCon
 import { changeAssetOwnerShipAPI } from "../../../../../axioscall";
 import InsufficientFunds from "./InsufficientFunds";
 import Auction from "./Auction";
-import { activeUserData } from "../../../../../atoms";
+import {
+  activeUserData,
+  gameCardsData,
+  GamePlayDataState,
+} from "../../../../../atoms";
 import { useRecoilState } from "recoil";
+import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const LandedOnAsset = (props) => {
-  const { inTurnLocationState,setinTurnLocationState, confirm } = props;
+  const { inTurnLocationState, confirm } = props;
 
+  const [gameCardsDataState, setGameCardsDataState] = useRecoilState(
+    gameCardsData
+  );
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
   const [buyTheAssetState, setbuytheAssetState] = useState(false);
   const [auctionState, setAuctionState] = useState(false);
 
-  const [activeUserDataState, setActiveUserDataState] =
-  useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const buyAsset = () => {
+    const fieldNum = inTurnLocationState.fieldNum;
+    const tempCards = { ...gameCardsDataState };
+    tempCards[fieldNum] = {
+      ...tempCards[fieldNum],
+      property: [activeUserDataState.name, 0],
+      forSale: false,
+    };
+    setGameCardsDataState(tempCards);
+
+    const update = { ...activeUserDataState };
+
+    update[`balance`] -= inTurnLocationState[`price`];
+    update.property = [...update.property, inTurnLocationState];
+    saveToPlayersState(update, playersDataState, setPlayersDataState);
+
+    setActiveUserDataState(update);
+    setbuytheAssetState(true);
     changeAssetOwnerShipAPI(
       inTurnLocationState.fieldNum,
       activeUserDataState.playersTurnNumber
     );
-    const tempActiveUser = { ...activeUserDataState };
-    const tempLocationState = { ...inTurnLocationState };
-    const activeUserassetsUpdate = [];
-    activeUserassetsUpdate.push(tempLocationState, tempActiveUser[`property`]);
-    tempActiveUser[`balance`] -= tempLocationState[`price`];
-    tempActiveUser[`property`] = activeUserassetsUpdate;
-    tempLocationState[`forSale`] = false;
-    tempLocationState[`property`] = [
-      tempActiveUser.name,
-      tempActiveUser.playersTurnNumber,
-      tempActiveUser._id,
-    ];
-    setinTurnLocationState(tempLocationState);
-    setActiveUserDataState(tempActiveUser);
-    setbuytheAssetState(true);
   };
 
   // if the user wants to buy the asset
@@ -88,9 +102,7 @@ const LandedOnAsset = (props) => {
         return (
           <>
             <AssetCardsContainer>
-              <InsufficientFunds
-                confirm={confirm}
-              ></InsufficientFunds>
+              <InsufficientFunds confirm={confirm}></InsufficientFunds>
             </AssetCardsContainer>
           </>
         );

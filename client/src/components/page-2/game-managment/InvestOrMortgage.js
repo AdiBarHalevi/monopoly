@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { activeUserData, gameCardsData, shouldLayoutChange } from "../../../atoms";
+import {
+  activeUserData,
+  gameCardsData,
+  shouldLayoutChange,
+} from "../../../atoms";
 import styled from "styled-components";
 import {
   mortgageAnAssetAPI,
@@ -10,7 +14,9 @@ import {
 import { processData } from "../../../UtilityFunctions";
 
 const InvestOrMortgage = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
+  const [renderGlobalState, setrenderState] = useRecoilState(
+    shouldLayoutChange
+  );
 
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData

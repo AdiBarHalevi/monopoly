@@ -6,12 +6,13 @@ import { GamePlayDataState, activeUserData } from "../../../../../atoms";
 import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const PayTheRent = (props) => {
-  const {  inTurnLocationState } = props;
+  const { inTurnLocationState } = props;
   const [bankruptState, setbankruptState] = useState(false);
   const [ownerState, setOwnerState] = useState("");
   const [rentState, setRentState] = useState(0);
-  const [activeUserDataState, setActiveUserDataState] =
-  useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
@@ -67,7 +68,9 @@ const PayTheRent = (props) => {
         setRentState(0);
         break;
     }
-  }, [setRentState, inTurnLocationState.cardDetails.allfacility,
+  }, [
+    setRentState,
+    inTurnLocationState.cardDetails.allfacility,
     inTurnLocationState.cardDetails.rent,
     inTurnLocationState.cardDetails.rentWith1house,
     inTurnLocationState.cardDetails.rentWith2house,
@@ -76,18 +79,21 @@ const PayTheRent = (props) => {
     inTurnLocationState.cardDetails.rentWithHotel,
     inTurnLocationState.cardDetails.with2RR,
     inTurnLocationState.cardDetails.with3RR,
-    inTurnLocationState.cardDetails.with4RR])
-
+    inTurnLocationState.cardDetails.with4RR,
+  ]);
 
   const payTheRent = () => {
-    if (activeUserDataState.balance - inTurnLocationState.cardDetails.rent < 0) {
+    if (
+      activeUserDataState.balance - inTurnLocationState.cardDetails.rent <
+      0
+    ) {
       return setbankruptState(true);
     }
     // the case wich there are no houses/hotels yet
     if (!inTurnLocationState.property[3]) {
-      const update = {...activeUserDataState}
-      let newBalance = update.balance-inTurnLocationState.cardDetails.rent
-      update[`balance`]=newBalance
+      const update = { ...activeUserDataState };
+      let newBalance = update.balance - inTurnLocationState.cardDetails.rent;
+      update[`balance`] = newBalance;
 
       // TODO
       // const details = {
@@ -101,12 +107,8 @@ const PayTheRent = (props) => {
       //   setActiveUserDataState,
       //   inTurnLocationState.cardDetails.rent
       // );
-      setActiveUserDataState(update)
-      saveToPlayersState(
-        update,
-        playersDataState,
-        setPlayersDataState
-      );
+      setActiveUserDataState(update);
+      saveToPlayersState(update, playersDataState, setPlayersDataState);
       props.confirm();
     }
   };
@@ -126,8 +128,6 @@ const PayTheRent = (props) => {
     setRent();
     findAssetOwner();
   }, [findAssetOwner, setRent]);
-
-
 
   return (
     <AssetCardsContainer>

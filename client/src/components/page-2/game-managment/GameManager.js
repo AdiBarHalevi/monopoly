@@ -7,16 +7,18 @@ import ActiveUserManager from "./ActiveUserManager";
 import { updateUserReq, primaryPlayersLoad } from "../../../axioscall";
 
 const GameManager = () => {
-  const [playersDataState, setPlayersDataState] =
-    useRecoilState(GamePlayDataState);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
   // const gameboardDataState = useRecoilValue(
   //   gameCardsData
   // );
 
   // const setrenderState = useSetRecoilState(shouldLayoutChange);
 
-  const [activeUserDataState, setActiveUserDataState] =
-    useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const [turnState, setTurnState] = useState(0);
 
@@ -49,8 +51,7 @@ const GameManager = () => {
 
   // ends the turn, saves the changes
   const endGameCheck = () => {
-    const filterIt = playersDataState.filter((user) => 
-     user.isActive);
+    const filterIt = playersDataState.filter((user) => user.isActive);
     if (filterIt.length === 1) return true;
     return false;
   };

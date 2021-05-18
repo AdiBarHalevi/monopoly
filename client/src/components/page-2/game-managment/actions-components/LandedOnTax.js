@@ -5,8 +5,9 @@ import { useRecoilState } from "recoil";
 import { activeUserData } from "../../../../atoms";
 
 const LandedOnTax = (props) => {
-  const [activeUserDataState, setActiveUserDataState] =
-  useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const { inTurnLocationState } = props;
   const confirm = () => {

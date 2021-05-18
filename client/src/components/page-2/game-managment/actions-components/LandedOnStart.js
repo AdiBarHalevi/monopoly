@@ -9,8 +9,9 @@ const LandedOnStart = (props) => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const [activeUserDataState, setActiveUserDataState] =
-  useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const { setStartBoxState } = props;
 
@@ -18,7 +19,7 @@ const LandedOnStart = (props) => {
     const updateActiveUser = { ...activeUserDataState };
     updateActiveUser["balance"] += 200;
     setActiveUserDataState(updateActiveUser);
-    saveToPlayersState(activeUserDataState, playersDataState, setPlayersDataState);
+    saveToPlayersState(updateActiveUser, playersDataState, setPlayersDataState);
     setStartBoxState && setStartBoxState(false);
   };
 

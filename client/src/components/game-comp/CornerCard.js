@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState , useRecoilValue} from "recoil";
-import { cardWindowState , GamePlayDataState} from "../../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cardWindowState, GamePlayDataState } from "../../atoms";
 import Avatar from "../common-components/AvatarDiv";
 
 const CornerCard = (props) => {
@@ -15,9 +15,11 @@ const CornerCard = (props) => {
 
   return (
     <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-      {playersDataState.filter(player => player.currentLocation === props.rowItems.fieldNum).map(player =>
-    <Avatar key={player.name} avatar={player.avatar} />              
-    )}
+      {playersDataState
+        .filter((player) => player.currentLocation === props.rowItems.fieldNum)
+        .map((player) => (
+          <Avatar key={player.name} avatar={player.avatar} />
+        ))}
     </Container>
   );
 };

@@ -25,7 +25,9 @@ const Auction = (props) => {
     ...playersDataState,
   });
 
-  const [renderGlobalState, setrenderState] = useRecoilState(shouldLayoutChange);
+  const [renderGlobalState, setrenderState] = useRecoilState(
+    shouldLayoutChange
+  );
 
   const bidRef = useRef(0);
 

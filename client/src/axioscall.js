@@ -19,15 +19,14 @@ export const getGameBoard = async (processData) => {
 };
 
 export const updatedGameBoardData = async () => {
-  try {
-    return await axiosInstance.get(`/gameAPI/gameplay`);
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   return await axiosInstance.get(`/gameAPI/gameplay`);
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
-export const primaryPlayersLoad = async (
-) => {
+export const primaryPlayersLoad = async () => {
   return await axiosInstance.get(`/gameAPI/users/getAll/1`);
 };
 
@@ -43,19 +42,19 @@ export const updateUserReq = async (activeUserDataState) => {
 };
 
 export const getaUserListFromApi = async (setPlayersDataState) => {
-  const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
-  setPlayersDataState(res.data);
+  // const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
+  // setPlayersDataState(res.data);
 };
 
 export const getPaid = async (details) => {
-  try {
-    const body = JSON.stringify(details);
-    await axiosInstance.put(`/gameAPI/users/getPaid`, {
-      body: body,
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const body = JSON.stringify(details);
+  //   await axiosInstance.put(`/gameAPI/users/getPaid`, {
+  //     body: body,
+  //   });
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const postUser = async (user, turnNum, avatar) => {
@@ -73,14 +72,14 @@ export const postUser = async (user, turnNum, avatar) => {
 };
 
 export const retirePlayer = async (playerID) => {
-  try {
-    const res = await axiosInstance.put(
-      `/gameAPI/users/retirePlayer/${playerID}`
-    );
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const res = await axiosInstance.put(
+  //     `/gameAPI/users/retirePlayer/${playerID}`
+  //   );
+  //   console.log(res);
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
@@ -95,65 +94,65 @@ export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
 };
 
 export const mortgageAnAssetAPI = async (fieldNum, userId, mortgageValue) => {
-  try {
-    const res = await axiosInstance.put(
-      `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
-    );
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const res = await axiosInstance.put(
+  //     `/gameAPI/gameCards/mortgageAnAsset/${fieldNum}/${userId}/${mortgageValue}`
+  //   );
+  //   return res;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const takeMoneyfromUser = async (userId, amount) => {
-  const body = JSON.stringify({ userId, amount });
-  try {
-    const res = await axiosInstance.put(`/gameAPI/users/reduceMoney`, {
-      body: body,
-    });
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
+  // const body = JSON.stringify({ userId, amount });
+  // try {
+  //   const res = await axiosInstance.put(`/gameAPI/users/reduceMoney`, {
+  //     body: body,
+  //   });
+  //   return res;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const updateLocationOnMap = async (
   previousLocation,
   currentLocation
 ) => {
-  const avatar = currentLocation.avatar;
-  const fieldNum = currentLocation.currentLocation;
-  let data = { previousLocation, avatar };
-  const body = JSON.stringify({ ...data });
-  try {
-    const res = await axiosInstance.put(
-      `gameAPI/gameCards/updateLayout/${fieldNum}`,
-      { body: body }
-    );
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
+  // const avatar = currentLocation.avatar;
+  // const fieldNum = currentLocation.currentLocation;
+  // let data = { previousLocation, avatar };
+  // const body = JSON.stringify({ ...data });
+  // try {
+  //   const res = await axiosInstance.put(
+  //     `gameAPI/gameCards/updateLayout/${fieldNum}`,
+  //     { body: body }
+  //   );
+  //   return res;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const deleteGame = async () => {
-  try {
-    const res = await axiosInstance.delete(`gameAPI/deleteGame`);
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const res = await axiosInstance.delete(`gameAPI/deleteGame`);
+  //   return res;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 export const buyAhouseAPI = async (inputData) => {
-  const body = JSON.stringify(inputData);
-  try {
-    const res = await axiosInstance.put(`gameAPI/buyhouse`, {
-      body: body,
-    });
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
-  console.log(body);
+  // const body = JSON.stringify(inputData);
+  // try {
+  //   const res = await axiosInstance.put(`gameAPI/buyhouse`, {
+  //     body: body,
+  //   });
+  //   return res;
+  // } catch (e) {
+  //   console.log(e);
+  // }
+  // console.log(body);
 };

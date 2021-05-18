@@ -15,7 +15,6 @@ const StartTurn = (props) => {
     props.setdiceState([props.diceState[0], props.diceState[1], "roll-dice"]);
   };
 
-
   return (
     <ActionBoxContainer>
       <AssetCardsContainer>
@@ -23,7 +22,7 @@ const StartTurn = (props) => {
           {" "}
           this is {activeUserDataState && activeUserDataState.name}'s turn{" "}
         </div>
-        <button onClick={confirm}>Start turn</button> 
+        <button onClick={confirm}>Start turn</button>
       </AssetCardsContainer>
     </ActionBoxContainer>
   );

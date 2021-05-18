@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -14,16 +14,18 @@ import StartTurn from "./StartTurn";
 import { FlexBox } from "../../common-components/FlexBox";
 import MakeAmoveMenu from "./MakeAmoveMenu";
 
-import {updateUserReq } from "../../../axioscall";
+import { updateUserReq } from "../../../axioscall";
 
 const ActiveUserManager = (props) => {
   // const setrenderState = useSetRecoilState(shouldLayoutChange);
   const gameboardDataState = useRecoilValue(gameCardsData);
-  const [activeUserDataState, setActiveUserDataState] =
-    useRecoilState(activeUserData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
-  const [playersDataState, setPlayersDataState] =
-    useRecoilState(GamePlayDataState);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
 
   const [inTurnLocationState, setinTurnLocationState] = useState({});
 
@@ -34,7 +36,7 @@ const ActiveUserManager = (props) => {
   const [makeAmoveState, setMakeAmoveState] = useState(false);
 
   const rollDice = async () => {
-    setdiceState([getRandomInt(1, 7), getRandomInt(1, 7),"end-turn" ]);
+    setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), "end-turn"]);
     await updateLocation();
     setBoxState("flex");
   };
@@ -54,13 +56,11 @@ const ActiveUserManager = (props) => {
 
     setActiveUserDataState(update);
 
-    saveToPlayersState(
-      update,
-      playersDataState,
-      setPlayersDataState
-    );
+    saveToPlayersState(update, playersDataState, setPlayersDataState);
+
+    setinTurnLocationState(gameboardDataState[newLocation]);
     // saves the movment in the API
-    await updateUserReq(update)
+    await updateUserReq(update);
   };
 
   // finishes the turn with click of a button saves the next user as active, resets the dice state and saves changes
@@ -83,36 +83,16 @@ const ActiveUserManager = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   loadLocationCard();
-  // }, [diceState]);
-
   if (startBlockState) {
+    return <LandedOnStart setStartBoxState={setStartBoxState} />;
+  } else if (makeAmoveState) {
     return (
-      <LandedOnStart
-        // setBoxState={setBoxState}
-        // boxState={boxState}
-        setStartBoxState={setStartBoxState}
-        // gameboardDataState={gameboardDataState}
-        // setgameboardData={setgameboardData}
-      />
-    );
-  } 
-  else if (makeAmoveState) {
-    return (
-      <MakeAmoveMenu
-       setMakeAmoveState={setMakeAmoveState}
-       ></MakeAmoveMenu>
+      <MakeAmoveMenu setMakeAmoveState={setMakeAmoveState}></MakeAmoveMenu>
     );
   } else
     return (
       <div>
-        {/* //TODO */}
-        <button onClick={loadLocationCard}>CHECK</button>
-        <button onClick={()=>{console.log(inTurnLocationState)}}>CHECK2</button>
-
         {diceState[2] === "start-turn" && (
-
           <StartTurn
             diceState={diceState}
             setdiceState={setdiceState}
