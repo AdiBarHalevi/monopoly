@@ -93,7 +93,7 @@ const ActiveUserManager = (props) => {
       <LandedOnStart
         // setBoxState={setBoxState}
         // boxState={boxState}
-        // setStartBoxState={setStartBoxState}
+        setStartBoxState={setStartBoxState}
         // gameboardDataState={gameboardDataState}
         // setgameboardData={setgameboardData}
       />

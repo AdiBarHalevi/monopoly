@@ -16,11 +16,11 @@ const AssetCard = ({
   data,
 }) => {
   const setCardWindow = useSetRecoilState(cardWindowState);
-  const playersDataState= useRecoilValue(GamePlayDataState);
+  const playersDataState = useRecoilValue(GamePlayDataState);
 
   const {
     // cardDetails,
-    // fieldNum,
+    fieldNum,
     headerColor,
     name,
     // price,
@@ -43,6 +43,10 @@ const AssetCard = ({
     } else return "#d7e622";
   };
 
+  const playerAvatar = playersDataState.filter(player => player.currentLocation === fieldNum).map(player =>
+    <Avatar avatar={player.avatar} />              
+    )
+
   const activityColor = validateActiveAsset();
   if (displayImage) {
     if (data.rowItems.property[0]) {
@@ -55,7 +59,9 @@ const AssetCard = ({
           image={displayImage}
           backgroundColor="white"
         >
-          {/* <Avatar avatar={avatar} /> */}
+          {
+            playerAvatar
+          }
         </Container2>
       );
     } else
@@ -68,8 +74,9 @@ const AssetCard = ({
           image={displayImage}
           ownerAvatar=""
         >
-          {/* <Avatar avatar={avatar} /> */}
-        </Container2>
+ {
+            playerAvatar
+          }        </Container2>
       );
   }
 
@@ -101,6 +108,9 @@ const AssetCard = ({
             }
           />
         </Header>
+        {
+            playerAvatar
+          }
       </Container>
     );
   else
@@ -123,7 +133,7 @@ const AssetCard = ({
           ownerAvatar=""
           backgroundColor=""
         ></Header>
-        {/* <Avatar avatar={avatar} /> */}
+         {playerAvatar}
       </Container>
     );
 };
@@ -159,10 +169,10 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  background:${(props) => props.headerColor};
+  background: ${(props) => props.headerColor};
   width: ${(props) => props.headerWidth};
-  height:${(props) => props.headerheight};
-  position:relative;
+  height: ${(props) => props.headerheight};
+  position: relative;
 `;
 
 const Container2 = styled.div`
@@ -172,7 +182,9 @@ const Container2 = styled.div`
   background-position: center;
   background-size: cover;
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid black;
 
   @media (max-height: 799px) and(max-width:1200) {
@@ -184,7 +196,6 @@ const Container2 = styled.div`
     position: relative;
     display: inline-block;
     border: 1px solid black;
-
   }
 
   @media (max-width: 768px) {

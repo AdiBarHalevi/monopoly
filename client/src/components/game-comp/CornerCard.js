@@ -14,7 +14,9 @@ const CornerCard = (props) => {
 
   return (
     <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-      {/* <Avatar avatar={props.rowItems.avatar} /> */}
+      {playersDataState.filter(player => player.currentLocation === props.rowItems.fieldNum).map(player =>
+    <Avatar avatar={player.avatar} />              
+    )}
     </Container>
   );
 };
