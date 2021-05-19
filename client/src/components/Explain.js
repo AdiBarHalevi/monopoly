@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import fullStackImage from "../img/showFullStack.png";
 
 const Explain = () => {
   const [lineState, setLinestate] = useState("0px");

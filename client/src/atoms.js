@@ -10,8 +10,8 @@ export const GamePlayDataState = atom({
   default: [],
 });
 
-export const gameboardData = atom({
-  key: "gameboardData",
+export const gameCardsData = atom({
+  key: "gameCardsData",
   default: [],
 });
 
@@ -20,7 +20,7 @@ export const activeUserData = atom({
   default: [],
 });
 
-export const renderState = atom({
-  key: "renderState",
+export const shouldLayoutChange = atom({
+  key: "shouldLayoutChange",
   default: true,
 });

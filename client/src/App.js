@@ -22,14 +22,14 @@ function App() {
                   Home
                 </Link>
               </Li>
-              <Li>
+              {/* <Li>
                 <Link
                   to="/play"
                   style={{ textDecoration: "none", color: "#6d8d8a" }}
                 >
                   Play
                 </Link>
-              </Li>
+              </Li> */}
             </Ul>
             <About>
               <Link

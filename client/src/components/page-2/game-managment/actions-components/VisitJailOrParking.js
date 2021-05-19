@@ -1,12 +1,21 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
+import { activeUserData } from "../../../../atoms";
 import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
 
 const VisitJailOrParking = (props) => {
-  const { activeUserState, inTurnLocationState, confirm } = props;
+  const { inTurnLocationState } = props;
+  const activeUserDataState = useRecoilValue(activeUserData);
   return (
     <AssetCardsContainer>
-      {activeUserState.name} is visiting at {inTurnLocationState.name}
-      <button onClick={confirm}>confirm</button>
+      {activeUserDataState.name} is visiting at {inTurnLocationState.name}
+      <button
+        onClick={() => {
+          props.setBoxState("none");
+        }}
+      >
+        confirm
+      </button>
     </AssetCardsContainer>
   );
 };

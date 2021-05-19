@@ -1,35 +1,37 @@
-import { useEffect, useState } from "react";
-import { getPaid, retirePlayer } from "../../../../../axioscall";
-import { reduceMoney } from "../../../../../UtilityFunctions";
+import { useCallback, useEffect, useState } from "react";
+import { updateUserReq, retirePlayer } from "../../../../../axioscall";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
-import { GamePlayDataState, renderState } from "../../../../../atoms";
+import { GamePlayDataState, activeUserData } from "../../../../../atoms";
+// import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const PayTheRent = (props) => {
-  const { activeUserState, inTurnLocationState, setActiveUserState } = props;
+  const { inTurnLocationState } = props;
   const [bankruptState, setbankruptState] = useState(false);
   const [ownerState, setOwnerState] = useState("");
   const [rentState, setRentState] = useState(0);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
 
-  const findAssetOwner = () => {
+  const findAssetOwner = useCallback(() => {
     try {
-      const owner = playersDataState.find((player) =>
-        player.playersTurnNumber ===
-        parseInt(inTurnLocationState.property[0].ownedby)
-          ? player
-          : ""
+      const owner = playersDataState.find(
+        (player) =>
+          player.playersTurnNumber ===
+          parseInt(inTurnLocationState.property[0].ownedby)
       );
       setOwnerState(owner);
     } catch (e) {
       console.log(e);
     }
-  };
+  }, [inTurnLocationState.property, playersDataState]);
 
-  const setRent = () => {
+  const setRent = useCallback(() => {
     switch (inTurnLocationState.property[0].Assets) {
       case 0:
         setRentState(inTurnLocationState.cardDetails.rent);
@@ -65,36 +67,63 @@ const PayTheRent = (props) => {
         setRentState(0);
         break;
     }
-  };
+  }, [
+    setRentState,
+    inTurnLocationState.cardDetails.allfacility,
+    inTurnLocationState.cardDetails.rent,
+    inTurnLocationState.cardDetails.rentWith1house,
+    inTurnLocationState.cardDetails.rentWith2house,
+    inTurnLocationState.cardDetails.rentWith3house,
+    inTurnLocationState.cardDetails.rentWithColorSet,
+    inTurnLocationState.cardDetails.rentWithHotel,
+    inTurnLocationState.cardDetails.with2RR,
+    inTurnLocationState.cardDetails.with3RR,
+    inTurnLocationState.cardDetails.with4RR,
+    inTurnLocationState.property,
+  ]);
 
   const payTheRent = () => {
-    if (activeUserState.balance - inTurnLocationState.cardDetails.rent < 0) {
+    if (
+      activeUserDataState.balance - inTurnLocationState.cardDetails.rent <
+      0
+    ) {
       return setbankruptState(true);
     }
     // the case wich there are no houses/hotels yet
     if (!inTurnLocationState.property[3]) {
-      const details = {
-        payTo: inTurnLocationState.property[2],
-        amount: inTurnLocationState.cardDetails.rent,
-      };
-      getPaid(details);
-      // reduceMoney params = (activeUserState,setActiveUserState,amount)
-      reduceMoney(
-        activeUserState,
-        setActiveUserState,
-        inTurnLocationState.cardDetails.rent
-      );
+      const ownerNum = inTurnLocationState.property[0].ownedby;
+
+      const newPlayersStateAfterRent = playersDataState.map((player) => {
+        if (player.playersTurnNumber === Number(ownerNum))
+          return {
+            ...player,
+            balance: player.balance + inTurnLocationState.cardDetails.rent,
+          };
+        if (player.playersTurnNumber === activeUserDataState.playersTurnNumber)
+          return {
+            ...player,
+            balance: player.balance - inTurnLocationState.cardDetails.rent,
+          };
+        else {
+          return player;
+        }
+      });
+
+      setActiveUserDataState(newPlayersStateAfterRent[ownerNum]);
+      setPlayersDataState(newPlayersStateAfterRent);
+      updateUserReq(newPlayersStateAfterRent[ownerNum]);
+
       props.confirm();
     }
   };
 
   const declareBankrupcy = () => {
-    retirePlayer(activeUserState._id);
+    retirePlayer(activeUserDataState._id);
     const details = {
       payTo: inTurnLocationState.property[0].ownedby,
-      amount: activeUserState.balance,
+      amount: activeUserDataState.balance,
     };
-    getPaid(details);
+    // getPaid(details);
     setbankruptState(false);
     props.confirm();
   };
@@ -102,19 +131,19 @@ const PayTheRent = (props) => {
   useEffect(() => {
     setRent();
     findAssetOwner();
-  }, []);
+  }, [findAssetOwner, setRent]);
 
   return (
     <AssetCardsContainer>
       {!bankruptState && (
         <div>
           <div>
-            {activeUserState.name} has landed on {inTurnLocationState.name}
+            {activeUserDataState.name} has landed on {inTurnLocationState.name}
           </div>
 
           <div>this asset is owned by {ownerState && ownerState.name}</div>
           <div>
-            {activeUserState.name} has to pay rent of ${rentState}
+            {activeUserDataState.name} has to pay rent of ${rentState}
           </div>
           <button onClick={payTheRent}>pay rent</button>
         </div>

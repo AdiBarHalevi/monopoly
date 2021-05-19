@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import { GamePlayDataState, renderState } from "../../../../../atoms";
-import { useRecoilState } from "recoil";
+import { GamePlayDataState, shouldLayoutChange } from "../../../../../atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   changeAssetOwnerShipAPI,
   takeMoneyfromUser,
@@ -10,98 +10,87 @@ import styled from "styled-components";
 import AuctionMallet from "../../../../../img/Auction-mallet.gif";
 
 const Auction = (props) => {
-  const [sellAssetState, setSellAssetState] = useState(false);
-  const [bidState, setbidState] = useState(0);
+  const [isAssetSold, setIsAssetSold] = useState(false);
+  const [bidPrice, setbidPrice] = useState(0);
   const [bidPhase, setbidPhase] = useState("Auction-start");
   const [invalidBid, setinvalidBid] = useState("");
   // the number of the bidding player
-  const [activeTurnState, setActiveTurnState] = useState(0);
+  const [currentBidderNumber, setCurrentBidderNumber] = useState(0);
   // global var to import players list
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
   // inner state for the Auction
-  const [auctionPlayersState, setAuctionActivePlayersState] = useState({
+  const [auctionPlayersState, setAuctionActivePlayersState] = useState([
     ...playersDataState,
-  });
+  ]);
 
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  const setrenderState = useSetRecoilState(shouldLayoutChange);
 
   const bidRef = useRef(0);
 
   const endAuction = async () => {
     await changeAssetOwnerShipAPI(
       props.inTurnLocationState.fieldNum,
-      Object.entries(auctionPlayersState)[0][1].playersTurnNumber
+      auctionPlayersState[0].playersTurnNumber
     );
-    await takeMoneyfromUser(
-      Object.values(auctionPlayersState)[0]._id,
-      bidState
-    );
+
+    await takeMoneyfromUser(auctionPlayersState[0]._id, bidPrice);
+
+    const newPlayersStateAfterPurchase = playersDataState.map((player) => {
+      if (
+        player.playersTurnNumber === auctionPlayersState[0].playersTurnNumber
+      ) {
+        const newplayer = { ...player, balance: player.balance - bidPrice };
+        return newplayer;
+      }
+      return player;
+    });
+
+    setPlayersDataState(newPlayersStateAfterPurchase);
+
     props.confirm();
     setrenderState(true);
   };
 
   const changebidingPlayer = () => {
-    let currentPlayerIndex = 0;
+    let currentPlayerIndex = currentBidderNumber;
     // saves the index of the player on the remaining of the auction table
-    Object.values(auctionPlayersState).find((user, i) => {
-      if (user.playersTurnNumber) {
-        if (
-          user.playersTurnNumber ===
-          Object.values(auctionPlayersState)[activeTurnState][
-            `playersTurnNumber`
-          ]
-        )
-          return (currentPlayerIndex = i);
-      }
-      return "";
-    });
-
-    // // update active user
-    if (currentPlayerIndex === Object.keys(auctionPlayersState).length - 1)
-      setActiveTurnState(0);
-    else {
-      currentPlayerIndex++;
-      setActiveTurnState(currentPlayerIndex);
-    }
+    if (currentPlayerIndex === auctionPlayersState.length - 1) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex++;
+    setCurrentBidderNumber(currentPlayerIndex);
   };
 
   const changebidingPlayerAfterRetirement = () => {
-    let currentPlayerIndex = 0;
-    const newAuctionPlayerList = { ...auctionPlayersState };
-    delete newAuctionPlayerList[activeTurnState];
-    Object.values(auctionPlayersState).find((user, i) => {
-      if (
-        user.playersTurnNumber ===
-        Object.values(auctionPlayersState)[activeTurnState][`playersTurnNumber`]
-      ) {
-        return (currentPlayerIndex = i);
-      } else return "";
-    });
-    // update active user
-    if (currentPlayerIndex === playersDataState.length - 1)
-      setActiveTurnState(0);
-    else setActiveTurnState(currentPlayerIndex++);
+    // delete current user
+    let currentPlayerIndex = currentBidderNumber;
+    const newAuctionPlayerList = [...auctionPlayersState];
+    newAuctionPlayerList.splice(currentPlayerIndex, 1);
+    // set the new Active players list
+    setAuctionActivePlayersState(newAuctionPlayerList);
+    // update to new Active user
+    if (currentPlayerIndex === newAuctionPlayerList.length - 1) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex++;
+    setCurrentBidderNumber(currentPlayerIndex);
+
     return newAuctionPlayerList;
   };
 
   const retireFromAuction = () => {
-    if (Object.keys(auctionPlayersState).length - 1 === 1) {
+    changebidingPlayerAfterRetirement();
+    if (auctionPlayersState.length === 2) {
       return setbidPhase("Auction-end");
     }
-    const newAuctionPlayerList = changebidingPlayerAfterRetirement();
-    setAuctionActivePlayersState(newAuctionPlayerList);
-    return setbidPhase("bid");
+    setbidPhase("bid");
   };
 
   const validateBid = (userbid) => {
-    if (
-      userbid > Object.values(auctionPlayersState)[activeTurnState][`balance`]
-    ) {
+    if (userbid > auctionPlayersState[currentBidderNumber][`balance`]) {
       setinvalidBid("your bid is over you balance,sell assets or bid lower");
       return false;
-    } else if (userbid <= bidState) {
+    } else if (userbid <= bidPrice) {
       setinvalidBid("your bid is too low,bid higer or forfit the Auction");
       return false;
     }
@@ -115,13 +104,13 @@ const Auction = (props) => {
 
   const activeUserbid = () => {
     if (validateBid(bidRef.current.value)) {
-      setbidState(parseInt(bidRef.current.value));
+      setbidPrice(parseInt(bidRef.current.value));
       setinvalidBid("");
       return setbidPhase("endbid");
     }
   };
 
-  if (!sellAssetState)
+  if (!isAssetSold)
     if (bidPhase === "Auction-start")
       return (
         <Container>
@@ -144,16 +133,16 @@ const Auction = (props) => {
         <Container>
           <h3>
             Auction Time <br />
-            current bid is ${bidState}
+            current bid is ${bidPrice}
           </h3>
           current bidding players:
           <TableContainer>
-            {Object.keys(auctionPlayersState).map((playerNum, i) => {
+            {auctionPlayersState.map((player, i) => {
               return (
                 <tbody>
                   <tr>
-                    <th>{auctionPlayersState[playerNum].name}</th>
-                    <td>{auctionPlayersState[playerNum].balance}</td>
+                    <th>{player.name}</th>
+                    <td>{player.balance}</td>
                   </tr>
                 </tbody>
               );
@@ -161,14 +150,13 @@ const Auction = (props) => {
           </TableContainer>
           {auctionPlayersState && invalidBid.length === 0 && (
             <div>
-              {Object.values(auctionPlayersState)[activeTurnState][`name`]},
-              this is your turn to bid <br />
+              {auctionPlayersState[currentBidderNumber][`name`]}, this is your
+              turn to bid <br />
               your current balance is: $
-              {Object.values(auctionPlayersState)[activeTurnState][`balance`]}
+              {auctionPlayersState[currentBidderNumber][`balance`]}
               <br />
               <label>make your bid:</label>
               <br />
-              {console.log(Object.values(auctionPlayersState)[activeTurnState])}
               <input type="number" ref={bidRef}></input>
               <button onClick={activeUserbid}> bid </button>
             </div>
@@ -188,8 +176,8 @@ const Auction = (props) => {
     else if (bidPhase === "endbid")
       return (
         <Container>
-          {Object.values(auctionPlayersState)[activeTurnState][`name`]} has
-          placed a bid of ${bidState} <br />
+          {auctionPlayersState[currentBidderNumber][`name`]} has placed a bid of
+          ${bidPrice} <br />
           <button onClick={endBidTurn}>Confirm</button>
         </Container>
       );
@@ -198,12 +186,11 @@ const Auction = (props) => {
         <Container>
           Auction ended the winner is:
           <div>
-            {/* {console.log(Object.entries(auctionPlayersState)[0][1])} */}
-            <h2>{Object.values(auctionPlayersState)[0][`name`]}</h2>
+            <h2>{auctionPlayersState[0][`name`]}</h2>
             <p>
               wins the auction over the new property
               <br />
-              at the cost of: ${bidState}
+              at the cost of: ${bidPrice}
             </p>
           </div>
           <CardShow>
@@ -218,7 +205,7 @@ const Auction = (props) => {
   return (
     <SellAssets
       confirm={props.confirm}
-      setSellAssetState={setSellAssetState}
+      setSellAssetState={setIsAssetSold}
       endTurn={props.endTurn}
     />
   );

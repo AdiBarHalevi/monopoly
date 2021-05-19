@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const GameUtilityDisplayCard = (props) => {
-  console.log(props);
   return (
     <Container>
       <PicContainer picture={props.picture} />

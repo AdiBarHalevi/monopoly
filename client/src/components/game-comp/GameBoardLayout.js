@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
 import { getGameBoard } from "../../axioscall";
-import { gameboardData, renderState } from "../../atoms";
-import { useRecoilState } from "recoil";
+import { gameCardsData, shouldLayoutChange } from "../../atoms";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
 // assetes Column/Row Parent components
@@ -17,45 +17,47 @@ import CornerCard from "./CornerCard";
 
 const GameBoardLayout = () => {
   // boards layout's state
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  const setGameCardsDataState = useSetRecoilState(gameCardsData);
+  const setShouldLayoutUpdateState = useSetRecoilState(shouldLayoutChange);
   const [layoutDataState, setlayoutDataState] = useState([]);
 
   // process the data from the API call
-  const processData = (data) => {
-    const processForGlobalVar = {};
-    const lowerRow = {};
-    const leftColumn = {};
-    const topRow = {};
-    const rightColumn = {};
-    data.forEach((singleCard) => {
-      if (singleCard.fieldNum < 11) {
-        lowerRow[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum] = singleCard;
-      }
-      if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19) {
-        leftColumn[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum] = singleCard;
-      }
+  const processData = useCallback(
+    (data) => {
+      const processForGlobalVar = {};
+      const lowerRow = {};
+      const leftColumn = {};
+      const topRow = {};
+      const rightColumn = {};
+      data.forEach((singleCard) => {
+        if (singleCard.fieldNum < 11) {
+          lowerRow[singleCard.fieldNum] = singleCard;
+          processForGlobalVar[singleCard.fieldNum] = singleCard;
+        }
+        if (singleCard.fieldNum >= 11 && singleCard.fieldNum <= 19) {
+          leftColumn[singleCard.fieldNum] = singleCard;
+          processForGlobalVar[singleCard.fieldNum] = singleCard;
+        }
 
-      if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30) {
-        topRow[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum] = singleCard;
-      }
-      if (singleCard.fieldNum > 30) {
-        rightColumn[singleCard.fieldNum] = singleCard;
-        processForGlobalVar[singleCard.fieldNum] = singleCard;
-      }
-    });
-    setlayoutDataState([lowerRow, leftColumn, topRow, rightColumn]);
-    setgameboardData(processForGlobalVar);
-  };
+        if (singleCard.fieldNum >= 20 && singleCard.fieldNum <= 30) {
+          topRow[singleCard.fieldNum] = singleCard;
+          processForGlobalVar[singleCard.fieldNum] = singleCard;
+        }
+        if (singleCard.fieldNum > 30) {
+          rightColumn[singleCard.fieldNum] = singleCard;
+          processForGlobalVar[singleCard.fieldNum] = singleCard;
+        }
+      });
+      setlayoutDataState([lowerRow, leftColumn, topRow, rightColumn]);
+      setGameCardsDataState(processForGlobalVar);
+    },
+    [setGameCardsDataState]
+  );
 
   useEffect(() => {
     getGameBoard(processData);
-    setrenderState(false);
-    console.log("gameBoard renders");
-  }, [renderGlobalState]);
+    setShouldLayoutUpdateState(false);
+  }, [setShouldLayoutUpdateState, processData]);
 
   return (
     <BoardContainer>

@@ -1,12 +1,17 @@
 import React from "react";
 import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
 import { SendUserToLocation } from "../../../../UtilityFunctions";
+import { activeUserData } from "../../../../atoms";
+import { useRecoilState } from "recoil";
 
 const GoToJail = (props) => {
   // SendUserToLocation =(activeUserState,setActiveUserState,detinationCardNum)
-  const { activeUserState, setActiveUserState } = props;
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
+
   const confirm = () => {
-    SendUserToLocation(activeUserState, setActiveUserState, 10);
+    SendUserToLocation(activeUserDataState, setActiveUserDataState, 10);
     props.confirm();
   };
 

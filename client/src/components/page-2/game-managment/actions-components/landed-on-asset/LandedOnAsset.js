@@ -5,33 +5,52 @@ import { AssetCardsContainer } from "../../../../common-components/AssetCardsCon
 import { changeAssetOwnerShipAPI } from "../../../../../axioscall";
 import InsufficientFunds from "./InsufficientFunds";
 import Auction from "./Auction";
+import {
+  activeUserData,
+  gameCardsData,
+  GamePlayDataState,
+} from "../../../../../atoms";
+import { useRecoilState } from "recoil";
+import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const LandedOnAsset = (props) => {
-  const { inTurnLocationState, activeUserState, confirm } = props;
+  const { inTurnLocationState, confirm } = props;
 
+  const [gameCardsDataState, setGameCardsDataState] = useRecoilState(
+    gameCardsData
+  );
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
   const [buyTheAssetState, setbuytheAssetState] = useState(false);
   const [auctionState, setAuctionState] = useState(false);
 
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
+
   const buyAsset = () => {
+    const fieldNum = inTurnLocationState.fieldNum;
+    const tempCards = { ...gameCardsDataState };
+    tempCards[fieldNum] = {
+      ...tempCards[fieldNum],
+      property: [activeUserDataState.name, 0],
+      forSale: false,
+    };
+    setGameCardsDataState(tempCards);
+
+    const update = { ...activeUserDataState };
+
+    update[`balance`] -= inTurnLocationState[`price`];
+    update.property = [...update.property, inTurnLocationState];
+    saveToPlayersState(update, playersDataState, setPlayersDataState);
+
+    setActiveUserDataState(update);
+    setbuytheAssetState(true);
     changeAssetOwnerShipAPI(
       inTurnLocationState.fieldNum,
-      activeUserState.playersTurnNumber
+      activeUserDataState.playersTurnNumber
     );
-    const tempActiveUser = { ...activeUserState };
-    const tempLocationState = { ...inTurnLocationState };
-    const activeUserassetsUpdate = [];
-    activeUserassetsUpdate.push(tempLocationState, tempActiveUser[`property`]);
-    tempActiveUser[`balance`] -= tempLocationState[`price`];
-    tempActiveUser[`property`] = activeUserassetsUpdate;
-    tempLocationState[`forSale`] = false;
-    tempLocationState[`property`] = [
-      tempActiveUser.name,
-      tempActiveUser.playersTurnNumber,
-      tempActiveUser._id,
-    ];
-    props.setinTurnLocationState(tempLocationState);
-    props.setActiveUserState(tempActiveUser);
-    setbuytheAssetState(true);
   };
 
   // if the user wants to buy the asset
@@ -39,7 +58,6 @@ const LandedOnAsset = (props) => {
     return (
       <>
         <BuytheAsset
-          activeUserState={activeUserState}
           confirm={confirm}
           setbuytheAssetState={setbuytheAssetState}
         />
@@ -59,17 +77,17 @@ const LandedOnAsset = (props) => {
       );
     // if the Asset is for sale
     if (inTurnLocationState.forSale) {
-      if (activeUserState.balance > inTurnLocationState.price) {
+      if (activeUserDataState.balance > inTurnLocationState.price) {
         return (
           <AssetCardsContainer>
             <h4>
-              {activeUserState.name} moved to {inTurnLocationState.name}{" "}
+              {activeUserDataState.name} moved to {inTurnLocationState.name}{" "}
             </h4>
             <div>
               Would you like to purchase the asset in the price of{" "}
               {inTurnLocationState.price}
             </div>
-            <div>Your Current balance is:{activeUserState.balance}</div>
+            <div>Your Current balance is:{activeUserDataState.balance}</div>
             <div>
               <button onClick={buyAsset}> buy</button>
               <button onClick={() => setAuctionState(true)}>
@@ -84,10 +102,7 @@ const LandedOnAsset = (props) => {
         return (
           <>
             <AssetCardsContainer>
-              <InsufficientFunds
-                confirm={confirm}
-                endTurn={props.endTurn}
-              ></InsufficientFunds>
+              <InsufficientFunds confirm={confirm}></InsufficientFunds>
             </AssetCardsContainer>
           </>
         );
@@ -95,15 +110,13 @@ const LandedOnAsset = (props) => {
 
     // if the owner of the asset is not the Active user and the property is not for sale
     else if (
-      inTurnLocationState.property[0].ownedby !==
-      activeUserState.playersTurnNumber
+      parseInt(inTurnLocationState.property[0].ownedby) !==
+      activeUserDataState.playersTurnNumber
     ) {
       return (
         <>
           <PayTheRent
-            activeUserState={activeUserState}
             inTurnLocationState={inTurnLocationState}
-            setActiveUserState={props.setActiveUserState}
             confirm={confirm}
           />
         </>
@@ -114,7 +127,7 @@ const LandedOnAsset = (props) => {
       return (
         <AssetCardsContainer>
           <h4>
-            {activeUserState.name} moved to {inTurnLocationState.name}{" "}
+            {activeUserDataState.name} moved to {inTurnLocationState.name}{" "}
           </h4>
           <div>this player owns the asset</div>
           <div>

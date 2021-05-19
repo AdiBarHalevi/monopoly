@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getRandomInt } from "../../../UtilityFunctions";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  gameboardData,
+  gameCardsData,
   GamePlayDataState,
   activeUserData,
-  renderState,
 } from "../../../atoms";
 
 import ActionBox from "./actions-components/ActionBox";
@@ -15,16 +14,20 @@ import StartTurn from "./StartTurn";
 import { FlexBox } from "../../common-components/FlexBox";
 import MakeAmoveMenu from "./MakeAmoveMenu";
 
-import { updateLocationOnMap } from "../../../axioscall";
+import { updateUserReq } from "../../../axioscall";
 
 const ActiveUserManager = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
-  const [activeUserDataState, setActiveUserDataState] =
-    useRecoilState(activeUserData);
+  // const setrenderState = useSetRecoilState(shouldLayoutChange);
+  const gameboardDataState = useRecoilValue(gameCardsData);
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
+
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
+
   const [inTurnLocationState, setinTurnLocationState] = useState({});
-  const [playersDataState, setPlayersDataState] =
-    useRecoilState(GamePlayDataState);
 
   const [diceState, setdiceState] = useState([0, 0, "start-turn"]);
   const [boxState, setBoxState] = useState("flex");
@@ -34,43 +37,30 @@ const ActiveUserManager = (props) => {
 
   const rollDice = async () => {
     setdiceState([getRandomInt(1, 7), getRandomInt(1, 7), "end-turn"]);
-    updateLocation();
-    saveToPlayersState(
-      activeUserDataState,
-      playersDataState,
-      setPlayersDataState
-    );
-    props.saveChanges(activeUserDataState);
+    await updateLocation();
     setBoxState("flex");
-  };
-
-  const updatePlayerMovement = (previousLocation, newLocation) => {
-    // active player's avatar
-    // field num for the API request
-    const newLocationUpdate = { ...newLocation };
-    newLocationUpdate[`avatar`] = activeUserDataState.avatar;
-    updateLocationOnMap(previousLocation, newLocationUpdate);
   };
 
   // updates the user's location and saves it on its state
   const updateLocation = async () => {
     const update = { ...activeUserDataState };
-    let previousLocation = update.currentLocation;
+
     let newLocation = update[`currentLocation`] + diceState[1] + diceState[0];
+
     if (newLocation < 40) {
       update[`currentLocation`] = newLocation;
     } else {
       update[`currentLocation`] = newLocation - 40;
       setStartBoxState(true);
     }
+
     setActiveUserDataState(update);
-    saveToPlayersState(
-      activeUserDataState,
-      playersDataState,
-      setPlayersDataState
-    );
-    await updatePlayerMovement(previousLocation, update);
-    setrenderState(true);
+
+    saveToPlayersState(update, playersDataState, setPlayersDataState);
+
+    setinTurnLocationState(gameboardDataState[newLocation]);
+    // saves the movment in the API
+    await updateUserReq(update);
   };
 
   // finishes the turn with click of a button saves the next user as active, resets the dice state and saves changes
@@ -81,7 +71,6 @@ const ActiveUserManager = (props) => {
       setPlayersDataState
     );
     props.endTurn();
-    props.saveChanges();
     setdiceState([diceState[0], diceState[1], "start-turn"]);
     setBoxState("flex");
   };
@@ -94,20 +83,11 @@ const ActiveUserManager = (props) => {
     }
   };
 
-  useEffect(() => {
-    loadLocationCard();
-  }, [diceState]);
-
   if (startBlockState) {
     return (
       <LandedOnStart
-        setActiveUserState={setActiveUserDataState}
-        setBoxState={setBoxState}
-        boxState={boxState}
+        confirm={() => setStartBoxState(false)}
         setStartBoxState={setStartBoxState}
-        activeUserState={activeUserDataState}
-        gameboardDataState={gameboardDataState}
-        setgameboardData={setgameboardData}
       />
     );
   } else if (makeAmoveState) {
@@ -119,8 +99,6 @@ const ActiveUserManager = (props) => {
       <div>
         {diceState[2] === "start-turn" && (
           <StartTurn
-            setBoxState={setBoxState}
-            boxState={boxState}
             diceState={diceState}
             setdiceState={setdiceState}
             loadLocationCard={loadLocationCard}
@@ -143,7 +121,7 @@ const ActiveUserManager = (props) => {
               setinTurnLocationState={setinTurnLocationState}
               boxState={boxState}
               setBoxState={setBoxState}
-              endTurn={props.endTurn}
+              setStartBoxState={setStartBoxState}
             />
             <button onClick={finishTurn}>end turn</button>
           </FlexBox>

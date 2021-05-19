@@ -1,20 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
-import { cardWindowState } from "../../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { cardWindowState, GamePlayDataState } from "../../atoms";
 import Avatar from "../common-components/AvatarDiv";
 
 const CornerCard = (props) => {
-  const [card, setCardWindow] = useRecoilState(cardWindowState);
+  const setCardWindow = useSetRecoilState(cardWindowState);
+  const playersDataState = useRecoilValue(GamePlayDataState);
 
   const handleHover = () => {
     setCardWindow([props.rowItems.originalImage]);
-    console.log(card);
   };
 
   return (
     <Container image={props.rowItems.displayImage} onMouseEnter={handleHover}>
-      {/* <Avatar avatar={props.rowItems.avatar} /> */}
+      {playersDataState
+        .filter((player) => player.currentLocation === props.rowItems.fieldNum)
+        .map((player) => (
+          <Avatar key={player.name} avatar={player.avatar} />
+        ))}
     </Container>
   );
 };

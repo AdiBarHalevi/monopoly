@@ -1,13 +1,19 @@
 import React from "react";
 import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
 import { takeMoneyFromActiveUser } from "../../../../UtilityFunctions";
+import { useRecoilState } from "recoil";
+import { activeUserData } from "../../../../atoms";
 
 const LandedOnTax = (props) => {
-  const { inTurnLocationState, setActiveUserState, activeUserState } = props;
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
+
+  const { inTurnLocationState } = props;
   const confirm = () => {
     takeMoneyFromActiveUser(
-      activeUserState,
-      setActiveUserState,
+      activeUserDataState,
+      setActiveUserDataState,
       inTurnLocationState
     );
     props.confirm();

@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  GamePlayDataState,
-  activeUserData,
-  gameboardData,
-  renderState,
-} from "../../../atoms";
-import ActiveUserManager from "./ActiveUserManager";
-import {
-  retirePlayer,
-  updateUserReq,
-  primaryPlayersLoad,
-  getaUserListFromApi,
-  updateLocationOnMap,
-} from "../../../axioscall";
 import styled from "styled-components";
+
+import { GamePlayDataState, activeUserData } from "../../../atoms";
+import ActiveUserManager from "./ActiveUserManager";
+import { updateUserReq, primaryPlayersLoad } from "../../../axioscall";
 
 const GameManager = () => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const [gameboardDataState, setlayoutDataState] = useRecoilState(
-    gameboardData
-  );
+  // const gameboardDataState = useRecoilValue(
+  //   gameCardsData
+  // );
 
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  // const setrenderState = useSetRecoilState(shouldLayoutChange);
 
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
@@ -32,18 +22,19 @@ const GameManager = () => {
 
   const [turnState, setTurnState] = useState(0);
 
-  const retirePlayerFunc = async () => {
-    // must have a player to retire
-    retirePlayer();
-  };
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await primaryPlayersLoad();
+      setPlayersDataState(data);
+      setActiveUserDataState(data[turnState]);
+    }
+    fetchData();
+  }, [setPlayersDataState, setActiveUserDataState, turnState]); // Or [] if effect doesn't need props or state
 
-  // saves data to the API - updates the users data on both sides
-  const savetoAPI = () => {
-    // updates the last active user state and saves the changes
-    updateUserReq(activeUserDataState);
-    // by the end of each turn the users list updates with the server and requests all the active users
-    getaUserListFromApi(setPlayersDataState);
-  };
+  // const retirePlayerFunc = async () => {
+  //   // must have a player to retire
+  //   retirePlayer();
+  // };
 
   // validates the turn, once a turn is over it passes the turn to the next player
   const turnUpdate = () => {
@@ -60,59 +51,23 @@ const GameManager = () => {
 
   // ends the turn, saves the changes
   const endGameCheck = () => {
-    const filterIt = playersDataState.filter((user) => {
-      if (user.isActive) return user;
-    });
+    const filterIt = playersDataState.filter((user) => user.isActive);
     if (filterIt.length === 1) return true;
     return false;
   };
-  const endTurn = () => {
+
+  const endTurn = async () => {
     if (!endGameCheck()) {
       turnUpdate();
-      savetoAPI();
+      await updateUserReq(activeUserDataState);
     } else {
       window.alert("you are the winner!");
     }
   };
 
-  useEffect(() => {
-    primaryPlayersLoad(setPlayersDataState, setActiveUserDataState, turnState);
-  }, []);
-
-  useEffect(() => {
-    // if(activeUserDataState) updatePlayerMovement()
-  }, [activeUserDataState]);
-
-  // useEffect(() => {
-  //   updatePlayerMovement()
-  // }, [renderGlobalState]);
-
-  const updatePlayerMovement = () => {
-    // active player's avatar
-    // field num for the API request
-    const previousLocation =
-      playersDataState[activeUserDataState.playersTurnNumber - 1]
-        .currentLocation;
-    const gameboardDatatry = { ...gameboardDataState };
-    const changeAvatarToNewLocation = {
-      ...gameboardDatatry[activeUserDataState.currentLocation],
-    };
-    changeAvatarToNewLocation[`avatar`] = activeUserDataState.avatar;
-    const updates = {
-      newLocationData: changeAvatarToNewLocation,
-      previousLocation,
-    };
-    updateLocationOnMap(activeUserDataState.currentLocation, updates);
-    setrenderState(true);
-  };
-
   return (
     <Container>
-      <ActiveUserManager
-        endTurn={endTurn}
-        saveChanges={savetoAPI}
-        updatePlayerMovement={updatePlayerMovement}
-      />
+      <ActiveUserManager endTurn={endTurn} />
     </Container>
   );
 };

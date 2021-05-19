@@ -2,16 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import GameBoard from "../game-comp/GameBoard";
 import woodenFloor from "../../img/woodenFloor.png";
-import CardDisplay from "./card-display/CardDisplay";
-import PlayerTable from "./PlayerTable";
 
 const Page2 = () => {
   return (
-    <>
-      <PageLayout background={woodenFloor}>
-        <GameBoard />
-      </PageLayout>
-    </>
+    <PageLayout background={woodenFloor}>
+      <GameBoard />
+    </PageLayout>
   );
 };
 

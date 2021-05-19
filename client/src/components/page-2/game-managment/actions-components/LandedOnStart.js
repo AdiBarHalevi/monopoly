@@ -1,5 +1,5 @@
 import React from "react";
-import { GamePlayDataState } from "../../../../atoms";
+import { activeUserData, GamePlayDataState } from "../../../../atoms";
 import { useRecoilState } from "recoil";
 import { saveToPlayersState } from "../../../../UtilityFunctions";
 import { AssetCardsContainer } from "../../../common-components/AssetCardsContainer";
@@ -9,25 +9,29 @@ const LandedOnStart = (props) => {
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
   );
-  const { activeUserState, setActiveUserState, setStartBoxState } = props;
+  const [activeUserDataState, setActiveUserDataState] = useRecoilState(
+    activeUserData
+  );
 
+  const { setStartBoxState } = props;
   const confirm = () => {
-    const updateActiveUser = { ...activeUserState };
+    const updateActiveUser = { ...activeUserDataState };
     updateActiveUser["balance"] += 200;
-    setActiveUserState(updateActiveUser);
-    saveToPlayersState(activeUserState, playersDataState, setPlayersDataState);
+    setActiveUserDataState(updateActiveUser);
+    saveToPlayersState(updateActiveUser, playersDataState, setPlayersDataState);
     setStartBoxState(false);
+    props.confirm();
   };
 
   return (
     <>
       <ActionBoxContainer boxState={props.boxState}>
         <AssetCardsContainer>
-          <div>{activeUserState.name} has landed on start</div>
-          <div>With the balance of : {activeUserState.balance}</div>
+          <div>{activeUserDataState.name} has landed on start</div>
+          <div>With the balance of : {activeUserDataState.balance}</div>
           <div>
-            {activeUserState.name}'s new balance is:
-            {activeUserState.balance + 200}
+            {activeUserDataState.name}'s new balance is:
+            {activeUserDataState.balance + 200}
           </div>
           <button onClick={confirm}>confirm</button>
         </AssetCardsContainer>

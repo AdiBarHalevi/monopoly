@@ -1,36 +1,65 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import { activeUserData, gameboardData, renderState } from "../../../atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  activeUserData,
+  gameCardsData,
+  GamePlayDataState,
+  shouldLayoutChange,
+} from "../../../atoms";
 import styled from "styled-components";
 import {
   mortgageAnAssetAPI,
   updatedGameBoardData,
   buyAhouseAPI,
 } from "../../../axioscall";
-import { processData } from "../../../UtilityFunctions";
+import { saveToPlayersState } from "../../../UtilityFunctions";
 
 const InvestOrMortgage = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(renderState);
+  const setrenderState = useSetRecoilState(shouldLayoutChange);
 
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
   );
-  const [gameboardDataState, setgameboardData] = useRecoilState(gameboardData);
+  const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
 
   const [insufficientFundsState, setInsufficientFundsState] = useState(false);
 
   const mortgageaAssets = async (asset) => {
-    const mortgageValue = gameboardDataState[asset.fieldNum][`price`] * 0.6;
+    // give money to the player and change property activity (in the players state)
+    const mortgageValue = asset.price * 0.6;
+    let AssetUpdate;
+    const updateAsset = activeUserDataState.property.map((card) => {
+      if (card.fieldNum === asset.fieldNum) {
+        const newCard = { ...card, isActive: false };
+        AssetUpdate = newCard;
+        return newCard;
+      } else return card;
+    });
+    const updateUser = {
+      ...activeUserDataState,
+      balance: activeUserDataState.balance + mortgageValue,
+      property: updateAsset,
+    };
+    setActiveUserDataState(updateUser);
+    saveToPlayersState(updateUser, playersDataState, setPlayersDataState);
+
+    const updateGameBoard = { ...gameboardDataState };
+    updateGameBoard[asset.fieldNum] = AssetUpdate;
+    setgameboardData(updateGameBoard);
+
     const userId = activeUserDataState._id;
     await mortgageAnAssetAPI(asset.fieldNum, userId, mortgageValue);
-    const newBoard = await updatedGameBoardData();
+
     setrenderState(true);
   };
 
   const buyAhouse = async (asset) => {
-    console.log(activeUserDataState.property.length);
     if (activeUserDataState.balance < asset.cardDetails.houseCost)
       return setInsufficientFundsState(true);
+
     // assets card, whats in there
     const body = {
       houseCost: asset.cardDetails.houseCost,
@@ -40,7 +69,7 @@ const InvestOrMortgage = (props) => {
       playersTurnNumber: activeUserDataState.playersTurnNumber,
     };
     await buyAhouseAPI(body);
-    const newBoard = await updatedGameBoardData();
+    await updatedGameBoardData();
     setrenderState(true);
   };
 

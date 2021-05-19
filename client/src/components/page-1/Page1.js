@@ -22,7 +22,9 @@ const WelcomPage = () => {
             <br /> click{" "}
             <Link
               to="/explain"
-              style={{ textDecoration: "none", color: "#88CCD9" }}
+              style={{ textDecoration: "none",
+               color: "#88CCD9",
+               borderBottom:"1px solid" }}
             >
               here
             </Link>{" "}
@@ -30,7 +32,10 @@ const WelcomPage = () => {
             <br /> or{" "}
             <Link
               to="/Register"
-              style={{ textDecoration: "none", color: "#88CCD9" }}
+              style={{ textDecoration: "none",
+               color: "#88CCD9",
+               borderBottom:"1px solid",
+              }}
             >
               Register
             </Link>{" "}
