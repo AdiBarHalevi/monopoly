@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ActionBoxContainer } from "../../common-components/ActionBoxContainer";
 import { AssetCardsContainer } from "../../common-components/AssetCardsContainer";
-import SellAssets from "./actions-components/landed-on-asset/SellAssets";
 import InvestOrMortgage from "./InvestOrMortgage";
 
 const MakeAmoveMenu = (props) => {

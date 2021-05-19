@@ -19,11 +19,11 @@ export const getGameBoard = async (processData) => {
 };
 
 export const updatedGameBoardData = async () => {
-  // try {
-  //   return await axiosInstance.get(`/gameAPI/gameplay`);
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    return await axiosInstance.get(`/gameAPI/gameplay`);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const primaryPlayersLoad = async () => {
@@ -135,13 +135,13 @@ export const updateLocationOnMap = async (
   // }
 };
 
-export const deleteGame = async () => {
-  // try {
-  //   const res = await axiosInstance.delete(`gameAPI/deleteGame`);
-  //   return res;
-  // } catch (e) {
-  //   console.log(e);
-  // }
+export const ResetGameAPI = async () => {
+  try {
+    await axiosInstance.delete(`gameAPI/deleteGame`);
+    await axiosInstance.post(`/gameAPI/gameCards`)
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const buyAhouseAPI = async (inputData) => {

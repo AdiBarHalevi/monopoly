@@ -3,7 +3,7 @@ import { updateUserReq, retirePlayer } from "../../../../../axioscall";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../../../atoms";
-import { saveToPlayersState } from "../../../../../UtilityFunctions";
+// import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const PayTheRent = (props) => {
   const { inTurnLocationState } = props;
@@ -78,6 +78,8 @@ const PayTheRent = (props) => {
     inTurnLocationState.cardDetails.with2RR,
     inTurnLocationState.cardDetails.with3RR,
     inTurnLocationState.cardDetails.with4RR,
+    inTurnLocationState.property
+    
   ]);
 
   const payTheRent = () => {
@@ -111,14 +113,14 @@ const PayTheRent = (props) => {
   };
 
   const declareBankrupcy = () => {
-    // retirePlayer(activeUserDataState._id);
-    // const details = {
-    //   payTo: inTurnLocationState.property[0].ownedby,
-    //   amount: activeUserDataState.balance,
-    // };
+    retirePlayer(activeUserDataState._id);
+    const details = {
+      payTo: inTurnLocationState.property[0].ownedby,
+      amount: activeUserDataState.balance,
+    };
     // getPaid(details);
-    // setbankruptState(false);
-    // props.confirm();
+    setbankruptState(false);
+    props.confirm();
   };
 
   useEffect(() => {

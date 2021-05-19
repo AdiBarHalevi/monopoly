@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   activeUserData,
   gameCardsData,
@@ -12,12 +12,10 @@ import {
   updatedGameBoardData,
   buyAhouseAPI,
 } from "../../../axioscall";
-import { processData,saveToPlayersState } from "../../../UtilityFunctions";
+import {saveToPlayersState } from "../../../UtilityFunctions";
 
 const InvestOrMortgage = (props) => {
-  const [renderGlobalState, setrenderState] = useRecoilState(
-    shouldLayoutChange
-  );
+  const setrenderState = useSetRecoilState(shouldLayoutChange);
   
   const [playersDataState, setPlayersDataState] = useRecoilState(
     GamePlayDataState
@@ -36,7 +34,7 @@ const InvestOrMortgage = (props) => {
     let AssetUpdate 
     const updateAsset = activeUserDataState.property.map(card=>{
       if(card.fieldNum === asset.fieldNum) {
-        const newCard = {... card , isActive : false}
+        const newCard = {... card,isActive:false}
         AssetUpdate = newCard
         return (newCard)}
         else return card
@@ -70,7 +68,7 @@ const InvestOrMortgage = (props) => {
       playersTurnNumber: activeUserDataState.playersTurnNumber,
     };
     await buyAhouseAPI(body);
-    const newBoard = await updatedGameBoardData();
+    await updatedGameBoardData();
     setrenderState(true);
   };
 

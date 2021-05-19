@@ -27,7 +27,7 @@ function App() {
                   to="/play"
                   style={{ textDecoration: "none", color: "#6d8d8a" }}
                 >
-                  Play
+                   Play
                 </Link>
               </Li>
             </Ul>

@@ -5,11 +5,9 @@ import woodenFloor from "../../img/woodenFloor.png";
 
 const Page2 = () => {
   return (
-    <>
-      <PageLayout background={woodenFloor}>
+     <PageLayout background={woodenFloor}>
         <GameBoard />
       </PageLayout>
-    </>
   );
 };
 

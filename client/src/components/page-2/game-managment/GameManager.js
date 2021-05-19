@@ -65,39 +65,11 @@ const GameManager = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // if(activeUserDataState) updatePlayerMovement()
-  // }, [activeUserDataState]);
-
-  // useEffect(() => {
-  //   updatePlayerMovement()
-  // }, [renderGlobalState]);
-
-  // const updatePlayerMovement = () => {
-  //   // active player's avatar
-  //   // field num for the API request
-  //   const previousLocation =
-  //     playersDataState[activeUserDataState.playersTurnNumber - 1]
-  //       .currentLocation;
-  //   const gameboardDatatry = { ...gameboardDataState };
-  //   const changeAvatarToNewLocation = {
-  //     ...gameboardDatatry[activeUserDataState.currentLocation],
-  //   };
-  //   changeAvatarToNewLocation[`avatar`] = activeUserDataState.avatar;
-  //   const updates = {
-  //     newLocationData: changeAvatarToNewLocation,
-  //     previousLocation,
-  //   };
-  //   updateLocationOnMap(activeUserDataState.currentLocation, updates);
-  //   setrenderState(true);
-  // };
 
   return (
     <Container>
-      {/* <button onClick={()=>{console.log(activeUserDataState)}}>CHECK</button> */}
       <ActiveUserManager
         endTurn={endTurn}
-        // updatePlayerMovement={updatePlayerMovement}
       />
     </Container>
   );

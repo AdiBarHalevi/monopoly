@@ -23,18 +23,14 @@ const Register = () => {
   const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
 
   const saveUser = (userName) => {
+    const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
     if (registrated.length === 4) return setRegistrationErorState(true);
+    postUser(userName, registrated.length + 1, avatars[registrated.length])
     setregistrated([...registrated, userName]);
+    
   };
 
   const shuffle = (array) => array.sort(() => Math.random() - 0.5);
-
-  const startGame = () => {
-    const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
-    shuffle(registrated).forEach((user, index) => {
-      postUser(user, index + 1, avatars[index]);
-    });
-  };
 
   if (registrationErorState) {
     return (
@@ -70,7 +66,7 @@ const Register = () => {
             </Button>
           </>
         )}
-        <Button onClick={startGame} style={{ marginLeft: "2rem" }}>
+        <Button style={{ marginLeft: "2rem" }}>
           {" "}
           <Link to="/play" style={{ textDecoration: "none", color: `#345167` }}>
             startGame{" "}
