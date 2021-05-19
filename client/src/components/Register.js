@@ -66,6 +66,7 @@ const Register = () => {
                   display: "block",
                   width:"22rem"
                 }}
+                placeholder="regiter a new player"
               ></input>
   
               <br></br>
