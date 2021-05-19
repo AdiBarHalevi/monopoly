@@ -65,12 +65,9 @@ const GameManager = () => {
     }
   };
 
-
   return (
     <Container>
-      <ActiveUserManager
-        endTurn={endTurn}
-      />
+      <ActiveUserManager endTurn={endTurn} />
     </Container>
   );
 };

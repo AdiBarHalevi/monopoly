@@ -41,9 +41,9 @@ export const updateUserReq = async (activeUserDataState) => {
   }
 };
 
-export const getaUserListFromApi = async (setPlayersDataState) => {
-  // const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
-  // setPlayersDataState(res.data);
+export const getaUserListFromApi = async () => {
+  const res = await axiosInstance.get(`/gameAPI/users/getAll/1`);
+  return res 
 };
 
 export const getPaid = async (details) => {
@@ -138,7 +138,7 @@ export const updateLocationOnMap = async (
 export const ResetGameAPI = async () => {
   try {
     await axiosInstance.delete(`gameAPI/deleteGame`);
-    await axiosInstance.post(`/gameAPI/gameCards`)
+    await axiosInstance.post(`/gameAPI/gameCards`);
   } catch (e) {
     console.log(e);
   }

@@ -17,14 +17,15 @@ const Auction = (props) => {
   // the number of the bidding player
   const [currentBidderNumber, setCurrentBidderNumber] = useState(0);
   // global var to import players list
-  const [playersDataState, setPlayersDataState] =
-    useRecoilState(GamePlayDataState);
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
   // inner state for the Auction
   const [auctionPlayersState, setAuctionActivePlayersState] = useState([
     ...playersDataState,
   ]);
 
-  const  setrenderState =useSetRecoilState(shouldLayoutChange);
+  const setrenderState = useSetRecoilState(shouldLayoutChange);
 
   const bidRef = useRef(0);
 
@@ -34,17 +35,19 @@ const Auction = (props) => {
       auctionPlayersState[0].playersTurnNumber
     );
 
-    await takeMoneyfromUser(auctionPlayersState[0]._id,bidPrice);
+    await takeMoneyfromUser(auctionPlayersState[0]._id, bidPrice);
 
-    const newPlayersStateAfterPurchase =playersDataState.map(player => {
-      if(player.playersTurnNumber === auctionPlayersState[0].playersTurnNumber) {
-        const newplayer =  {...player , balance:player.balance-bidPrice}
-        return (newplayer)
+    const newPlayersStateAfterPurchase = playersDataState.map((player) => {
+      if (
+        player.playersTurnNumber === auctionPlayersState[0].playersTurnNumber
+      ) {
+        const newplayer = { ...player, balance: player.balance - bidPrice };
+        return newplayer;
       }
-      return player
-    })
+      return player;
+    });
 
-    setPlayersDataState(newPlayersStateAfterPurchase)
+    setPlayersDataState(newPlayersStateAfterPurchase);
 
     props.confirm();
     setrenderState(true);
@@ -53,22 +56,24 @@ const Auction = (props) => {
   const changebidingPlayer = () => {
     let currentPlayerIndex = currentBidderNumber;
     // saves the index of the player on the remaining of the auction table
-    if(currentPlayerIndex === auctionPlayersState.length-1){ currentPlayerIndex=0}
-    else currentPlayerIndex++
-    setCurrentBidderNumber(currentPlayerIndex)
+    if (currentPlayerIndex === auctionPlayersState.length - 1) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex++;
+    setCurrentBidderNumber(currentPlayerIndex);
   };
 
   const changebidingPlayerAfterRetirement = () => {
-    // delete current user 
+    // delete current user
     let currentPlayerIndex = currentBidderNumber;
     const newAuctionPlayerList = [...auctionPlayersState];
-    newAuctionPlayerList.splice(currentPlayerIndex,1)
-    // set the new Active players list 
-    setAuctionActivePlayersState(newAuctionPlayerList)
+    newAuctionPlayerList.splice(currentPlayerIndex, 1);
+    // set the new Active players list
+    setAuctionActivePlayersState(newAuctionPlayerList);
     // update to new Active user
-    if(currentPlayerIndex === newAuctionPlayerList.length-1){ currentPlayerIndex=0}
-    else currentPlayerIndex++
-    setCurrentBidderNumber(currentPlayerIndex)
+    if (currentPlayerIndex === newAuctionPlayerList.length - 1) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex++;
+    setCurrentBidderNumber(currentPlayerIndex);
 
     return newAuctionPlayerList;
   };
@@ -82,9 +87,7 @@ const Auction = (props) => {
   };
 
   const validateBid = (userbid) => {
-    if (
-      userbid > auctionPlayersState[currentBidderNumber][`balance`]
-    ) {
+    if (userbid > auctionPlayersState[currentBidderNumber][`balance`]) {
       setinvalidBid("your bid is over you balance,sell assets or bid lower");
       return false;
     } else if (userbid <= bidPrice) {
@@ -147,8 +150,8 @@ const Auction = (props) => {
           </TableContainer>
           {auctionPlayersState && invalidBid.length === 0 && (
             <div>
-              {auctionPlayersState[currentBidderNumber][`name`]},
-              this is your turn to bid <br />
+              {auctionPlayersState[currentBidderNumber][`name`]}, this is your
+              turn to bid <br />
               your current balance is: $
               {auctionPlayersState[currentBidderNumber][`balance`]}
               <br />
@@ -173,8 +176,8 @@ const Auction = (props) => {
     else if (bidPhase === "endbid")
       return (
         <Container>
-          {auctionPlayersState[currentBidderNumber][`name`]} has
-          placed a bid of ${bidPrice} <br />
+          {auctionPlayersState[currentBidderNumber][`name`]} has placed a bid of
+          ${bidPrice} <br />
           <button onClick={endBidTurn}>Confirm</button>
         </Container>
       );

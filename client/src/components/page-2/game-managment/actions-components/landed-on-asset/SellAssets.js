@@ -1,13 +1,21 @@
 import React from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { activeUserData, gameCardsData, GamePlayDataState, shouldLayoutChange } from "../../../../../atoms";
+import {
+  activeUserData,
+  gameCardsData,
+  GamePlayDataState,
+  shouldLayoutChange,
+} from "../../../../../atoms";
 import styled from "styled-components";
 import {
   mortgageAnAssetAPI,
   updatedGameBoardData,
   retirePlayer,
 } from "../../../../../axioscall";
-import { processData,saveToPlayersState } from "../../../../../UtilityFunctions";
+import {
+  processData,
+  saveToPlayersState,
+} from "../../../../../UtilityFunctions";
 
 const SellAsset = (props) => {
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
@@ -15,30 +23,32 @@ const SellAsset = (props) => {
   );
   const setShouldLayoutUpdateState = useSetRecoilState(shouldLayoutChange);
   const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
-  const [playersDataState, setPlayersDataState] = useRecoilState(GamePlayDataState); 
-
+  const [playersDataState, setPlayersDataState] = useRecoilState(
+    GamePlayDataState
+  );
 
   const mortgageaAssets = async (asset) => {
-
     // give money to the player and change property activity (in the players state)
-    const mortgageValue = asset.price*0.6
-    let AssetUpdate 
-    const updateAsset = activeUserDataState.property.map(card=>{
-      if(card.fieldNum === asset.fieldNum) {
-        const newCard = {... card,isActive:false}
-        AssetUpdate = newCard
-        return (newCard)}
-        else return card
-      })
-      const updateUser =  {...activeUserDataState,
-         balance: activeUserDataState.balance + mortgageValue,
-         property:updateAsset}
-      setActiveUserDataState(updateUser)
-      saveToPlayersState(updateUser, playersDataState, setPlayersDataState);
+    const mortgageValue = asset.price * 0.6;
+    let AssetUpdate;
+    const updateAsset = activeUserDataState.property.map((card) => {
+      if (card.fieldNum === asset.fieldNum) {
+        const newCard = { ...card, isActive: false };
+        AssetUpdate = newCard;
+        return newCard;
+      } else return card;
+    });
+    const updateUser = {
+      ...activeUserDataState,
+      balance: activeUserDataState.balance + mortgageValue,
+      property: updateAsset,
+    };
+    setActiveUserDataState(updateUser);
+    saveToPlayersState(updateUser, playersDataState, setPlayersDataState);
 
-     const updateGameBoard = {...gameboardDataState} 
-     updateGameBoard[asset.fieldNum] = AssetUpdate
-     setgameboardData(updateGameBoard)
+    const updateGameBoard = { ...gameboardDataState };
+    updateGameBoard[asset.fieldNum] = AssetUpdate;
+    setgameboardData(updateGameBoard);
 
     const userId = activeUserDataState._id;
     await mortgageAnAssetAPI(asset.fieldNum, userId, mortgageValue);
@@ -47,7 +57,6 @@ const SellAsset = (props) => {
 
     setShouldLayoutUpdateState(true);
   };
-
 
   const bankrupcy = () => {
     retirePlayer(activeUserDataState._id);

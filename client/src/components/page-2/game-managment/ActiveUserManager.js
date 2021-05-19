@@ -52,7 +52,6 @@ const ActiveUserManager = (props) => {
     } else {
       update[`currentLocation`] = newLocation - 40;
       setStartBoxState(true);
-      
     }
 
     setActiveUserDataState(update);
@@ -85,10 +84,13 @@ const ActiveUserManager = (props) => {
   };
 
   if (startBlockState) {
-    return <LandedOnStart confirm={()=> setStartBoxState(false)} setStartBoxState={setStartBoxState} />;
-  } 
-  else
-   if (makeAmoveState) {
+    return (
+      <LandedOnStart
+        confirm={() => setStartBoxState(false)}
+        setStartBoxState={setStartBoxState}
+      />
+    );
+  } else if (makeAmoveState) {
     return (
       <MakeAmoveMenu setMakeAmoveState={setMakeAmoveState}></MakeAmoveMenu>
     );

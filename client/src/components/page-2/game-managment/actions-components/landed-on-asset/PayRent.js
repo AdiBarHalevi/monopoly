@@ -20,9 +20,10 @@ const PayTheRent = (props) => {
 
   const findAssetOwner = useCallback(() => {
     try {
-      const owner = playersDataState.find((player) =>
-        player.playersTurnNumber ===parseInt(inTurnLocationState.property[0].ownedby)
-
+      const owner = playersDataState.find(
+        (player) =>
+          player.playersTurnNumber ===
+          parseInt(inTurnLocationState.property[0].ownedby)
       );
       setOwnerState(owner);
     } catch (e) {
@@ -78,8 +79,7 @@ const PayTheRent = (props) => {
     inTurnLocationState.cardDetails.with2RR,
     inTurnLocationState.cardDetails.with3RR,
     inTurnLocationState.cardDetails.with4RR,
-    inTurnLocationState.property
-    
+    inTurnLocationState.property,
   ]);
 
   const payTheRent = () => {
@@ -91,23 +91,28 @@ const PayTheRent = (props) => {
     }
     // the case wich there are no houses/hotels yet
     if (!inTurnLocationState.property[3]) {
+      const ownerNum = inTurnLocationState.property[0].ownedby;
 
-      const ownerNum = inTurnLocationState.property[0].ownedby
-
-      const newPlayersStateAfterRent = playersDataState.map(player =>
-         {if(player.playersTurnNumber === Number(ownerNum))
-      return {...player, balance: player.balance + inTurnLocationState.cardDetails.rent}
-      if(player.playersTurnNumber === activeUserDataState.playersTurnNumber)
-      return {...player, balance: player.balance - inTurnLocationState.cardDetails.rent}
-      else {
-        return player
-      }
-      })
+      const newPlayersStateAfterRent = playersDataState.map((player) => {
+        if (player.playersTurnNumber === Number(ownerNum))
+          return {
+            ...player,
+            balance: player.balance + inTurnLocationState.cardDetails.rent,
+          };
+        if (player.playersTurnNumber === activeUserDataState.playersTurnNumber)
+          return {
+            ...player,
+            balance: player.balance - inTurnLocationState.cardDetails.rent,
+          };
+        else {
+          return player;
+        }
+      });
 
       setActiveUserDataState(newPlayersStateAfterRent[ownerNum]);
-      setPlayersDataState(newPlayersStateAfterRent)
-      updateUserReq(newPlayersStateAfterRent[ownerNum])
-      
+      setPlayersDataState(newPlayersStateAfterRent);
+      updateUserReq(newPlayersStateAfterRent[ownerNum]);
+
       props.confirm();
     }
   };

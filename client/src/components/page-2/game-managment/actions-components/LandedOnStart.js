@@ -20,9 +20,8 @@ const LandedOnStart = (props) => {
     setActiveUserDataState(updateActiveUser);
     saveToPlayersState(updateActiveUser, playersDataState, setPlayersDataState);
     setStartBoxState(false);
-    props.confirm()
+    props.confirm();
   };
-
 
   return (
     <>

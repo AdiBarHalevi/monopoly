@@ -23,9 +23,7 @@ const ActionBox = (props) => {
     setBoxState("none");
   };
 
-
-  
-  if(inTurnLocationState)
+  if (inTurnLocationState)
     switch (inTurnLocationState.typeOfCard) {
       case "asset":
         return (
@@ -43,16 +41,16 @@ const ActionBox = (props) => {
             <LandedOnChance confirm={confirm} />
           </ActionBoxContainer>
         );
-  
+
       case "communityChest":
         console.log(props.inTurnLocationState);
-  
+
         return (
           <ActionBoxContainer boxState={boxState}>
             <LandedOnCommunityChest confirm={confirm} />
           </ActionBoxContainer>
         );
-  
+
       case "incomeTax" || "luxuryTax":
         return (
           <ActionBoxContainer boxState={boxState}>
@@ -62,21 +60,21 @@ const ActionBox = (props) => {
             />
           </ActionBoxContainer>
         );
-  
+
       case "goTojail":
         return (
           <ActionBoxContainer boxState={boxState[0]}>
             <GoToJail confirm={confirm} />
           </ActionBoxContainer>
         );
-  
-      case "jail"||"parking":
+
+      case "jail" || "parking":
         return (
           <ActionBoxContainer boxState={boxState}>
             <VisitJailOrParking
               confirm={confirm}
               inTurnLocationState={inTurnLocationState}
-              setBoxState = {setBoxState}
+              setBoxState={setBoxState}
             />
           </ActionBoxContainer>
         );
@@ -91,12 +89,11 @@ const ActionBox = (props) => {
             />
           </ActionBoxContainer>
         );
-  
+
       default:
         return <></>;
     }
-    else return <></>
-  
+  else return <></>;
 };
 
 export default ActionBox;
