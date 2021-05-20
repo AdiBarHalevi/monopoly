@@ -3,6 +3,8 @@ import { updateUserReq, retirePlayer } from "../../../../../axioscall";
 import { AssetCardsContainer } from "../../../../common-components/AssetCardsContainer";
 import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../../../atoms";
+import Bankrupcyimg from "../../../../../img/bankrupcy.gif"
+import {InsufficientFundsContainer} from "../../../../common-components/GifsContainer"
 // import { saveToPlayersState } from "../../../../../UtilityFunctions";
 
 const PayTheRent = (props) => {
@@ -151,6 +153,9 @@ const PayTheRent = (props) => {
 
       {bankruptState && (
         <div>
+          <InsufficientFundsContainer img={Bankrupcyimg}>
+
+          </InsufficientFundsContainer>
           <div>
             you do not have the funds to pay rent to{" "}
             {ownerState && ownerState.name}
@@ -163,3 +168,4 @@ const PayTheRent = (props) => {
 };
 
 export default PayTheRent;
+

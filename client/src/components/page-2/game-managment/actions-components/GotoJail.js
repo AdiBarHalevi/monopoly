@@ -25,9 +25,3 @@ const GoToJail = (props) => {
 
 export default GoToJail;
 
-// activeUserState={activeUserState}
-// setActiveUserState={setActiveUserState}
-// confirm={confirm}
-// inTurnLocationState={inTurnLocationState}
-// setinTurnLocationState={setinTurnLocationState}
-// boxState={boxState}

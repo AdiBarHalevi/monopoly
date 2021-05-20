@@ -72,14 +72,14 @@ export const postUser = async (user, turnNum, avatar) => {
 };
 
 export const retirePlayer = async (playerID) => {
-  // try {
-  //   const res = await axiosInstance.put(
-  //     `/gameAPI/users/retirePlayer/${playerID}`
-  //   );
-  //   console.log(res);
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    const res = await axiosInstance.put(
+      `/gameAPI/users/retirePlayer/${playerID}`
+    );
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
