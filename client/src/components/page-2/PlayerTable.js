@@ -50,8 +50,7 @@ const GameStatus = styled.table`
 
 const Td = styled.td`
   background: #345167;
-  color: #6d8d8a;
-  border: 1px solid;
+  color: white;
   @media (max-width: 768px) {
     height: 30px;
     width: 15px;

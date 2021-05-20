@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FlexBox } from "../common-components/FlexBox";
 import { getGameBoard } from "../../axioscall";
 import { gameCardsData, shouldLayoutChange } from "../../atoms";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState,useRecoilState } from "recoil";
 import styled from "styled-components";
 
 // assetes Column/Row Parent components
@@ -18,7 +18,7 @@ import CornerCard from "./CornerCard";
 const GameBoardLayout = () => {
   // boards layout's state
   const setGameCardsDataState = useSetRecoilState(gameCardsData);
-  const setShouldLayoutUpdateState = useSetRecoilState(shouldLayoutChange);
+  const [shouldLayoutUpdateState,setShouldLayoutUpdateState] = useRecoilState(shouldLayoutChange);
   const [layoutDataState, setlayoutDataState] = useState([]);
 
   // process the data from the API call
@@ -57,7 +57,7 @@ const GameBoardLayout = () => {
   useEffect(() => {
     getGameBoard(processData);
     setShouldLayoutUpdateState(false);
-  }, [setShouldLayoutUpdateState, processData]);
+  }, [setShouldLayoutUpdateState, processData,shouldLayoutUpdateState]);
 
   return (
     <BoardContainer>

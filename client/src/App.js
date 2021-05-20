@@ -17,7 +17,7 @@ function App() {
               <Li>
                 <Link
                   to="/"
-                  style={{ textDecoration: "none", color: "#6d8d8a" }}
+                  style={{ textDecoration: "none", color: "#f0fffe" }}
                 >
                   Home
                 </Link>
@@ -34,7 +34,7 @@ function App() {
             <About>
               <Link
                 to="/explain"
-                style={{ textDecoration: "none", color: "#6d8d8a" }}
+                style={{ textDecoration: "none", color: "#f0fffe" }}
               >
                 About the APP
               </Link>

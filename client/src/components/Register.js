@@ -81,7 +81,7 @@ const Register = () => {
           </Button>
           <Button style={{ marginLeft: "2rem" }}>
             {" "}
-            <Link to="/play" style={{ textDecoration: "none", color: `#345167` }}>
+            <Link to="/play" style={{ textDecoration: "none", color: `#f0fffe` }}>
               startGame{" "}
             </Link>
           </Button>

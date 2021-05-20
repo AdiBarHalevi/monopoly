@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const WelcomePage = styled.div`
-  color: #6d8d8a;
+  // color: #6d8d8a;
+  color: #f0fffe;
   display: flex;
   align-items: center;
   flex-direction: column;

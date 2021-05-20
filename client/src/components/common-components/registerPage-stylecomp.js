@@ -13,7 +13,7 @@ export const PlayerTable = styled.table`
 
 export const RegisterPage = styled.div`
   background-color: #345167;
-  color: #6d8d8a;
+  color: #f0fffe;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -33,7 +33,6 @@ export const Tr = styled.tr`
 `;
 
 export const Td = styled.td`
-  // border: 1px solid white;
   height: 6rem;
   width: 8rem;
 `;
@@ -46,7 +45,7 @@ export const Button = styled.button`
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #345167;
+  color: #f0fffe;
   background-color: #6d8d8a;
   border: none;
   border-radius: 15px;

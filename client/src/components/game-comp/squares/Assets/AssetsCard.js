@@ -59,6 +59,7 @@ const AssetCard = ({
           image={displayImage}
           backgroundColor="white"
         >
+        <OwnerAvatar avatar={playersDataState[data.rowItems.property[0].ownedby - 1].avatar } />
           {playerAvatar}
         </Container2>
       );
@@ -73,6 +74,7 @@ const AssetCard = ({
           ownerAvatar=""
         >
           {playerAvatar}{" "}
+          
         </Container2>
       );
   }
@@ -99,7 +101,7 @@ const AssetCard = ({
           }
           backgroundColor="white"
         >
-          <Avatar
+          <OwnerAvatar
             avatar={
               playersDataState[data.rowItems.property[0].ownedby - 1].avatar
             }
@@ -198,3 +200,12 @@ const Container2 = styled.div`
     height: 1.5rem;
   }
 `;
+
+const OwnerAvatar = styled.div`
+height: 20px;
+width: 21px;
+background-image: url(${(props) => props.avatar});
+background-color: white;
+background-position: center;
+background-size: cover;
+`
