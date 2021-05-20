@@ -170,6 +170,11 @@ const Header = styled.div`
   width: ${(props) => props.headerWidth};
   height: ${(props) => props.headerheight};
   position: relative;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 `;
 
 const Container2 = styled.div`
@@ -183,6 +188,8 @@ const Container2 = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  overflow: hidden;
+  
 
   @media (max-height: 799px) and(max-width:1200) {
     height: 2.5rem;
@@ -208,4 +215,5 @@ background-image: url(${(props) => props.avatar});
 background-color: white;
 background-position: center;
 background-size: cover;
+
 `

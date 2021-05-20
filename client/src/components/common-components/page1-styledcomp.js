@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const WelcomePage = styled.div`
-  // color: #6d8d8a;
   color: #f0fffe;
   display: flex;
   align-items: center;
@@ -22,6 +21,7 @@ export const WelcomePage = styled.div`
     background-position: center;
     background-size: cover;
   }
+
 `;
 
 export const WelcomeSign = styled.div`
@@ -30,11 +30,20 @@ export const WelcomeSign = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 100%;
+    text-align:center;
+  }
 `;
 export const Paragraph = styled.p`
   width: 29rem;
   text-align: center;
   z-index: 1;
+  @media (max-width: 500px) {
+    width: 60%;
+    text-align:center;
+  }
 `;
 
 export const MonopolyLogo = styled.div`
@@ -45,3 +54,4 @@ export const MonopolyLogo = styled.div`
   background-size: cover;
   display: inline-block;
 `;
+

@@ -12,6 +12,7 @@ import {
   PlayerTable,
   RegisterPage,
   Avatar,
+  Container
 } from "./common-components/registerPage-stylecomp";
 import { Link } from "react-router-dom";
 
@@ -54,7 +55,7 @@ const Register = () => {
     return (
       <RegisterPage>
         <div>Register players for the game</div>
-        <div>
+        <Container>
           {registrated.length < 4 && (
             <>
               <input
@@ -64,7 +65,8 @@ const Register = () => {
                   background: "white",
                   color: `#345167`,
                   display: "block",
-                  width:"22rem"
+                  width:"100%",
+                  marginRight: "1rem"
                 }}
                 placeholder="regiter a new player"
               ></input>
@@ -76,16 +78,16 @@ const Register = () => {
               </Button>
             </>
           )}
-          <Button style={{ marginLeft: "2rem" }} onClick={savedGamecheck}> 
-            Load my previous game 
+          <Button onClick={savedGamecheck}> 
+            Load  
           </Button>
-          <Button style={{ marginLeft: "2rem" }}>
+          <Button>
             {" "}
             <Link to="/play" style={{ textDecoration: "none", color: `#f0fffe` }}>
               startGame{" "}
             </Link>
           </Button>
-        </div>
+        </Container>
         {!isGameSaveAvailable&& 
           <>
             <p style={{ width: "80%",textAlign:"center",color:"red"}}> sorry your game is unavialable, please register a new game</p>

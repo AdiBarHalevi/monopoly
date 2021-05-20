@@ -150,6 +150,14 @@ const ConnectionLine = styled.div`
     right: 7.5rem;
     border-bottom: 1px solid black;
   }
+  
+  @media (max-width: 500px) {
+    &:before {
+    display:none;
+  }
+    &:after {
+    display:none;
+  }
 `;
 
 const FrontEndChart = styled.div`
@@ -171,3 +179,4 @@ const Td = styled.td`
   border-bottom: 1px solid;
   text-align: center;
 `;
+

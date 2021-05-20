@@ -50,4 +50,25 @@ export const Button = styled.button`
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px #999;
+  margin-left:1rem;
+  width:12rem;
+  @media (max-width: 500px) {
+    margin:0;
+
+  }
+  
 `;
+
+export const Container = styled.div`
+  width:80%;
+  margin-bottom:2rem;
+  display:flex;
+  justify-content:space-around;
+  height:14rem;
+  align-items:center;
+  @media (max-width: 500px) {
+    flex-direction:column;
+
+  }
+`
+

@@ -21,25 +21,15 @@ const WelcomPage = () => {
             this App is a mock of the game Monopoly.
             <br /> click{" "}
             <Link
-              to="/explain"
-              style={{ textDecoration: "none",
-               color: "#88CCD9",
-               borderBottom:"1px solid" }}
-            >
-              here
-            </Link>{" "}
-            to learn more about the building process
-            <br /> or{" "}
-            <Link
               to="/Register"
               style={{ textDecoration: "none",
                color: "#88CCD9",
                borderBottom:"1px solid",
               }}
             >
-              Register
+              Here
             </Link>{" "}
-            a new game
+             to register a new game
           </Paragraph>
         </WelcomeSign>
       </>

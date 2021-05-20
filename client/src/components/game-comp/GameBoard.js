@@ -26,11 +26,11 @@ const GameBoard = () => {
     <PageContainer>
       <GameBoardLayout />
       <Container>
-        <FlexBox flexDirection="column" alignItems="center">
-          <label>reset the game </label>
+        <ResetButtonDiv>
+          <ResetLabel>reset the game </ResetLabel>
 
           <ResetButton reset={ResetButtonIMG} onClick={resetGame}></ResetButton>
-        </FlexBox>
+        </ResetButtonDiv>
         <CardDisplay />
         <PlayerTable />
         <GameManager />
@@ -69,4 +69,29 @@ const ResetButton = styled.button`
   width: 3rem;
   border-radius: 3rem;
   cursor: pointer;
+  @media (max-width: 500px) {
+    height: 2rem;
+    width: 2rem;
+  }
+
 `;
+
+const ResetButtonDiv = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    @media (max-width: 500px) {
+      position:absolute;
+      top:0.5rem;
+      right:52%;
+      flex-direction: row;
+    }
+
+`
+const ResetLabel = styled.label`
+    @media (max-width: 500px) {
+      display:none;
+
+    }
+
+`

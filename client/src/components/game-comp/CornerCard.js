@@ -34,6 +34,7 @@ const Container = styled.div`
     background-size: cover;
     display: inline-block;
     border: 1px solid black;
+    overflow: hidden;
 
     @media (max-height: 799px) and(max-width:1200) {
       height: 2.5rem;
