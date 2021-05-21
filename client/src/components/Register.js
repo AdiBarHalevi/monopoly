@@ -22,12 +22,14 @@ const Register = () => {
   const [isGameSaveAvailable, setIsGameSaveAvailable] = useState(true);
   const [isGameIsNew, setIsGameIsNew] = useState(false);
   const [isGameSet, setIsGameIsSet] = useState(false);
+  const [isUserNameValid , setIsUserNameValid] = useState(true)
   const history = useHistory();
 
   const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
 
   const saveUser = (userName) => {
     const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
+    if (registrated.indexOf(userName) >= 0) return setIsUserNameValid(false)
     if (registrated.length >= 1) setIsGameIsSet(true);
     postUser(userName, registrated.length + 1, avatars[registrated.length]);
     setregistrated([...registrated, userName]);
@@ -64,9 +66,22 @@ const Register = () => {
             ></input>
 
             <br></br>
-            <Button onClick={() => saveUser(textInput.current.value)}>
-              Submit
-            </Button>
+            {!isUserNameValid&&
+              <div> 
+                sorry this name is already taken
+                  <Button onClick={() => setIsUserNameValid(true)}>
+                  Ok
+                </Button>
+                
+              </div>
+            
+            }
+            {
+              isUserNameValid&&
+              <Button onClick={() => saveUser(textInput.current.value)}>
+                Submit
+              </Button>
+            }
           </>
         )}
         {!isGameIsNew && (
