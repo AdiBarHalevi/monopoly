@@ -51,4 +51,5 @@ roll dice- generates random numbers saves it to the state and updates the Active
 
 Flow chart for the React App:
 
-![React Chart](https://user-images.githubusercontent.com/77383329/119080193-4c6f5e00-ba02-11eb-8e7d-45396da04b83.png)
+![monopoly game chart-React-app page2 (1)](https://user-images.githubusercontent.com/77383329/119080591-05ce3380-ba03-11eb-9d54-bf8f00ebb281.png)
+
