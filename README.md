@@ -4,7 +4,6 @@ product planning:
 this is a full stack project, with production (on Heroku).
 during this project i astblished an active server with Node.js and used
 MongoDB as a data base.
-
     the Website has 4 pages in total:
     1- Wellcome page, Welcomes the user and lets the user decide if he/she wants to
        initate a game or to get an explaination about the website.
@@ -37,8 +36,19 @@ the game picks a user and sets him to the active user global state.
 
 roll dice- generates random numbers saves it to the state and updates the Active user
   State to a new location.
+
   ** make a move- allows the user to make a move such as mortgage an asset or buy a house. \*** Auction - genereate a players rotation, during the Auction there is an active user that
   is saved localy, on each turn the player can bid or retire from the Auction.
   once the player retired from the Auction he is removed from the Auction state component.
   once there is one user left on the Auction player list, the Auction is over the
   winner of the Auction get the Asset, there is an API call to save the player's new Asset as well as it is saved Localy and re renders the board with the new Asset.
+  
+  
+  Flow chart for the full stack project:
+  
+![full stack chart](https://user-images.githubusercontent.com/77383329/119080149-35307080-ba02-11eb-8bbf-07d288c61437.png)
+
+
+Flow chart for the React App:
+
+![React Chart](https://user-images.githubusercontent.com/77383329/119080193-4c6f5e00-ba02-11eb-8e7d-45396da04b83.png)
