@@ -10,16 +10,38 @@ export const PlayerTable = styled.table`
   // border: 1px solid black;
   text-align: center;
 `;
-
 export const RegisterPage = styled.div`
-  background-color: #345167;
   color: #f0fffe;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
-  height: 90vh;
+  justify-content: center;
+  background-color: #345167;
+  height: 92.5vh;
+  position: relative;
+  &:before {
+    content: "";
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: url(${(props) => props.background});
+    opacity: 0.05;
+    background-position: center;
+    background-size: cover;
+  }
 `;
+
+// export const RegisterPage = styled.div`
+//   background-color: #345167;
+//   color: #f0fffe;
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   height: 90vh;
+// `;
 
 export const Avatar = styled.td`
   height: 6rem;
@@ -50,25 +72,23 @@ export const Button = styled.button`
   border: none;
   border-radius: 15px;
   box-shadow: 0 4px #999;
-  margin-left:1rem;
-  width:12rem;
+  margin-left: 1rem;
+  width: 12rem;
+  z-index: 1;
   @media (max-width: 500px) {
-    margin:0;
-
+    margin: 0;
   }
-  
 `;
 
 export const Container = styled.div`
-  width:80%;
-  margin-bottom:2rem;
-  display:flex;
-  justify-content:space-around;
-  height:14rem;
-  align-items:center;
+  z-index: 1;
+  width: 80%;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-around;
+  height: 14rem;
+  align-items: center;
   @media (max-width: 500px) {
-    flex-direction:column;
-
+    flex-direction: column;
   }
-`
-
+`;

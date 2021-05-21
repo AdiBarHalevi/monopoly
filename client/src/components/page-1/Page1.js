@@ -22,14 +22,15 @@ const WelcomPage = () => {
             <br /> click{" "}
             <Link
               to="/Register"
-              style={{ textDecoration: "none",
-               color: "#88CCD9",
-               borderBottom:"1px solid",
+              style={{
+                textDecoration: "none",
+                color: "#88CCD9",
+                borderBottom: "1px solid",
               }}
             >
               Here
             </Link>{" "}
-             to register a new game
+            to register a new game
           </Paragraph>
         </WelcomeSign>
       </>

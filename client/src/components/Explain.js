@@ -179,4 +179,3 @@ const Td = styled.td`
   border-bottom: 1px solid;
   text-align: center;
 `;
-

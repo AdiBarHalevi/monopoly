@@ -73,25 +73,21 @@ const ResetButton = styled.button`
     height: 2rem;
     width: 2rem;
   }
-
 `;
 
 const ResetButtonDiv = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    @media (max-width: 500px) {
-      position:absolute;
-      top:0.5rem;
-      right:52%;
-      flex-direction: row;
-    }
-
-`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media (max-width: 500px) {
+    position: absolute;
+    top: 0.5rem;
+    right: 52%;
+    flex-direction: row;
+  }
+`;
 const ResetLabel = styled.label`
-    @media (max-width: 500px) {
-      display:none;
-
-    }
-
-`
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;

@@ -59,7 +59,11 @@ const AssetCard = ({
           image={displayImage}
           backgroundColor="white"
         >
-        <OwnerAvatar avatar={playersDataState[data.rowItems.property[0].ownedby - 1].avatar } />
+          <OwnerAvatar
+            avatar={
+              playersDataState[data.rowItems.property[0].ownedby - 1].avatar
+            }
+          />
           {playerAvatar}
         </Container2>
       );
@@ -74,7 +78,6 @@ const AssetCard = ({
           ownerAvatar=""
         >
           {playerAvatar}{" "}
-          
         </Container2>
       );
   }
@@ -189,7 +192,6 @@ const Container2 = styled.div`
   justify-content: center;
   border: 1px solid black;
   overflow: hidden;
-  
 
   @media (max-height: 799px) and(max-width:1200) {
     height: 2.5rem;
@@ -209,11 +211,10 @@ const Container2 = styled.div`
 `;
 
 const OwnerAvatar = styled.div`
-height: 20px;
-width: 21px;
-background-image: url(${(props) => props.avatar});
-background-color: white;
-background-position: center;
-background-size: cover;
-
-`
+  height: 20px;
+  width: 21px;
+  background-image: url(${(props) => props.avatar});
+  background-color: white;
+  background-position: center;
+  background-size: cover;
+`;

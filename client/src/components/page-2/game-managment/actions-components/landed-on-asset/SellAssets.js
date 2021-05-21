@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import {InsufficientFundsContainer, TextHolder} from "../../../../common-components/GifsContainer"
+import {
+  InsufficientFundsContainer,
+  TextHolder,
+} from "../../../../common-components/GifsContainer";
 import {
   activeUserData,
   gameCardsData,
@@ -22,7 +25,7 @@ const SellAsset = (props) => {
   const [activeUserDataState, setActiveUserDataState] = useRecoilState(
     activeUserData
   );
-  const [isPlayerBankrupt, setIsPlayerBankrupt] = useState(false)
+  const [isPlayerBankrupt, setIsPlayerBankrupt] = useState(false);
   const setShouldLayoutUpdateState = useSetRecoilState(shouldLayoutChange);
   const [gameboardDataState, setgameboardData] = useRecoilState(gameCardsData);
   const [playersDataState, setPlayersDataState] = useRecoilState(
@@ -99,18 +102,23 @@ const SellAsset = (props) => {
             else return <></>;
           })}
         </Container>
-        <button onClick={()=>setIsPlayerBankrupt(true)}>declare bankrupcy</button>
+        <button onClick={() => setIsPlayerBankrupt(true)}>
+          declare bankrupcy
+        </button>
       </>
     );
-
-    else return (
-          <InsufficientFundsContainer>
-            <TextHolder>
-              <p>{activeUserDataState.name} has declared bankrupcy, this player is not part of the game any more.</p>
-              <button onClick={bankrupcy}>Confirm</button>
-            </TextHolder>
-          </InsufficientFundsContainer>
-    )
+  else
+    return (
+      <InsufficientFundsContainer>
+        <TextHolder>
+          <p>
+            {activeUserDataState.name} has declared bankrupcy, this player is
+            not part of the game any more.
+          </p>
+          <button onClick={bankrupcy}>Confirm</button>
+        </TextHolder>
+      </InsufficientFundsContainer>
+    );
 };
 
 export default SellAsset;
@@ -120,7 +128,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   width: 90%;
   position: relative;
-  justify-content:center;
+  justify-content: center;
 `;
 
 const CardShow = styled.div`

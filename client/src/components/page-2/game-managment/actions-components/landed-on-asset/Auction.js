@@ -150,10 +150,12 @@ const Auction = (props) => {
           </TableContainer>
           {auctionPlayersState && invalidBid.length === 0 && (
             <div>
-              {auctionPlayersState[currentBidderNumber][`name`]&&auctionPlayersState[currentBidderNumber][`name`] }, this is your
-              turn to bid <br />
+              {auctionPlayersState[currentBidderNumber][`name`] &&
+                auctionPlayersState[currentBidderNumber][`name`]}
+              , this is your turn to bid <br />
               your current balance is: $
-              {auctionPlayersState[currentBidderNumber][`balance`]&&auctionPlayersState[currentBidderNumber][`balance`]}
+              {auctionPlayersState[currentBidderNumber][`balance`] &&
+                auctionPlayersState[currentBidderNumber][`balance`]}
               <br />
               <label>make your bid:</label>
               <br />

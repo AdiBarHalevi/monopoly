@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Avatar = styled.div`
-  height:4rem;
+  height: 4rem;
   width: 4rem;
   background-image: url(${(props) => props.avatar});
   // background-color: white;

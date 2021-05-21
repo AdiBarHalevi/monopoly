@@ -24,4 +24,3 @@ const GoToJail = (props) => {
 };
 
 export default GoToJail;
-
