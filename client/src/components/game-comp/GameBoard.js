@@ -5,8 +5,7 @@ import GameBoardLayout from "./GameBoardLayout";
 import styled from "styled-components";
 import CardDisplay from "../page-2/card-display/CardDisplay";
 import ResetButtonIMG from "../../img/resetButton.jpg";
-import { FlexBox } from "../common-components/FlexBox";
-import { Link, useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 import { ResetGameAPI } from "../../axioscall";
 
 const GameBoard = () => {

@@ -42,7 +42,6 @@ const genGameData = async (req, res) => {
         originalImage,
       } = value;
       const newGameCard = new gamePlateModel({
-        _id,
         fieldNum,
         name,
         price,

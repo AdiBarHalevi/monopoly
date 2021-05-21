@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { GamePlayDataState, activeUserData } from "../../../../../atoms";
 import Bankrupcyimg from "../../../../../img/bankrupcy.gif";
 import { InsufficientFundsContainer } from "../../../../common-components/GifsContainer";
-// import { saveToPlayersState } from "../../../../../UtilityFunctions";
+import {getPaid} from "../../../../../axioscall"
 
 const PayTheRent = (props) => {
   const { inTurnLocationState } = props;
@@ -125,7 +125,7 @@ const PayTheRent = (props) => {
       payTo: inTurnLocationState.property[0].ownedby,
       amount: activeUserDataState.balance,
     };
-    // getPaid(details);
+    getPaid(details);
     setbankruptState(false);
     props.confirm();
   };

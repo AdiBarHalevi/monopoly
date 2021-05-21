@@ -47,14 +47,14 @@ export const getaUserListFromApi = async () => {
 };
 
 export const getPaid = async (details) => {
-  // try {
-  //   const body = JSON.stringify(details);
-  //   await axiosInstance.put(`/gameAPI/users/getPaid`, {
-  //     body: body,
-  //   });
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    const body = JSON.stringify(details);
+    await axiosInstance.put(`/gameAPI/users/getPaid`, {
+      body: body,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const postUser = async (user, turnNum, avatar) => {
@@ -71,10 +71,9 @@ export const postUser = async (user, turnNum, avatar) => {
 
 export const retirePlayer = async (playerID) => {
   try {
-    const res = await axiosInstance.put(
+   await axiosInstance.put(
       `/gameAPI/users/retirePlayer/${playerID}`
     );
-    console.log(res);
   } catch (e) {
     console.log(e);
   }
@@ -82,10 +81,9 @@ export const retirePlayer = async (playerID) => {
 
 export const changeAssetOwnerShipAPI = async (fieldNum, player) => {
   try {
-    const res = await axiosInstance.put(
+     await axiosInstance.put(
       `/gameAPI/gameCards/changeOwnerShip/${fieldNum}/${player}`
     );
-    console.log(res);
   } catch (e) {
     console.log(e);
   }

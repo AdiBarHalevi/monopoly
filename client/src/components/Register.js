@@ -8,7 +8,6 @@ import carAvatar from "../img/car_avatar.png";
 import {
   Td,
   Tr,
-  ErrorMsg,
   Button,
   PlayerTable,
   RegisterPage,
@@ -20,7 +19,6 @@ import { Link, useHistory } from "react-router-dom";
 const Register = () => {
   const [registrated, setregistrated] = useState([]);
   const textInput = useRef();
-  const [registrationErorState, setRegistrationErorState] = useState(false);
   const [isGameSaveAvailable, setIsGameSaveAvailable] = useState(true);
   const [isGameIsNew, setIsGameIsNew] = useState(false);
   const [isGameSet, setIsGameIsSet] = useState(false);
@@ -30,8 +28,7 @@ const Register = () => {
 
   const saveUser = (userName) => {
     const avatars = [ironAvatar, carAvatar, shoeAvatar, hatAvatar];
-    if (registrated.length === 4) return setRegistrationErorState(true);
-    else if (registrated.length >= 1) setIsGameIsSet(true);
+    if (registrated.length >= 1) setIsGameIsSet(true);
     postUser(userName, registrated.length + 1, avatars[registrated.length]);
     setregistrated([...registrated, userName]);
   };

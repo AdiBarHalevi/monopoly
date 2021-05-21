@@ -140,7 +140,7 @@ const Auction = (props) => {
             {auctionPlayersState.map((player, i) => {
               return (
                 <tbody>
-                  <tr>
+                  <tr key={i}>
                     <th>{player.name}</th>
                     <td>{player.balance}</td>
                   </tr>
