@@ -35,7 +35,7 @@ the game picks a user and sets him to the active user global state.
     Reset button: deletes the player list, delets the board and sends the user to the
                    welcome page.
 
-- roll dice- generates random numbers saves it to the state and updates the Active user
+roll dice- generates random numbers saves it to the state and updates the Active user
   State to a new location.
   ** make a move- allows the user to make a move such as mortgage an asset or buy a house. \*** Auction - genereate a players rotation, during the Auction there is an active user that
   is saved localy, on each turn the player can bid or retire from the Auction.
