@@ -4,6 +4,7 @@ const { PlayerStatusModel } = require("../models/playerStatus.model");
 
 const getCards = async (req, res) => {
   try {
+
     const ans = await CardModel.find({});
     if (!ans || ans.length === 0) {
       return res.send("unable to fetch, invalid search term");
