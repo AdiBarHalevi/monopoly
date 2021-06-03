@@ -13,7 +13,7 @@ import {
 const WelcomPage = () => {
   return (
     <WelcomePage background={rainingMoney}>
-      <>
+      
         <WelcomeSign>
           <h1>Monopoly Full Stack Project</h1>
           <MonopolyLogo background={MonopolyIMG} /> <SignatureEffect />
@@ -33,7 +33,7 @@ const WelcomPage = () => {
             to register a new game
           </Paragraph>
         </WelcomeSign>
-      </>
+      
     </WelcomePage>
   );
 };

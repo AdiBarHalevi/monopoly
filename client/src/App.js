@@ -10,7 +10,7 @@ import styled from "styled-components";
 function App() {
   return (
     <RecoilRoot>
-      <div className="App">
+      <div>
         <Router>
           <HeaderContainer>
             <Ul>
@@ -22,14 +22,6 @@ function App() {
                   Home
                 </Link>
               </Li>
-              {/* <Li>
-                <Link
-                  to="/play"
-                  style={{ textDecoration: "none", color: "#6d8d8a" }}
-                >
-                  Play
-                </Link>
-              </Li> */}
             </Ul>
             <About>
               <Link

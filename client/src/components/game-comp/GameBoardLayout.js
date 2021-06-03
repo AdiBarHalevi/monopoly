@@ -51,6 +51,23 @@ const GameBoardLayout = () => {
     setShouldLayoutUpdateState(false);
   }, [setShouldLayoutUpdateState, processData, shouldLayoutUpdateState]);
 
+  const processColumnLayout =(positionOnLayoutArr)=>{
+    return positionOnLayoutArr === 3?
+    Object.keys(layoutDataState[positionOnLayoutArr]).map((blocknumber) => (
+      <AssetCardRightColumn
+        rowItems={layoutDataState[positionOnLayoutArr][blocknumber]}
+        key={blocknumber}
+      />
+    )):
+    Object.keys(layoutDataState[positionOnLayoutArr]).map((blocknumber) => (
+      <AssetCardLeftColumn
+        rowItems={layoutDataState[positionOnLayoutArr][blocknumber]}
+        key={blocknumber}
+      />
+    ))
+  }
+
+
   return (
     <BoardContainer>
       {layoutDataState.length > 0 && (
@@ -76,23 +93,10 @@ const GameBoardLayout = () => {
 
           <FlexBox>
             <FlexBox flexDirection="column-reverse">
-              {Object.keys(layoutDataState[1]).map((blocknumber) => {
-                return (
-                  <AssetCardLeftColumn
-                    rowItems={layoutDataState[1][blocknumber]}
-                    key={blocknumber}
-                  />
-                );
-              })}
+              {processColumnLayout(1)}
             </FlexBox>
             <ChanceAndCommunityChest assetHeight="6rem" assetWidth="8rem" />
-            <FlexBox flexDirection="column">
-              {Object.keys(layoutDataState[3]).map((blocknumber) => (
-                <AssetCardRightColumn
-                  rowItems={layoutDataState[3][blocknumber]}
-                  key={blocknumber}
-                />
-              ))}
+            <FlexBox flexDirection="column"> {processColumnLayout(3)}
             </FlexBox>
           </FlexBox>
           <FlexBox flexDirection="row-reverse">
